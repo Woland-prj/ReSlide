@@ -1,4 +1,5 @@
 // TODO: сделать типы TVector и TImage
+// Ветка Никиты
 
 type TSlideObject = {
 	type: TText // | TVector | TImage
