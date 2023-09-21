@@ -1,16 +1,16 @@
-type TSlideObject {
+type TSlideObject = {
 	type: TText | TVector | TImage
-	size:TSlideObjectSize
+	size: TSlideObjectSize
 	cords: TSlideObjectCords
 	rotationAngel: number
 }
 
-type TSlideObjectSize {
+type TSlideObjectSize = {
 	width: number
 	height: number
 }
 
-type TSlideObjectCords {
+type TSlideObjectCords = {
 	x: number
 	y: number
 }
