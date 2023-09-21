@@ -21,7 +21,7 @@ type TText = {
 	Formatting: TFormatting
 }
 
-// Твое, конечно дело, но мб через enum? Вроде того:
+// Денис, мб через enum? Вроде того:
 // enum FormattingVariation {
 // 	Italic,
 // 	Bold,
