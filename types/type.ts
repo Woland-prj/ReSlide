@@ -1,7 +1,8 @@
 // TODO: сделать типы TVector и TImage
+// main
 
 type TSlideObject = {
-	type: TText // | TVector | TImage |
+	type: TText // | TVector | TImage
 	size: TSlideObjectSize
 	cords: TSlideObjectCords
 	rotationAngel: number
