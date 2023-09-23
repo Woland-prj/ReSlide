@@ -1,22 +1,36 @@
 // TODO: сделать типы TVector и TImage
 // Ветка Никиты
 
+type TDocument = {
+	name: string
+	slides: TSlide[]
+}
+
+type TSlide = {
+	id: number
+	background: TSlideBackground
+	objects: TSlideObject[]
+}
+
+const enum SlideBgType {
+	Image,
+	Color
+}
+
+type TSlideBackground = {
+	type: SlideBgType
+	value: string
+}
+
 type TSlideObject = {
 	type: TText // | TVector | TImage
-	size: TSlideObjectSize
-	cords: TSlideObjectCords
+	width: number
+	height: number
+	x: number
+	y: number
 	rotationAngel: number
 }
 
-type TSlideObjectSize = {
-	width: number
-	height: number
-}
-
-type TSlideObjectCords = {
-	x: number
-	y: number
-}
 type TText = {
 	Value: string
 	Formatting: TFormatting
