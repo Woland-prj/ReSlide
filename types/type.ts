@@ -1,29 +1,29 @@
 // TODO: сделать типы TVector и TImage
 // Ветка Вадима
 
-type TDocument = {
+export type TDocument = {
 	name: string
 	slides: TSlide[]
 }
 
-type TSlide = {
+export type TSlide = {
 	id: number
 	background: TSlideBackground
 	objects: TSlideObject[]
 }
 
-const enum SlideBgType {
-	Image,
-	Color,
+export enum SlideBgType {
+	Img,
+	Color = 'Color',
 }
 
-type TSlideBackground = {
-	type: SlideBgType
+export type TSlideBackground = {
+	variation: SlideBgType
 	value: string
 }
 // Проверка
 
-type TSlideObject = {
+export type TSlideObject = {
 	type: TText | TVector | TImage
 	width: number
 	height: number
@@ -32,37 +32,37 @@ type TSlideObject = {
 	rotationAngel: number
 }
 
-type TText = {
-	Value: string
-	Formatting: TFormatting
+export type TText = {
+	value: string
+	formatting: TFormatting
 }
 
-const enum FormattingVariation {
+export const enum FormattingVariation {
 	Italic,
 	Bold,
 	Underline,
 }
 
-type TFormatting = {
-	Variation: FormattingVariation
-	FontFamily: string
-	Color: string
+export type TFormatting = {
+	variation: FormattingVariation
+	fontFamily: string
+	color: string
 }
 
-type TVector = {
-	Shape: ShapeVariation
-	FillColor: string
-	StrokeColor: string
-	StrokeSize: number
+export type TVector = {
+	shape: ShapeVariation
+	fillColor: string
+	strokeColor: string
+	strokeSize: number
 }
 
-const enum ShapeVariation {
+export const enum ShapeVariation {
 	Rectangle,
 	Triangle,
 	Circle,
 }
 
-type TImage = {
+export type TImage = {
 	Link: string
 	Width: number
 	Height: number
