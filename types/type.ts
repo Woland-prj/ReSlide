@@ -32,27 +32,27 @@ export type TSlideObject = {
 }
 
 export type TText = {
-	Value: string
-	Formatting: TFormatting
+	value: string
+	formatting: TFormatting
 }
 
-export const enum FormattingVariation {
-	Italic,
-	Bold,
-	Underline,
+export type FormattingVariation = {
+	italic: boolean,
+	bold: boolean,
+	underline: boolean,
 }
 
 export type TFormatting = {
-	Variation: FormattingVariation
-	FontFamily: string
-	Color: string
+	variation: FormattingVariation
+	fontFamily: string
+	color: string
 }
 
 export type TVector = {
-	Shape: ShapeVariation
-	FillColor: string
-	StrokeColor: string
-	StrokeSize: number
+	shape: ShapeVariation
+	fillColor: string
+	strokeColor: string
+	strokeSize: number
 }
 
 export const enum ShapeVariation {
@@ -62,7 +62,7 @@ export const enum ShapeVariation {
 }
 
 export type TImage = {
-	Link: string
-	Width: number
-	Height: number
+	link: string
+	width: number
+	height: number
 }
