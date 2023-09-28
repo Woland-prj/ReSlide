@@ -21,6 +21,7 @@ export type TSlideBackground = {
 	variation: SlideBgType
 	value: string
 }
+// Проверка
 
 export type TSlideObject = {
 	type: TText | TVector | TImage
