@@ -12,13 +12,13 @@ export type TSlide = {
 	objects: TSlideObject[]
 }
 
-export const enum SlideBgType {
-	Image,
-	Color,
+export enum SlideBgType {
+	Img,
+	Color = 'Color',
 }
 
 export type TSlideBackground = {
-	type: SlideBgType
+	variation: SlideBgType
 	value: string
 }
 
@@ -32,8 +32,8 @@ export type TSlideObject = {
 }
 
 export type TText = {
-	Value: string
-	Formatting: TFormatting
+	value: string
+	formatting: TFormatting
 }
 
 export const enum FormattingVariation {
@@ -43,16 +43,16 @@ export const enum FormattingVariation {
 }
 
 export type TFormatting = {
-	Variation: FormattingVariation
-	FontFamily: string
-	Color: string
+	variation: FormattingVariation
+	fontFamily: string
+	color: string
 }
 
 export type TVector = {
-	Shape: ShapeVariation
-	FillColor: string
-	StrokeColor: string
-	StrokeSize: number
+	shape: ShapeVariation
+	fillColor: string
+	strokeColor: string
+	strokeSize: number
 }
 
 export const enum ShapeVariation {

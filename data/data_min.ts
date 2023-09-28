@@ -1,6 +1,14 @@
-import { TDocument } from '../types/type'
+import { SlideBgType, TDocument, TSlide } from '../types/type'
 
-const Doc: TDocument = {
+const doc: TDocument = {
 	name: 'Test presentation',
 	slides: [],
+}
+
+const slide: TSlide = {
+	id: 1,
+	background: {
+		variation: SlideBgType.Color,
+		value: 'https://test.com/test_back.png',
+	},
 }
