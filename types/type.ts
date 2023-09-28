@@ -1,4 +1,4 @@
-// TODO: сделать типы TVector и TImage
+
 // Denis
 
 export type TDocument = {
@@ -36,14 +36,14 @@ export type TText = {
 	formatting: TFormatting
 }
 
-export type FormattingVariation = {
-	italic: boolean,
-	bold: boolean,
-	underline: boolean,
+export type TFormattingVariation = {
+	italic: boolean
+	bold: boolean
+	underline: boolean
 }
 
 export type TFormatting = {
-	variation: FormattingVariation
+	variation: TFormattingVariation
 	fontFamily: string
 	color: string
 }
