@@ -14,7 +14,7 @@ type TSlide = {
 
 const enum SlideBgType {
 	Image,
-	Color
+	Color,
 }
 
 type TSlideBackground = {
@@ -50,4 +50,23 @@ type TFormatting = {
 	Underline: boolean
 	FontFamily: string
 	Color: string
+}
+
+type TVector = {
+	Shape: ShapeVariation
+	FillColor: string
+	StrokeColor: string
+	StrokeSize: number
+}
+
+const enum ShapeVariation {
+	Rectangle,
+	Triangle,
+	Circle,
+}
+
+type TImage = {
+	Link: string
+	Width: number
+	Height: number
 }
