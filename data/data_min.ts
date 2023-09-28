@@ -2,6 +2,7 @@ import {
 	ShapeVariation,
 	SlideBgType,
 	TDocument,
+	TImage,
 	TSlide,
 	TText,
 	TVector,
@@ -40,11 +41,22 @@ const text: TText = {
 		color: '#000000',
 	},
 }
+
 const vector: TVector = {
 	shape: ShapeVariation.Rectangle,
 	fillColor: 'red',
 	strokeColor: '#f0f0f0',
 	strokeSize: 50,
+	width: 50,
+	height: 50,
+	x: 50,
+	y: 50,
+	rotationAngle: 30,
+}
+
+const image: TImage = {
+	link: 'https://...',
+
 	width: 50,
 	height: 50,
 	x: 50,

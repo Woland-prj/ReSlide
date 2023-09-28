@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 // TODO: сделать типы TVector и TImage
 // Nikita
+=======
+
+// Denis
+>>>>>>> Denis
 
 export type TDocument = {
 	name: string
@@ -63,6 +68,4 @@ export const enum ShapeVariation {
 
 export type TImage = TSlideObject & {
 	link: string
-	width: number
-	height: number
 }
