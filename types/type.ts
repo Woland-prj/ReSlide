@@ -22,14 +22,7 @@ export type TSlideBackground = {
 	value: string
 }
 
-export const enum objectType {
-	TText,
-	TImage,
-	TVector,
-}
-
 export type TSlideObject = {
-	type: objectType
 	width: number
 	height: number
 	x: number

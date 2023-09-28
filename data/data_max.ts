@@ -1,13 +1,6 @@
-import {
-	SlideBgType,
-	TDocument,
-	TSlide,
-	TText,
-	objectType,
-} from '../types/type'
+import { SlideBgType, TDocument, TSlide, TText } from '../types/type'
 
 const text: TText = {
-	type: objectType.TText,
 	width: 200,
 	height: 300,
 	x: 20,
