@@ -1,5 +1,5 @@
 // TODO: сделать типы TVector и TImage
-// main
+// Denis
 
 type TDocument = {
 	name: string
@@ -21,7 +21,6 @@ type TSlideBackground = {
 	type: SlideBgType
 	value: string
 }
-// Проверка
 
 type TSlideObject = {
 	type: TText | TVector | TImage
