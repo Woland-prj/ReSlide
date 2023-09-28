@@ -37,7 +37,7 @@ export type TSlideObject = {
 	rotationAngel: number
 }
 
-export type TText = {
+export type TText = TSlideObject & {
 	value: string
 	formatting: TFormatting
 }
@@ -51,10 +51,11 @@ export type TFormattingVariation = {
 export type TFormatting = {
 	variation: TFormattingVariation
 	fontFamily: string
+	fontSize: number
 	color: string
 }
 
-export type TVector = {
+export type TVector = TSlideObject & {
 	shape: ShapeVariation
 	fillColor: string
 	strokeColor: string
@@ -67,7 +68,7 @@ export const enum ShapeVariation {
 	Circle,
 }
 
-export type TImage = {
+export type TImage = TSlideObject & {
 	link: string
 	width: number
 	height: number
