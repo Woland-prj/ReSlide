@@ -21,6 +21,7 @@ type TSlideBackground = {
 	type: SlideBgType
 	value: string
 }
+// Проверка
 
 type TSlideObject = {
 	type: TText | TVector | TImage
