@@ -21,6 +21,7 @@ type TSlideBackground = {
 	type: SlideBgType
 	value: string
 }
+// Проверка
 
 type TSlideObject = {
 	type: TText | TVector | TImage
@@ -36,12 +37,11 @@ type TText = {
 	Formatting: TFormatting
 }
 
-
 const enum FormattingVariation {
- 	Italic,
- 	Bold,
- 	Underline
- }
+	Italic,
+	Bold,
+	Underline,
+}
 
 type TFormatting = {
 	Variation: FormattingVariation
