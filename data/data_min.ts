@@ -3,6 +3,7 @@ import {
 	TDocument,
 	TSlide,
 	TSlideObject,
+	TText,
 	objectType,
 } from '../types/type'
 
@@ -27,4 +28,18 @@ const object: TSlideObject = {
 	x: 20,
 	y: 70,
 	rotationAngel: 0,
+}
+
+const text: TText = {
+	value: 'Text',
+	formatting: {
+		variation: {
+			italic: true,
+			bold: true,
+			underline: true,
+		},
+		fontSize: 23,
+		fontFamily: 'FontName',
+		color: '#000000',
+	},
 }

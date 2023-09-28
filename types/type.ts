@@ -1,5 +1,5 @@
 // TODO: сделать типы TVector и TImage
-// main
+// Nikita
 
 export type TDocument = {
 	name: string
@@ -14,7 +14,7 @@ export type TSlide = {
 
 export enum SlideBgType {
 	Img,
-	Color = 'Color',
+	Color,
 }
 
 export type TSlideBackground = {
@@ -42,14 +42,14 @@ export type TText = {
 	formatting: TFormatting
 }
 
-export const enum FormattingVariation {
-	Italic,
-	Bold,
-	Underline,
+export type TFormattingVariation = {
+	italic: boolean
+	bold: boolean
+	underline: boolean
 }
 
 export type TFormatting = {
-	variation: FormattingVariation
+	variation: TFormattingVariation
 	fontFamily: string
 	color: string
 }
