@@ -1,5 +1,5 @@
 // TODO: сделать типы TVector и TImage
-// Ветка Никиты
+// main
 
 export type TDocument = {
 	name: string
@@ -21,10 +21,15 @@ export type TSlideBackground = {
 	variation: SlideBgType
 	value: string
 }
-// Проверка
+
+export const enum objectType {
+	TText,
+	TImage,
+	TVector,
+}
 
 export type TSlideObject = {
-	type: TText | TVector | TImage
+	type: objectType
 	width: number
 	height: number
 	x: number
@@ -63,7 +68,7 @@ export const enum ShapeVariation {
 }
 
 export type TImage = {
-	Link: string
-	Width: number
-	Height: number
+	link: string
+	width: number
+	height: number
 }
