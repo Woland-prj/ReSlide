@@ -54,7 +54,7 @@ const slide3: TSlide = {
 		variation: SlideBgType.Img,
 		value: 'https://test.com/test_back.png',
 	},
-	objects: [text],
+	objects: [text, text],
 }
 
 const doc: TDocument = {
