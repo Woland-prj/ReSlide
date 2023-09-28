@@ -1,4 +1,10 @@
-import { SlideBgType, TDocument, TSlide } from '../types/type'
+import {
+	SlideBgType,
+	TDocument,
+	TSlide,
+	TSlideObject,
+	objectType,
+} from '../types/type'
 
 const doc: TDocument = {
 	name: 'Test presentation',
@@ -14,6 +20,11 @@ const slide: TSlide = {
 	objects: [],
 }
 
-// const object: TSlideObject = {
-// 	data:
-// }
+const object: TSlideObject = {
+	type: objectType.TText,
+	width: 200,
+	height: 300,
+	x: 20,
+	y: 70,
+	rotationAngel: 0,
+}
