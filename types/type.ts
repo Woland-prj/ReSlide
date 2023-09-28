@@ -27,7 +27,7 @@ export type TSlideObject = {
 	height: number
 	x: number
 	y: number
-	rotationAngel: number
+	rotationAngle: number
 }
 
 export type TText = TSlideObject & {

@@ -1,4 +1,11 @@
-import { SlideBgType, TDocument, TSlide, TText } from '../types/type'
+import {
+	ShapeVariation,
+	SlideBgType,
+	TDocument,
+	TSlide,
+	TText,
+	TVector,
+} from '../types/type'
 
 const doc: TDocument = {
 	name: 'Test presentation',
@@ -19,7 +26,8 @@ const text: TText = {
 	height: 300,
 	x: 20,
 	y: 70,
-	rotationAngel: 0,
+	rotationAngle: 0,
+
 	value: 'Text',
 	formatting: {
 		variation: {
@@ -31,4 +39,15 @@ const text: TText = {
 		fontFamily: 'FontName',
 		color: '#000000',
 	},
+}
+const vector: TVector = {
+	shape: ShapeVariation.Rectangle,
+	fillColor: 'red',
+	strokeColor: '#f0f0f0',
+	strokeSize: 50,
+	width: 50,
+	height: 50,
+	x: 50,
+	y: 50,
+	rotationAngle: 30,
 }
