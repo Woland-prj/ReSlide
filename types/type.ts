@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 // TODO: сделать типы TVector и TImage
 // Nikita
-=======
-
-// Denis
->>>>>>> Denis
 
 export type TDocument = {
 	name: string
