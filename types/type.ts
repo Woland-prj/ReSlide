@@ -45,6 +45,7 @@ export type TFormattingVariation = {
 export type TFormatting = {
 	variation: TFormattingVariation
 	fontFamily: string
+    fontSize: number
 	color: string
 }
 

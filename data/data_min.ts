@@ -15,6 +15,7 @@ const text: TText = {
 		    underline: true,
 	    },
 	    fontFamily: "FontName",
+		fontSize: 12,
 	    color: "#000000",
 	}
 }
