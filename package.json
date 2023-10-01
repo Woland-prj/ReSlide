@@ -10,6 +10,13 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
-    "prettier": "3.0.3"
+    "prettier": "3.0.3",
+    "stylelint": "^15.10.3",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-prettier": "^4.0.2"
+  },
+  "scripts": {
+    "lint": "yarn prettier . --write && yarn eslint . --fix && yarn stylelint \"**/*.css\" --fix"
   }
 }
