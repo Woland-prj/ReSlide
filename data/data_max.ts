@@ -8,20 +8,6 @@ import {
   TVector,
 } from '../types/type'
 
-const doc: TDocument = {
-  name: 'Test presentation',
-  slides: [],
-}
-
-const slide: TSlide = {
-  id: 1,
-  background: {
-    variation: SlideBgType.Color,
-    value: 'https://test.com/test_back.png',
-  },
-  objects: [],
-}
-
 const text: TText = {
   width: 200,
   height: 300,
@@ -62,4 +48,36 @@ const image: TImage = {
   x: 50,
   y: 50,
   rotationAngle: 30,
+}
+
+const slide1: TSlide = {
+  id: 1,
+  background: {
+    variation: SlideBgType.Color,
+    value: '#FFFFFF',
+  },
+  objects: [image, vector, text],
+}
+
+const slide2: TSlide = {
+  id: 2,
+  background: {
+    variation: SlideBgType.Img,
+    value: 'https://test.com/test_back.png',
+  },
+  objects: [text, vector, image],
+}
+
+const slide3: TSlide = {
+  id: 3,
+  background: {
+    variation: SlideBgType.Img,
+    value: 'https://test.com/test_back.png',
+  },
+  objects: [vector, image, text],
+}
+
+const doc: TDocument = {
+  name: 'Test presentation',
+  slides: [slide1, slide2, slide3],
 }
