@@ -1,4 +1,4 @@
-// Nikita
+// Denis
 
 export enum SlideBgType {
   Img,
