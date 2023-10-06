@@ -1,7 +1,8 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC } from 'react'
+import TopMenu from '@ui/TopMenu'
 
-const App: FC<PropsWithChildren> = () => {
-  return <div>Presentation maker App component</div>
+const App: FC = () => {
+  return <TopMenu presentationName={'Test pres'}></TopMenu>
 }
 
 export default App
