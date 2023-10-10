@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import TextButton from '@ui/TextButton'
+import TextButton from '@ui/top_menu/TextButton'
 import { menu_buttons } from '@/data/top_menu_buttons.data'
 
 const MenuButtons: FC = () => {

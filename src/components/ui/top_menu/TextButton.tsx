@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ButtonProps } from '@ui/ButtonProps'
+import { ButtonProps } from '@ui/top_menu/ButtonProps'
 
 type TextButtonProps = ButtonProps & {
   text: string

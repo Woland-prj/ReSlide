@@ -1,4 +1,4 @@
-import { ButtonProps } from '@ui/ButtonProps'
+import { ButtonProps } from '@ui/top_menu/ButtonProps'
 import { FC } from 'react'
 //TODO: Я не знаю как этому элементу дать картинку по url. Надо разобраться позже
 
