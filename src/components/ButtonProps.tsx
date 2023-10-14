@@ -1,6 +1,4 @@
-import React from 'react'
-
 export type ButtonProps = {
-  hover: () => void
-  onClick: () => void
+  hover: () => undefined
+  onClick: () => undefined
 }

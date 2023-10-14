@@ -1,4 +1,3 @@
-import React from 'react'
 import { ButtonProps } from 'components/ButtonProps'
 
 type TextButtonProps = ButtonProps & {
