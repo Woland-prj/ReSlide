@@ -1,4 +1,4 @@
 export type ButtonProps = {
-  hover: () => undefined
-  onClick: () => undefined
+  hover: () => void
+  onClick: () => void
 }
