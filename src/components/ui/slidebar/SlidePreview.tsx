@@ -1,5 +1,9 @@
-import { FC } from 'react'
 import { doc } from '@/data/data_max'
+import { FC } from 'react'
+
+const Slide: FC = () => {
+  return <></>
+}
 
 export const SlidePreview: FC = () => {
   return (
