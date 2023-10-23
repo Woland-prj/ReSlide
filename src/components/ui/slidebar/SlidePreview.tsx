@@ -7,11 +7,11 @@ const SlidePreview: FC = () => {
     return (
         <div className="SlidePreview">
             {doc.slides.map(slide => (
-              /*<Slide
+              <Slide
                 id={slide.id}
                 background={slide.background}
                 objects={slide.objects}
-              ></Slide>*/
+              ></Slide>
             ))}
         </div>
     )
