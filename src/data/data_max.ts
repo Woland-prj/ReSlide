@@ -1,4 +1,5 @@
 import {
+  ObjectType,
   ShapeVariation,
   SlideBgType,
   TDocument,
@@ -6,13 +7,19 @@ import {
   TSlide,
   TText,
   TVector,
-} from '../types/type'
+} from '@/types/type'
 
-const text: TText = {
-  width: 200,
-  height: 300,
-  x: 20,
-  y: 70,
+export const text: TText = {
+  id: 1,
+  type: ObjectType.Text,
+  size: {
+    width: 200,
+    height: 300,
+  },
+  coords: {
+    x: 20,
+    y: 70,
+  },
   rotationAngle: 0,
 
   value: 'Text',
@@ -26,28 +33,42 @@ const text: TText = {
     fontFamily: 'FontName',
     color: '#000000',
   },
+  isSelected: false,
 }
 
-const vector: TVector = {
+export const vector: TVector = {
+  id: 2,
+  type: ObjectType.Vector,
   shape: ShapeVariation.Rectangle,
   fillColor: 'red',
   strokeColor: '#f0f0f0',
   strokeSize: 50,
-  width: 50,
-  height: 50,
-  x: 50,
-  y: 50,
+  size: {
+    width: 50,
+    height: 50,
+  },
+  coords: {
+    x: 50,
+    y: 50,
+  },
   rotationAngle: 30,
+  isSelected: true,
 }
 
-const image: TImage = {
+export const image: TImage = {
+  id: 3,
+  type: ObjectType.Image,
   link: 'https://...',
-
-  width: 50,
-  height: 50,
-  x: 50,
-  y: 50,
+  size: {
+    width: 50,
+    height: 50,
+  },
+  coords: {
+    x: 50,
+    y: 50,
+  },
   rotationAngle: 30,
+  isSelected: false,
 }
 
 export const slide1: TSlide = {
@@ -57,24 +78,27 @@ export const slide1: TSlide = {
     value: '#FFFFFF',
   },
   objects: [image, vector, text],
+  isSelected: false,
 }
 
-const slide2: TSlide = {
+export const slide2: TSlide = {
   id: 2,
   background: {
     variation: SlideBgType.Img,
     value: 'https://test.com/test_back.png',
   },
   objects: [text, vector, image],
+  isSelected: true,
 }
 
-const slide3: TSlide = {
+export const slide3: TSlide = {
   id: 3,
   background: {
     variation: SlideBgType.Img,
     value: 'https://test.com/test_back.png',
   },
   objects: [vector, image, text],
+  isSelected: false,
 }
 
 export const doc: TDocument = {
