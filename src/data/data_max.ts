@@ -50,7 +50,7 @@ const image: TImage = {
   rotationAngle: 30,
 }
 
-const slide1: TSlide = {
+export const slide1: TSlide = {
   id: 1,
   background: {
     variation: SlideBgType.Color,
@@ -77,7 +77,7 @@ const slide3: TSlide = {
   objects: [vector, image, text],
 }
 
-const doc: TDocument = {
+export const doc: TDocument = {
   name: 'Test presentation',
   slides: [slide1, slide2, slide3],
 }

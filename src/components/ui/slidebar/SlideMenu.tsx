@@ -1,5 +1,7 @@
-import { FC } from "react"
+import { FC } from 'react'
 
-const SlideMenu: FC<{}> = ({  }) => {
-
+const SlideMenu: FC<{}> = ({}) => {
+  return
+  ;<></>
 }
+export default SlideMenu
