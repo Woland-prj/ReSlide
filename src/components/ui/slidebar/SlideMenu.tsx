@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TSlide } from 'types/type'
+import { TSlide } from '@/types/type'
 import { SlidePreview } from '@ui/slidebar/SlidePreview'
 
 type SlideMenuProps = {
