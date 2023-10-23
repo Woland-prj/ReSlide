@@ -23,6 +23,7 @@ const slide: TSlide = {
 }
 
 const text: TText = {
+  id: 1,
   width: 200,
   height: 300,
   x: 20,

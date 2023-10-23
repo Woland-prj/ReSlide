@@ -11,6 +11,7 @@ export type TSlideBackground = {
 }
 
 export type TSlideObject = {
+  id: number
   width: number
   height: number
   x: number
@@ -38,6 +39,7 @@ export type TFormatting = {
 }
 
 export type TText = TSlideObject & {
+  type: 'text'
   value: string
   formatting: TFormatting
 }
@@ -49,6 +51,7 @@ export const enum ShapeVariation {
 }
 
 export type TVector = TSlideObject & {
+  type: 'vector'
   shape: ShapeVariation
   fillColor: string
   strokeColor: string
