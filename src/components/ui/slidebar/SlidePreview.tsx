@@ -2,16 +2,21 @@ import { FC } from 'react'
 import { TSlide } from 'types/type'
 import { doc } from 'data/data_max'
 
-export const SlidePreview: FC = () => {
+type SlidePreview = {
+  slides: TSlide[]
+}
+
+export const SlidePreview: FC<SlidePreview> = ({slides=doc.slides}) => {
   return (
     <div className='SlidePreview'>
-      {doc.slides.map(slide => (
+      {slides.map(slide => (
         <Slide
           id={slide.id}
           background={slide.background}
           objects={slide.objects}
         ></Slide>
       ))}
+      
     </div>
   )
 }
