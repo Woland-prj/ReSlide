@@ -1,6 +1,12 @@
 // Denis
 
-export enum SlideBgType {
+export const enum ObjectType {
+  Text,
+  Vector,
+  Image,
+}
+
+export const enum SlideBgType {
   Img,
   Color,
 }
@@ -10,18 +16,29 @@ export type TSlideBackground = {
   value: string
 }
 
-export type TSlideObject = {
+export type TSize = {
   width: number
   height: number
+}
+
+export type TCoords = {
   x: number
   y: number
+}
+
+export type TSlideObject = {
+  id: number
+  size: TSize
+  coords: TCoords
   rotationAngle: number
+  isSelected: boolean
 }
 
 export type TSlide = {
   id: number
   background: TSlideBackground
   objects: TSlideObject[]
+  isSelected: boolean
 }
 
 export type TFormattingVariation = {
@@ -38,17 +55,19 @@ export type TFormatting = {
 }
 
 export type TText = TSlideObject & {
+  type: ObjectType.Text
   value: string
   formatting: TFormatting
 }
 
 export const enum ShapeVariation {
-  Rectangle,
-  Triangle,
-  Circle,
+  Rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
 }
 
 export type TVector = TSlideObject & {
+  type: ObjectType.Vector
   shape: ShapeVariation
   fillColor: string
   strokeColor: string
@@ -56,6 +75,7 @@ export type TVector = TSlideObject & {
 }
 
 export type TImage = TSlideObject & {
+  type: ObjectType.Image
   link: string
 }
 
