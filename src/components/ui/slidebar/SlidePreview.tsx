@@ -5,10 +5,14 @@ const Slide: FC = () => {
   return <></>
 }
 
-export const SlidePreview: FC = () => {
+type SlidePreview = {
+  slides: TSlide[]
+}
+
+export const SlidePreview: FC<SlidePreview> = ({slides=doc.slides}) => {
   return (
     <div className='SlidePreview'>
-      {doc.slides.map(slide => (
+      {slides.map(slide => (
         <Slide
           key={slide.id}
           id={slide.id}
@@ -16,6 +20,7 @@ export const SlidePreview: FC = () => {
           objects={slide.objects}
         ></Slide>
       ))}
+      
     </div>
   )
 }
