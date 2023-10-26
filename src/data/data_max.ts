@@ -41,8 +41,8 @@ export const vector: TVector = {
   type: ObjectType.Vector,
   shape: ShapeVariation.Rectangle,
   fillColor: 'red',
-  strokeColor: '#f0f0f0',
-  strokeSize: 50,
+  strokeColor: 'blue',
+  strokeSize: 10,
   size: {
     width: 50,
     height: 50,

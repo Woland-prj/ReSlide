@@ -1,16 +1,19 @@
-import { TVector } from '@/types/type'
-import { FC, useEffect, useRef } from 'react'
+// import { ShapeVariation, TVector } from '@/types/type'
+// import { FC } from 'react'
 
-type TVectorProps = {
-  vector: TVector
-}
+// type TVectorProps = {
+//   vector: TVector
+// }
 
-const Vector: FC<TVectorProps> = ({ vector }) => {
-  const shapeRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    shapeRef.current?.classList.add(vector.shape)
-  }, [])
-  return <div ref={shapeRef}></div>
-}
+// const Vector: FC<TVectorProps> = ({ vector }) => {
+//   switch (vector.shape) {
+//     case ShapeVariation.Circle:
 
-export default Vector
+//       break;
+
+//     default:
+//       break;
+//   }
+// }
+
+// export default Vector

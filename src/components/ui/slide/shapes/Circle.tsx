@@ -1,11 +1,11 @@
 import { TVector } from '@/types/type'
 import { FC } from 'react'
 
-type TRectangleProps = {
+type TCircleProps = {
   vector: TVector
 }
 
-const Rectangle: FC<TRectangleProps> = ({ vector }) => {
+const Circle: FC<TCircleProps> = ({ vector }) => {
   return (
     <div>
       <svg
@@ -25,4 +25,4 @@ const Rectangle: FC<TRectangleProps> = ({ vector }) => {
   )
 }
 
-export default Rectangle
+export default Circle
