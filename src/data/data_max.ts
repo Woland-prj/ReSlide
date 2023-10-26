@@ -40,11 +40,11 @@ export const vector: TVector = {
   id: 2,
   type: ObjectType.Vector,
   shape: ShapeVariation.Rectangle,
-  fillColor: 'red',
-  strokeColor: 'blue',
-  strokeSize: 10,
+  fillColor: 'orange',
+  strokeColor: 'purple',
+  strokeSize: 5,
   size: {
-    width: 50,
+    width: 100,
     height: 50,
   },
   coords: {

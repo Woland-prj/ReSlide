@@ -1,11 +1,11 @@
 import { TVector } from '@/types/type'
 import { FC } from 'react'
 
-type TRectangleProps = {
+type TCircleProps = {
   vector: TVector
 }
 
-const Rectangle: FC<TRectangleProps> = ({ vector }) => {
+const Ellipse: FC<TCircleProps> = ({ vector }) => {
   return (
     <div>
       <svg
@@ -15,11 +15,11 @@ const Rectangle: FC<TRectangleProps> = ({ vector }) => {
         stroke={vector.strokeColor}
         fill={vector.fillColor}
       >
-        <rect
-          x={vector.strokeSize / 2}
-          y={vector.strokeSize / 2}
-          width={vector.size.width}
-          height={vector.size.height}
+        <ellipse
+          cx={(vector.size.width + vector.strokeSize) / 2}
+          cy={(vector.size.height + vector.strokeSize) / 2}
+          rx={vector.size.width / 2}
+          ry={vector.size.height / 2}
           strokeWidth={vector.strokeSize}
         />
       </svg>
@@ -27,4 +27,4 @@ const Rectangle: FC<TRectangleProps> = ({ vector }) => {
   )
 }
 
-export default Rectangle
+export default Ellipse

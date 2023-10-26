@@ -63,7 +63,7 @@ export type TText = TSlideObject & {
 export const enum ShapeVariation {
   Rectangle = 'rectangle',
   Triangle = 'triangle',
-  Circle = 'circle',
+  Ellipse = 'ellipse',
 }
 
 export type TVector = TSlideObject & {
