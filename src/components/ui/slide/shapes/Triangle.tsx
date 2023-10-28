@@ -6,6 +6,18 @@ type TCircleProps = {
 }
 
 const Ellipse: FC<TCircleProps> = ({ vector }) => {
+  const points: string =
+    vector.strokeSize / 2 +
+    ',' +
+    vector.size.height +
+    ' ' +
+    vector.size.width / 2 +
+    ',' +
+    vector.strokeSize / 2 +
+    ' ' +
+    vector.size.width +
+    ',' +
+    vector.size.height
   return (
     <div>
       <svg
@@ -15,7 +27,7 @@ const Ellipse: FC<TCircleProps> = ({ vector }) => {
         stroke={vector.strokeColor}
         fill={vector.fillColor}
       >
-        <polygon points={} strokeWidth={vector.strokeSize} />
+        <polygon points={points} strokeWidth={vector.strokeSize} />
       </svg>
     </div>
   )
