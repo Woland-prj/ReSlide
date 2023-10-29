@@ -12,7 +12,7 @@ const ActionsBlock: FC<TActionsBlock> = ({ actions }) => {
       {actions.map(action => (
         <ImageButton
           key={action.name}
-          hover={() => console.log(`${action.name} hover`)}
+          onHover={() => console.log(`${action.name} hover`)}
           onClick={() => console.log(`${action.name} click`)}
           image_url={action.iconUrl}
           alt={action.name}

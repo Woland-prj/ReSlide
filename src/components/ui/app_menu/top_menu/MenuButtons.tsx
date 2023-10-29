@@ -9,7 +9,7 @@ const MenuButtons: FC = () => {
         <TextButton
           key={button.name}
           text={button.name}
-          hover={() => console.log('test')}
+          onHover={() => console.log('test')}
           onClick={() => console.log('test')}
         ></TextButton>
       ))}
