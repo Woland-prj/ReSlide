@@ -34,13 +34,6 @@ export type TSlideObject = {
   isSelected: boolean
 }
 
-export type TSlide = {
-  id: number
-  background: TSlideBackground
-  objects: TSlideObject[]
-  isSelected: boolean
-}
-
 export type TFormattingVariation = {
   italic: boolean
   bold: boolean
@@ -77,6 +70,13 @@ export type TVector = TSlideObject & {
 export type TImage = TSlideObject & {
   type: ObjectType.Image
   link: string
+}
+
+export type TSlide = {
+  id: number
+  background: TSlideBackground
+  objects: Array<TText | TVector | TImage>
+  isSelected: boolean
 }
 
 export type TDocument = {

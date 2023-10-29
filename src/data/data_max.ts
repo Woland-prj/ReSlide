@@ -13,8 +13,8 @@ export const text: TText = {
   id: 1,
   type: ObjectType.Text,
   size: {
-    width: 575,
-    height: 300,
+    width: 50,
+    height: 20,
   },
   coords: {
     x: 20,
@@ -29,7 +29,7 @@ export const text: TText = {
       bold: true,
       underline: true,
     },
-    fontSize: 100,
+    fontSize: 20,
     fontFamily: 'Times New Roman',
     color: '#FF0000',
   },
@@ -67,7 +67,7 @@ export const image: TImage = {
     x: 50,
     y: 50,
   },
-  rotationAngle: 30,
+  rotationAngle: 0,
   isSelected: false,
 }
 
