@@ -1,4 +1,11 @@
-import { ObjectType, TImage, TSlide, TText, TVector } from '@/types/type'
+import {
+  ObjectType,
+  SlideBgType,
+  TImage,
+  TSlide,
+  TText,
+  TVector,
+} from '@/types/type'
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
@@ -42,11 +49,19 @@ const Object: FC<TObjectProps> = ({ object }) => {
 }
 
 const Slide: FC<TSlideProps> = ({ slide }) => {
+  function changeStyles(slide: TSlide): React.CSSProperties {
+    const styles: React.CSSProperties = {
+      width: slide.size.width,
+      height: slide.size.height,
+    }
+    slide.background.variation == SlideBgType.Img
+      ? (styles.backgroundImage = `url(${slide.background.value})`)
+      : (styles.backgroundColor = slide.background.value)
+    return styles
+  }
+
   return (
-    <div
-      className={styles.slide}
-      style={{ backgroundColor: slide.background.value }}
-    >
+    <div className={styles.slide} style={changeStyles(slide)}>
       {slide.objects.map(object => (
         <Object key={object.id} object={object} />
       ))}

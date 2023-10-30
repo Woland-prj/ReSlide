@@ -75,6 +75,7 @@ export type TImage = TSlideObject & {
 export type TSlide = {
   id: number
   background: TSlideBackground
+  size: TSize
   objects: Array<TText | TVector | TImage>
   isSelected: boolean
 }

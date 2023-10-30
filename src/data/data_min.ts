@@ -21,6 +21,10 @@ export const slide: TSlide = {
     variation: SlideBgType.Color,
     value: 'https://test.com/test_back.png',
   },
+  size: {
+    width: 960,
+    height: 540,
+  },
   objects: [],
 }
 

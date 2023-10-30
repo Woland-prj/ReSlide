@@ -16,18 +16,16 @@ const Ellipse: FC<TCircleProps> = ({ vector }) => {
     ',' +
     vector.size.height
   return (
-    <div>
-      <svg
-        width={vector.size.width + vector.strokeSize}
-        height={vector.size.height + vector.strokeSize}
-        xmlns='http://www.w3.org/2000/svg'
-        stroke={vector.strokeColor}
-        fill={vector.fillColor}
-        strokeWidth={vector.strokeSize}
-      >
-        <polygon points={points} />
-      </svg>
-    </div>
+    <svg
+      width={vector.size.width + vector.strokeSize}
+      height={vector.size.height + vector.strokeSize}
+      xmlns='http://www.w3.org/2000/svg'
+      stroke={vector.strokeColor}
+      fill={vector.fillColor}
+      strokeWidth={vector.strokeSize}
+    >
+      <polygon points={points} />
+    </svg>
   )
 }
 
