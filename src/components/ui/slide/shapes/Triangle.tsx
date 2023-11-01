@@ -5,7 +5,7 @@ type TCircleProps = {
   vector: TVector
 }
 
-const Ellipse: FC<TCircleProps> = ({ vector }) => {
+const Triangle: FC<TCircleProps> = ({ vector }) => {
   const points: string =
     '0,' +
     vector.size.height +
@@ -29,4 +29,4 @@ const Ellipse: FC<TCircleProps> = ({ vector }) => {
   )
 }
 
-export default Ellipse
+export default Triangle
