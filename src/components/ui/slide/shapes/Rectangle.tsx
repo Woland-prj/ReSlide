@@ -18,6 +18,7 @@ const Rectangle: FC<TRectangleProps> = ({ vector }) => {
         color: vector.formatting.color,
       }}
     >
+      {vector.value}
       <svg
         width={vector.size.width + vector.strokeSize}
         height={vector.size.height + vector.strokeSize}
