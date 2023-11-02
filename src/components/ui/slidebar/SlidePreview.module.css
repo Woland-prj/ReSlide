@@ -1,10 +1,13 @@
 .preview {
   width: 300px;
+
   /* height: 100vh; */
   display: flex;
-  flex-direction: column;
+  flex-grow: 1;
+  flex-flow: column nowrap;
 }
 
 .slidePreview {
+  transform-origin: top left;
   min-width: fit-content;
 }

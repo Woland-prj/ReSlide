@@ -15,7 +15,7 @@ export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
         <div
           key={slide.id}
           className={styles.slidePreview}
-          style={{ transform: `scale(${300 / slide.size.width})` }}
+          style={{ scale: '0.3' }}
         >
           <Slide slide={slide}></Slide>
         </div>
@@ -23,3 +23,5 @@ export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
     </div>
   )
 }
+
+// style={{ transform: `scale(${300 / slide.size.width})` }}
