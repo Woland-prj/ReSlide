@@ -7,11 +7,7 @@ type TTextProps = {
 }
 
 const Text: FC<TTextProps> = ({ _text = text }) => {
-  return (
-    <div color='_text.formatting.color'>
-      {_text.value}
-    </div>
-  )
+  return <div color='_text.formatting.color'>{_text.value}</div>
 }
 
 export default Text
