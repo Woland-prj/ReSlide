@@ -4,9 +4,9 @@ import { FC } from 'react'
 type TextButtonProps = ButtonProps & {
   text: string
 }
-const TextButton: FC<TextButtonProps> = ({ text, onHover, onClick }) => {
+const TextButton: FC<TextButtonProps> = ({ text, hover, onClick }) => {
   return (
-    <button onClick={onClick} onMouseEnter={onHover} className='TextButton'>
+    <button onClick={onClick} onMouseEnter={hover} className='TextButton'>
       {text}
     </button>
   )

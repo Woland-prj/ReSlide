@@ -9,33 +9,32 @@ import {
   TVector,
 } from '@/types/type'
 
-// Устарело в связи с вырезанием TText
-// export const text: TText = {
-//   id: 1,
-//   type: ObjectType.Text,
-//   size: {
-//     width: 50,
-//     height: 20,
-//   },
-//   coords: {
-//     x: 20,
-//     y: 70,
-//   },
-//   rotationAngle: 0,
+export const text: TText = {
+  id: 1,
+  type: ObjectType.Text,
+  size: {
+    width: 200,
+    height: 300,
+  },
+  coords: {
+    x: 20,
+    y: 70,
+  },
+  rotationAngle: 0,
 
-//   value: 'Text Text Text',
-//   formatting: {
-//     variation: {
-//       italic: true,
-//       bold: true,
-//       underline: true,
-//     },
-//     fontSize: 20,
-//     fontFamily: 'Times New Roman',
-//     color: '#FF0000',
-//   },
-//   isSelected: false,
-// }
+  value: 'Text',
+  formatting: {
+    variation: {
+      italic: true,
+      bold: true,
+      underline: true,
+    },
+    fontSize: 23,
+    fontFamily: 'FontName',
+    color: '#000000',
+  },
+  isSelected: false,
+}
 
 export const vector: TVector = {
   id: 2,

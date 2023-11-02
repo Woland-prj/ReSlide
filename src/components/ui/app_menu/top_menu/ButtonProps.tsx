@@ -1,4 +1,4 @@
 export type ButtonProps = {
-  onHover: () => void
+  hover: () => void
   onClick: () => void
 }
