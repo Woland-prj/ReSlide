@@ -78,7 +78,7 @@ export const slide1: TSlide = {
     value: '#FFFFFF',
   },
   size: {
-    width: 960,
+    width: 969,
     height: 540,
   },
   objects: [image, vector, text],
