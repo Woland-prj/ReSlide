@@ -9,13 +9,18 @@ type SlidePreview = {
 }
 
 export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
+  const scale: number = 300 / slides[0].size.width
   return (
     <div className={styles.preview}>
       {slides.map(slide => (
         <div
           key={slide.id}
           className={styles.slidePreview}
-          style={{ scale: '0.3' }}
+          style={{
+            scale: `${scale}`,
+            width: slide.size.width * scale,
+            height: slide.size.height * scale,
+          }}
         >
           <Slide slide={slide}></Slide>
         </div>
