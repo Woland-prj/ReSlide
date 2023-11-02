@@ -5,7 +5,7 @@ import {
   TDocument,
   TImage,
   TSlide,
-  //TText,
+  TText,
   TVector,
 } from '@/types/type'
 
@@ -28,32 +28,32 @@ export const slide: TSlide = {
   objects: [],
 }
 
-// export const text: TText = {
-//   id: 1,
-//   type: ObjectType.Text,
-//   size: {
-//     width: 200,
-//     height: 300,
-//   },
-//   coords: {
-//     x: 20,
-//     y: 70,
-//   },
-//   rotationAngle: 0,
+export const text: TText = {
+  id: 1,
+  type: ObjectType.Text,
+  size: {
+    width: 200,
+    height: 300,
+  },
+  coords: {
+    x: 20,
+    y: 70,
+  },
+  rotationAngle: 0,
 
-//   value: 'Text',
-//   formatting: {
-//     variation: {
-//       italic: true,
-//       bold: true,
-//       underline: true,
-//     },
-//     fontSize: 23,
-//     fontFamily: 'FontName',
-//     color: '#000000',
-//   },
-//   isSelected: false,
-// }
+  value: 'Text',
+  formatting: {
+    variation: {
+      italic: 'normal',
+      bold: 'normal',
+      decorationLine: 'none',
+    },
+    fontSize: 23,
+    fontFamily: 'FontName',
+    color: '#000000',
+  },
+  isSelected: false,
+}
 
 export const vector: TVector = {
   id: 2,
@@ -72,17 +72,6 @@ export const vector: TVector = {
   },
   rotationAngle: 30,
   isSelected: false,
-  value: '',
-  formatting: {
-    variation: {
-      italic: 'normal',
-      bold: 'normal',
-      decorationLine: 'none',
-    },
-    fontFamily: 'Times New Roman',
-    fontSize: 11,
-    color: '#FF0000',
-  },
 }
 
 export const image: TImage = {

@@ -3,17 +3,17 @@ import {
   SlideBgType,
   TImage,
   TSlide,
-  //TText,
+  TText,
   TVector,
 } from '@/types/type'
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
-//import TextField from '@slide/text/TextField'
+import TextField from '@slide/text/TextField'
 import { FC } from 'react'
 import styles from './Slide.module.css'
 
 type TObjectProps = {
-  object: /*TText |*/ TVector | TImage
+  object: TText | TVector | TImage
 }
 
 type TSlideProps = {
@@ -21,9 +21,7 @@ type TSlideProps = {
 }
 
 const Object: FC<TObjectProps> = ({ object }) => {
-  function changeStyles(
-    object: /*TText |*/ TVector | TImage,
-  ): React.CSSProperties {
+  function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
     const styles = {
       left: object.coords.x,
       top: object.coords.y,
@@ -36,8 +34,8 @@ const Object: FC<TObjectProps> = ({ object }) => {
     <div style={changeStyles(object)} className={styles.object}>
       {(() => {
         switch (object.type) {
-          //case ObjectType.Text:
-          //  return <TextField text={object} />
+          case ObjectType.Text:
+            return <TextField text={object} />
           case ObjectType.Image:
             return <Image image={object} />
           case ObjectType.Vector:

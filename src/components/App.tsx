@@ -1,13 +1,13 @@
-import { doc, vector } from '@/data/data_max'
+import { doc } from '@/data/data_max'
 import TopMenu from '@ui/app_menu/top_menu/TopMenu'
-import Rectangle from '@ui/slide/shapes/Rectangle'
 import { FC } from 'react'
+import { SlidePreview } from '@ui/slidebar/SlidePreview'
 
 const App: FC = () => {
   return (
     <>
       <TopMenu presentationName={doc.name} />
-      <Rectangle vector={vector} />
+      <SlidePreview slides={doc.slides}></SlidePreview>
     </>
   )
 }

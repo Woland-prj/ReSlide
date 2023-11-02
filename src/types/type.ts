@@ -1,7 +1,6 @@
 // Denis
-// Тип TText устарел. Он реализован в Vector
 export const enum ObjectType {
-  // Text,
+  Text,
   Vector,
   Image,
 }
@@ -51,11 +50,11 @@ export type TFormatting = {
   color: string
 }
 
-// export type TText = TSlideObject & {
-//   type: ObjectType.Text
-//   value: string
-//   formatting: TFormatting
-// }
+export type TText = TSlideObject & {
+  type: ObjectType.Text
+  value: string
+  formatting: TFormatting
+}
 
 export const enum ShapeVariation {
   Rectangle = 'rectangle',
@@ -69,9 +68,6 @@ export type TVector = TSlideObject & {
   fillColor: string
   strokeColor: string
   strokeSize: number
-  // Далее то что появилось от вырезания TText
-  value: string
-  formatting: TFormatting
 }
 
 export type TImage = TSlideObject & {
@@ -83,7 +79,7 @@ export type TSlide = {
   id: number
   background: TSlideBackground
   size: TSize
-  objects: Array</*TText |*/ TVector | TImage>
+  objects: Array<TText | TVector | TImage>
   isSelected: boolean
 }
 

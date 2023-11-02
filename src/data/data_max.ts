@@ -5,7 +5,7 @@ import {
   TDocument,
   TImage,
   TSlide,
-  // TText,
+  TText,
   TVector,
 } from '@/types/type'
 
@@ -25,9 +25,9 @@ export const text: TText = {
   value: 'Text',
   formatting: {
     variation: {
-      italic: true,
-      bold: true,
-      underline: true,
+      italic: 'italic',
+      bold: 'bold',
+      decorationLine: 'underline',
     },
     fontSize: 23,
     fontFamily: 'FontName',
@@ -53,17 +53,6 @@ export const vector: TVector = {
   },
   rotationAngle: 30,
   isSelected: true,
-  value: 'Text example',
-  formatting: {
-    variation: {
-      italic: 'italic',
-      bold: 'bold',
-      decorationLine: 'underline',
-    },
-    fontFamily: 'Times New Roman',
-    fontSize: 11,
-    color: '#FF0000',
-  },
 }
 
 export const image: TImage = {
@@ -92,7 +81,7 @@ export const slide1: TSlide = {
     width: 960,
     height: 540,
   },
-  objects: [image, vector /*, text*/],
+  objects: [image, vector, text],
   isSelected: false,
 }
 
@@ -106,7 +95,7 @@ export const slide2: TSlide = {
     width: 960,
     height: 540,
   },
-  objects: [/*text,*/ vector, image],
+  objects: [text, vector, image],
   isSelected: true,
 }
 
@@ -120,7 +109,7 @@ export const slide3: TSlide = {
     width: 960,
     height: 540,
   },
-  objects: [vector, image /*, text*/],
+  objects: [vector, image, text],
   isSelected: false,
 }
 
