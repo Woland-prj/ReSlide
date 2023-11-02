@@ -16,16 +16,18 @@ const Triangle: FC<TCircleProps> = ({ vector }) => {
     ',' +
     vector.size.height
   return (
-    <svg
-      width={vector.size.width + vector.strokeSize}
-      height={vector.size.height + vector.strokeSize}
-      xmlns='http://www.w3.org/2000/svg'
-      stroke={vector.strokeColor}
-      fill={vector.fillColor}
-      strokeWidth={vector.strokeSize}
-    >
-      <polygon points={points} />
-    </svg>
+    <div contentEditable='true'>
+      <svg
+        width={vector.size.width + vector.strokeSize}
+        height={vector.size.height + vector.strokeSize}
+        xmlns='http://www.w3.org/2000/svg'
+        stroke={vector.strokeColor}
+        fill={vector.fillColor}
+        strokeWidth={vector.strokeSize}
+      >
+        <polygon points={points} />
+      </svg>
+    </div>
   )
 }
 
