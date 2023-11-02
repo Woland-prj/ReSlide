@@ -5,36 +5,37 @@ import {
   TDocument,
   TImage,
   TSlide,
-  TText,
+  // TText,
   TVector,
 } from '@/types/type'
 
-export const text: TText = {
-  id: 1,
-  type: ObjectType.Text,
-  size: {
-    width: 50,
-    height: 20,
-  },
-  coords: {
-    x: 20,
-    y: 70,
-  },
-  rotationAngle: 0,
+// Устарело в связи с вырезанием TText
+// export const text: TText = {
+//   id: 1,
+//   type: ObjectType.Text,
+//   size: {
+//     width: 50,
+//     height: 20,
+//   },
+//   coords: {
+//     x: 20,
+//     y: 70,
+//   },
+//   rotationAngle: 0,
 
-  value: 'Text Text Text',
-  formatting: {
-    variation: {
-      italic: true,
-      bold: true,
-      underline: true,
-    },
-    fontSize: 20,
-    fontFamily: 'Times New Roman',
-    color: '#FF0000',
-  },
-  isSelected: false,
-}
+//   value: 'Text Text Text',
+//   formatting: {
+//     variation: {
+//       italic: true,
+//       bold: true,
+//       underline: true,
+//     },
+//     fontSize: 20,
+//     fontFamily: 'Times New Roman',
+//     color: '#FF0000',
+//   },
+//   isSelected: false,
+// }
 
 export const vector: TVector = {
   id: 2,
@@ -53,6 +54,17 @@ export const vector: TVector = {
   },
   rotationAngle: 30,
   isSelected: true,
+  value: 'Text example',
+  formatting: {
+    variation: {
+      italic: 'italic',
+      bold: 'bold',
+      decorationLine: 'underline',
+    },
+    fontFamily: 'Times New Roman',
+    fontSize: 11,
+    color: '#FF0000',
+  },
 }
 
 export const image: TImage = {
@@ -81,7 +93,7 @@ export const slide1: TSlide = {
     width: 960,
     height: 540,
   },
-  objects: [image, vector, text],
+  objects: [image, vector /*, text*/],
   isSelected: false,
 }
 
@@ -95,7 +107,7 @@ export const slide2: TSlide = {
     width: 960,
     height: 540,
   },
-  objects: [text, vector, image],
+  objects: [/*text,*/ vector, image],
   isSelected: true,
 }
 
@@ -109,7 +121,7 @@ export const slide3: TSlide = {
     width: 960,
     height: 540,
   },
-  objects: [vector, image, text],
+  objects: [vector, image /*, text*/],
   isSelected: false,
 }
 

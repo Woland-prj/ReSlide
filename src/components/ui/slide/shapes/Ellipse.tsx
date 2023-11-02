@@ -7,7 +7,17 @@ type TCircleProps = {
 
 const Ellipse: FC<TCircleProps> = ({ vector }) => {
   return (
-    <div contentEditable='true'>
+    <div
+      contentEditable='true'
+      // добавлено после вырезания TText
+      style={{
+        fontFamily: vector.formatting.fontFamily,
+        fontSize: vector.formatting.fontSize,
+        fontStyle: vector.formatting.variation.italic,
+        textDecoration: vector.formatting.variation.decorationLine,
+        color: vector.formatting.color,
+      }}
+    >
       <svg
         width={vector.size.width + vector.strokeSize}
         height={vector.size.height + vector.strokeSize}
