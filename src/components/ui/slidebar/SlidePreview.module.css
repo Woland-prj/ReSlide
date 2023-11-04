@@ -1,13 +1,12 @@
 .preview {
-  width: 300px;
-
+  width: 19vw;
   height: 80vh;
   display: flex;
-  flex-grow: 1;
   flex-flow: column nowrap;
 }
 
 .slidePreview {
   transform-origin: top left;
+  margin-bottom: 1rem;
   min-width: fit-content;
 }

@@ -1,3 +1,4 @@
+import { useStyles } from '@/hooks/useStyles'
 import {
   ObjectType,
   SlideBgType,
@@ -17,6 +18,7 @@ type TObjectProps = {
 }
 
 type TSlideProps = {
+  editable: boolean
   slide: TSlide
 }
 
@@ -29,9 +31,11 @@ const Object: FC<TObjectProps> = ({ object }) => {
     }
     return styles
   }
+  const params = [object.coords.x, object.coords.y, object.rotationAngle]
+  const chStyles = useStyles(params, object, changeStyles)
 
   return (
-    <div style={changeStyles(object)} className={styles.object}>
+    <div style={chStyles} className={styles.object}>
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
@@ -48,7 +52,7 @@ const Object: FC<TObjectProps> = ({ object }) => {
   )
 }
 
-const Slide: FC<TSlideProps> = ({ slide }) => {
+const Slide: FC<TSlideProps> = ({ slide, editable }) => {
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
       width: slide.size.width,
