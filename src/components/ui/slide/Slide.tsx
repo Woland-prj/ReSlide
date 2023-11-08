@@ -52,7 +52,7 @@ const Object: FC<TObjectProps> = ({ object }) => {
   )
 }
 
-const Slide: FC<TSlideProps> = ({ slide, editable }) => {
+const Slide: FC<TSlideProps> = ({ slide /*, editable*/ }) => {
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
       width: slide.size.width,
