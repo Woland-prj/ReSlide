@@ -22,7 +22,7 @@ export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
             height: slide.size.height * scale,
           }}
         >
-          <Slide slide={slide}></Slide>
+          <Slide slide={slide} editable={false}></Slide>
         </div>
       ))}
     </div>
