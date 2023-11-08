@@ -3,6 +3,7 @@
 }
 
 .slide {
+  display: flex;
   border: 1px solid #aaaaaa;
   position: relative;
   width: 960px;
