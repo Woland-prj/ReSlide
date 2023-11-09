@@ -1,30 +1,47 @@
-import { useEffect, useRef } from 'react'
+// import { useEffect, useRef } from 'react'
 
-const useDndList = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const itemsRef = useRef<HTMLDivElement[]>([])
-  const draggedItemRef = useRef<HTMLDivElement>()
+// type TDraggedItemInfo = {
+//   element: HTMLDivElement
+//   startY: number
+// }
 
-  useEffect(() => {
-    const unsubscribes = itemsRef.current.map(itemElement => {
-      const onMouseDawn = () => {
-        draggedItemRef.current = itemElement
-      }
-      itemElement.addEventListener('mousedown', onMouseDawn)
-    })
+// const useDndList = () => {
+//   const containerRef = useRef<HTMLDivElement>(null)
+//   const itemsRef = useRef<HTMLDivElement[]>([])
+//   const dragItemInfoRef = useRef<TDraggedItemInfo | null>(null)
+//   useEffect(() => {
+//     const unsubscribes = itemsRef.current.map(itemElement => {
+//       const onMouseDown = (e: MouseEvent) => {
+//         dragItemInfoRef.current = {
+//           element: itemElement,
+//           startY: e.clientY,
+//         }
+//       }
+//       itemElement.addEventListener('mousedown', onMouseDown)
 
-    return () => {
-      unsubscribes.forEach(unsubscribe => unsubscribe())
-    }
-  }, [])
+//       const onMouseMove = (e: MouseEvent) => {
+//         if (itemElement === dragItemInfoRef.current.element) {
+//           itemElement.style.position = 'relative'
+//           itemElement.style.top = e.clientY + 'px'
+//         }
+//       }
+//       itemElement.addEventListener('mousemove', onMouseMove)
+//     })
 
-  useEffect(() => {
-    const draggedItem = draggedItemRef.current
-    if (draggedItem) {
-    }
-  })
+//     const unsubscribe = () => {}
 
-  return { containerRef, itemsRef }
-}
+//     return () => {
+//       unsubscribes.forEach(unsubscribe => unsubscribe(unsubscribe))
+//     }
+//   }, [])
 
-export default useDndList
+//   useEffect(() => {
+//     const draggedItem = draggedItemRef.current
+//     if (draggedItem) {
+//     }
+//   })
+
+//   return { containerRef, itemsRef }
+// }
+
+// export default useDndList
