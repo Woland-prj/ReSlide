@@ -1,16 +1,20 @@
 import { useEffect, useRef } from 'react'
 
+type TDraggedItemInfo = {
+  element: HTMLDivElement
+  startY: 0
+}
 const useDndList = () => {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null) // Контейнер, внутри которого перемещается элемент
   const itemsRef = useRef<HTMLDivElement[]>([])
-  const draggedItemRef = useRef<HTMLDivElement>()
+  const draggedItemRef = useRef<TDraggedItemInfo>()
 
   useEffect(() => {
     const unsubscribes = itemsRef.current.map(itemElement => {
-      const onMouseDawn = () => {
+      const onMouseDown = () => {
         draggedItemRef.current = itemElement
       }
-      itemElement.addEventListener('mousedown', onMouseDawn)
+      itemElement.addEventListener('mousedown', onMouseDown)
     })
 
     return () => {

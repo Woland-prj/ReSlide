@@ -52,7 +52,7 @@ const Object: FC<TObjectProps> = ({ object }) => {
   )
 }
 
-const Slide: FC<TSlideProps> = ({ slide /*, editable*/ }) => {
+const Slide: FC<TSlideProps> = ({ slide, editable }) => {
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
       width: slide.size.width,
@@ -74,3 +74,7 @@ const Slide: FC<TSlideProps> = ({ slide /*, editable*/ }) => {
 }
 
 export default Slide
+
+// TODO: editable - Nikita
+// actions_menu 1) картинки, 2) размапить
+// CSS Layout
