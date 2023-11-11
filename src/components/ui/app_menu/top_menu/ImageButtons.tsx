@@ -1,9 +1,3 @@
 const ImageButtons: FC = () => {
-  return(
-    <div className='ImageButtons'>
-      {
-        
-      }
-    </div>
-  )
+  return <div className='ImageButtons'>{}</div>
 }
