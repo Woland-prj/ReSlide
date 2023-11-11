@@ -10,13 +10,13 @@ import {
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC, RefObject } from 'react'
+import { FC } from 'react'
 import styles from './Slide.module.css'
 import useDndList from '@/hooks/useDndList'
 
 type TObjectProps = {
   object: TText | TVector | TImage
-  ref: RefObject<HTMLDivElement>
+  refItem: { item: HTMLDivElement }
 }
 
 type TSlideProps = {
@@ -24,7 +24,7 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object, ref }) => {
+const Object: FC<TObjectProps> = ({ object, refItem }) => {
   function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
     const styles = {
       left: object.coords.x,
@@ -38,7 +38,11 @@ const Object: FC<TObjectProps> = ({ object, ref }) => {
   const chStyles = useStyles(params, object, changeStyles)
 
   return (
-    <div style={chStyles} className={styles.object} ref={ref}>
+    <div
+      style={chStyles}
+      className={styles.object}
+      ref={(el: HTMLDivElement) => (refItem.item = el)}
+    >
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
@@ -83,7 +87,7 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
         <Object
           key={object.id}
           object={object}
-          // ref
+          refItem={{ item: itemsRef.current[i] }}
         />
       ))}
     </div>

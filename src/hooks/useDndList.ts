@@ -17,6 +17,7 @@ const useDndList = () => {
   useEffect(() => {
     const unsubscribes: TSubscription[] = itemsRef.current.map(itemElement => {
       const onMouseDown = (e: MouseEvent) => {
+        console.log('mousedown')
         dragItemInfoRef.current = {
           element: itemElement,
           startY: e.clientY,
