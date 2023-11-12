@@ -11,6 +11,7 @@ const MenuButtons: FC = () => {
           text={button.name}
           hover={() => console.log('test')}
           onClick={() => console.log('test')}
+          // ntrcn
         ></TextButton>
       ))}
     </div>
