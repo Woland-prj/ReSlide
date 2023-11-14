@@ -1,3 +1,4 @@
+import { doc } from '@/data/data_max'
 import { useStyles } from '@/hooks/useStyles'
 import {
   ObjectType,
@@ -65,8 +66,8 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
 
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
-      width: slide.size.width,
-      height: slide.size.height,
+      width: doc.size.width,
+      height: doc.size.height,
     }
     slide.background.variation == SlideBgType.Img
       ? (styles.backgroundImage = `url(${slide.background.value})`)
@@ -74,7 +75,7 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
     return styles
   }
 
-  const params = [slide.size.width, slide.size.height]
+  const params = [doc.size.width, doc.size.height]
   const chStyles = useStyles(params, slide, changeStyles)
 
   return (

@@ -3,7 +3,6 @@
   display: flex;
   flex-flow: column nowrap;
   max-width: inherit;
-  background-color: #ff0000;
 }
 
 .slidePreview {

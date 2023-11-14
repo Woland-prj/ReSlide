@@ -1,0 +1,4 @@
+.TextButtonAndActions {
+  display: flex;
+  flex-direction: column;
+}
