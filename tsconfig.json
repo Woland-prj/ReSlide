@@ -17,10 +17,11 @@
     "noEmit": true,
     "lib": ["es2016", "dom", "es5"],
     "paths": {
+      "@slide/*": ["components/ui/slide/*"],
       "@ui/*": ["components/ui/*"],
       "@/*": ["./*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./declaration.d.ts"],
   "exclude": ["node_modules"]
 }

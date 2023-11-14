@@ -1,5 +1,5 @@
 import {
-  ObjectTypes,
+  ObjectType,
   ShapeVariation,
   SlideBgType,
   TDocument,
@@ -7,25 +7,30 @@ import {
   TSlide,
   TText,
   TVector,
-} from '../types/type'
+} from '@/types/type'
 
-const doc: TDocument = {
+export const doc: TDocument = {
   name: 'Test presentation',
   slides: [],
 }
 
-const slide: TSlide = {
+export const slide: TSlide = {
+  isSelected: false,
   id: 1,
   background: {
     variation: SlideBgType.Color,
     value: 'https://test.com/test_back.png',
   },
+  size: {
+    width: 960,
+    height: 540,
+  },
   objects: [],
 }
 
-const text: TText = {
+export const text: TText = {
   id: 1,
-  type: ObjectTypes.Text,
+  type: ObjectType.Text,
   size: {
     width: 200,
     height: 300,
@@ -47,11 +52,12 @@ const text: TText = {
     fontFamily: 'FontName',
     color: '#000000',
   },
+  isSelected: false,
 }
 
-const vector: TVector = {
+export const vector: TVector = {
   id: 2,
-  type: ObjectTypes.Vector,
+  type: ObjectType.Vector,
   shape: ShapeVariation.Rectangle,
   fillColor: 'red',
   strokeColor: '#f0f0f0',
@@ -65,13 +71,13 @@ const vector: TVector = {
     y: 50,
   },
   rotationAngle: 30,
+  isSelected: false,
 }
 
-const image: TImage = {
+export const image: TImage = {
   id: 3,
-  type: ObjectTypes.Image,
+  type: ObjectType.Image,
   link: 'https://...',
-
   size: {
     width: 50,
     height: 50,
@@ -81,4 +87,5 @@ const image: TImage = {
     y: 50,
   },
   rotationAngle: 30,
+  isSelected: false,
 }

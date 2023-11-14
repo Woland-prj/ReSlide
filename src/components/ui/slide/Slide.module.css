@@ -1,0 +1,10 @@
+.object {
+  position: absolute;
+}
+
+.slide {
+  border: 1px solid #aaaaaa;
+  position: relative;
+  width: 960px;
+  height: 540px;
+}

@@ -7,6 +7,7 @@ module.exports = {
     alias: {
       '@': resolvePath('./src'),
       '@ui': resolvePath('./src/components/ui'),
+      '@slide': resolvePath('./src/components/ui/slide'),
     },
   },
 }
