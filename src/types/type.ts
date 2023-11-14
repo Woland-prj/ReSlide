@@ -60,11 +60,7 @@ export const enum ShapeVariation {
 }
 
 export type TVector = TSlideObject & {
-<<<<<<< HEAD
-  type: ObjectTypes.Vector
-=======
   type: ObjectType.Vector
->>>>>>> refs/remotes/origin/Nikita
   shape: ShapeVariation
   fillColor: string
   strokeColor: string
@@ -72,11 +68,7 @@ export type TVector = TSlideObject & {
 }
 
 export type TImage = TSlideObject & {
-<<<<<<< HEAD
-  type: ObjectTypes.Image
-=======
   type: ObjectType.Image
->>>>>>> refs/remotes/origin/Nikita
   link: string
 }
 
