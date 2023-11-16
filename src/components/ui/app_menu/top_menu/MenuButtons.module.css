@@ -1,0 +1,4 @@
+.MenuButtons{
+    display: flex;
+    flex-direction: row;
+}
