@@ -1,14 +1,13 @@
 .preview {
-  width: 19vw;
-  height: 80vh;
+  height: inherit;
   display: flex;
   flex-flow: column nowrap;
-  min-width: fit-content;
+  max-width: inherit;
   background-color: #ff0000;
 }
 
 .slidePreview {
   transform-origin: top left;
   margin-bottom: 1rem;
-  min-width: fit-content;
+  max-width: inherit;
 }
