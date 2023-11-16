@@ -16,7 +16,8 @@ import useDndList from '@/hooks/useDndList'
 
 type TObjectProps = {
   object: TText | TVector | TImage
-  ref: RefObject<HTMLDivElement>
+  ref: React.MutableRefObject<HTMLDivElement[]>
+  index: number
 }
 
 type TSlideProps = {
@@ -24,7 +25,7 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object, ref }) => {
+const Object: FC<TObjectProps> = ({ object, ref, index }) => {
   function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
     const styles = {
       left: object.coords.x,
@@ -38,7 +39,11 @@ const Object: FC<TObjectProps> = ({ object, ref }) => {
   const chStyles = useStyles(params, object, changeStyles)
 
   return (
-    <div style={chStyles} className={styles.object} ref={ref}>
+    <div
+      style={chStyles}
+      className={styles.object}
+      ref={el => (el != null ? (ref.current[index] = el) : >)}
+    >
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
@@ -80,11 +85,7 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
   return (
     <div className={styles.slide} style={chStyles} ref={containerRef}>
       {slide.objects.map((object, i) => (
-        <Object
-          key={object.id}
-          object={object}
-          // ref
-        />
+        <Object key={object.id} object={object} ref={itemsRef} index={i} />
       ))}
     </div>
   )
