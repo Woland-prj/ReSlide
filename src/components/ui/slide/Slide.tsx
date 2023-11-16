@@ -31,11 +31,16 @@ const Object: FC<TObjectProps> = ({ object }) => {
     }
     return styles
   }
+
   const params = [object.coords.x, object.coords.y, object.rotationAngle]
   const chStyles = useStyles(params, object, changeStyles)
 
   return (
-    <div style={chStyles} className={styles.object}>
+    <div
+      style={chStyles}
+      className={styles.object}
+      //ref={(el: HTMLDivElement) => (refItem.item = el)}
+    >
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
@@ -53,6 +58,11 @@ const Object: FC<TObjectProps> = ({ object }) => {
 }
 
 const Slide: FC<TSlideProps> = ({ slide, editable }) => {
+  if (editable) {
+    // TODO: сделать драгэнддроп
+    console.log('useDnd')
+  }
+
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
       width: slide.size.width,
@@ -64,8 +74,11 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
     return styles
   }
 
+  const params = [slide.size.width, slide.size.height]
+  const chStyles = useStyles(params, slide, changeStyles)
+
   return (
-    <div className={styles.slide} style={changeStyles(slide)}>
+    <div className={styles.slide} style={chStyles}>
       {slide.objects.map(object => (
         <Object key={object.id} object={object} />
       ))}

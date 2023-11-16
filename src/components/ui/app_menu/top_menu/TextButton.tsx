@@ -1,14 +1,25 @@
-import { ButtonProps } from '@ui/app_menu/top_menu/ButtonProps'
-import { FC } from 'react'
+import { TMenuButton } from '@/types/menu_buttons.type'
+import { FC, useState } from 'react'
+import SubMenu from './SubMenu'
 
-type TextButtonProps = ButtonProps & {
-  text: string
+type TextButtonProps = {
+  button: TMenuButton
 }
-const TextButton: FC<TextButtonProps> = ({ text, hover, onClick }) => {
+
+const TextButton: FC<TextButtonProps> = ({ button }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleSubMenu = () => {
+    setIsMenuOpen(prev => !prev)
+  }
+
   return (
-    <button onClick={onClick} onMouseEnter={hover} className='TextButton'>
-      {text}
-    </button>
+    <>
+      <button onClick={toggleSubMenu} className='TextButton'>
+        {button.name}
+      </button>
+      {isMenuOpen && <SubMenu buttons={button.contextButtons} />}
+    </>
   )
 }
 
