@@ -12,11 +12,9 @@ import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
 import { FC } from 'react'
 import styles from './Slide.module.css'
-import useDndList from '@/hooks/useDndList'
 
 type TObjectProps = {
   object: TText | TVector | TImage
-  refItem: { item: HTMLDivElement }
 }
 
 type TSlideProps = {
@@ -24,7 +22,7 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object, refItem }) => {
+const Object: FC<TObjectProps> = ({ object }) => {
   function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
     const styles = {
       left: object.coords.x,
@@ -60,8 +58,6 @@ const Object: FC<TObjectProps> = ({ object, refItem }) => {
 }
 
 const Slide: FC<TSlideProps> = ({ slide, editable }) => {
-  const { containerRef, itemsRef } = useDndList()
-
   if (editable) {
     // TODO: сделать драгэнддроп
     console.log('useDnd')
@@ -82,9 +78,9 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
   const chStyles = useStyles(params, slide, changeStyles)
 
   return (
-    <div className={styles.slide} style={chStyles} ref={containerRef}>
-      {slide.objects.map((object, i) => (
-        <Object key={object.id} object={object} ref={itemsRef} index={i} />
+    <div className={styles.slide} style={chStyles}>
+      {slide.objects.map(object => (
+        <Object key={object.id} object={object} />
       ))}
     </div>
   )
