@@ -44,9 +44,9 @@ export const text: TText = {
   value: 'Text',
   formatting: {
     variation: {
-      italic: true,
-      bold: true,
-      underline: true,
+      italic: 'normal',
+      bold: 'normal',
+      decorationLine: 'none',
     },
     fontSize: 23,
     fontFamily: 'FontName',

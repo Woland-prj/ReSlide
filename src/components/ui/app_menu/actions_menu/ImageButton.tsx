@@ -9,11 +9,11 @@ type ImageButtonProps = ButtonProps & {
 const ImageButton: FC<ImageButtonProps> = ({
   image_url,
   alt,
-  onHover,
+  hover,
   onClick,
 }) => {
   return (
-    <button onClick={onClick} onMouseEnter={onHover} className='ImageButton'>
+    <button onClick={onClick} onMouseEnter={hover} className='ImageButton'>
       <img src={image_url} alt={alt} />
     </button>
   )

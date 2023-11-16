@@ -1,0 +1,4 @@
+.SlideContainer {
+  display: flex;
+  flex-direction: row;
+}

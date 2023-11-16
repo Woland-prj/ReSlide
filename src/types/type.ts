@@ -1,5 +1,4 @@
 // Denis
-
 export const enum ObjectType {
   Text,
   Vector,
@@ -35,10 +34,14 @@ export type TSlideObject = {
 }
 
 export type TFormattingVariation = {
-  italic: boolean
-  bold: boolean
-  underline: boolean
-}
+  italic: 'italic' | 'normal'
+  bold: 'bold' | 'normal'
+  decorationLine:
+    | 'none'
+    | 'underline'
+    | 'line-through'
+    | 'underline line-through'
+} // Раньше тут был boolean
 
 export type TFormatting = {
   variation: TFormattingVariation

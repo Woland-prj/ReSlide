@@ -12,6 +12,7 @@ const TopMenu: FC<TopMenuProps> = ({ presentationName }) => {
       <MenuLogo />
       <PresentationName name={presentationName}></PresentationName>
       <MenuButtons />
+      <ImageButtons />
     </>
   )
 }

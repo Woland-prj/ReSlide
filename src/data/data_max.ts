@@ -13,8 +13,8 @@ export const text: TText = {
   id: 1,
   type: ObjectType.Text,
   size: {
-    width: 50,
-    height: 20,
+    width: 200,
+    height: 300,
   },
   coords: {
     x: 20,
@@ -22,16 +22,16 @@ export const text: TText = {
   },
   rotationAngle: 0,
 
-  value: 'Text Text Text',
+  value: 'Text',
   formatting: {
     variation: {
-      italic: true,
-      bold: true,
-      underline: true,
+      italic: 'italic',
+      bold: 'bold',
+      decorationLine: 'underline',
     },
-    fontSize: 20,
-    fontFamily: 'Times New Roman',
-    color: '#FF0000',
+    fontSize: 23,
+    fontFamily: 'FontName',
+    color: '#000000',
   },
   isSelected: false,
 }
