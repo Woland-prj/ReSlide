@@ -2,6 +2,8 @@ import MenuButtons from '@ui/app_menu/top_menu/MenuButtons'
 import MenuLogo from '@ui/app_menu/top_menu/MenuLogo'
 import PresentationName from '@ui/app_menu/top_menu/PresentationName'
 import { FC } from 'react'
+import ImageButtons from '@ui/app_menu/top_menu/ImageButtons'
+
 type TopMenuProps = {
   presentationName: string
 }
