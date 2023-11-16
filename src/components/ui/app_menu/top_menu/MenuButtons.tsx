@@ -6,7 +6,13 @@ const MenuButtons: FC = () => {
   return (
     <div className='MenuButtons'>
       {menu_buttons.map(button => (
-        <TextButton key={button.name} button={button}></TextButton>
+        <TextButton
+          key={button.name}
+          text={button.name}
+          hover={() => console.log('test')}
+          onClick={() => console.log('test')}
+          // ntrcn
+        ></TextButton>
       ))}
     </div>
   )
