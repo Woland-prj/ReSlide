@@ -1,13 +1,14 @@
 import { doc } from '@/data/data_max'
 import TopMenu from '@ui/app_menu/top_menu/TopMenu'
-import { SlidePreview } from '@ui/slidebar/SlidePreview'
+import Slide from '@slide/Slide'
 import { FC } from 'react'
 
 const App: FC = () => {
   return (
     <>
       <TopMenu presentationName={doc.name} />
-      <SlidePreview slides={doc.slides} />
+      {/*<SlidePreview slides={doc.slides} />*/}
+      <Slide slide={doc.slides[0]} editable={true} />
     </>
   )
 }
