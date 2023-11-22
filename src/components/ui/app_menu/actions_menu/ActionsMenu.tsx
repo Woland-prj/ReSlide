@@ -7,7 +7,7 @@ const ActionsMenu: FC = () => {
   return (
     <div>
       <ActionsBlock actions={baseActions} />
-      <BaseActions />
+      {/* <BaseActions /> */}
       {/* Не понял, чем эти два блока отличаются друг от друга. Сейчас из-за них кнопки двоятся */}
       {/* <ChangedActions /> */}
     </div>
