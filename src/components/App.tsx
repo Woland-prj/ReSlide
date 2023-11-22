@@ -1,9 +1,6 @@
 import { doc } from '@/data/data_max'
 import TopMenu from '@ui/app_menu/top_menu/TopMenu'
-
 import Slide from '@slide/Slide'
-
-// Denis
 import { FC } from 'react'
 import Layout from '@/components/Layout/Layout'
 
