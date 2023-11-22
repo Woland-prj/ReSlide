@@ -2,8 +2,8 @@ import MenuButtons from '@ui/app_menu/top_menu/MenuButtons'
 import MenuLogo from '@ui/app_menu/top_menu/MenuLogo'
 import PresentationName from '@ui/app_menu/top_menu/PresentationName'
 import { FC } from 'react'
-import ImageButtons from '@ui/app_menu/top_menu/ImageButtons'
 import styles from './TopMenu.module.css'
+import ActionsMenu from '../actions_menu/ActionsMenu'
 
 type TopMenuProps = {
   presentationName: string
@@ -17,7 +17,7 @@ const TopMenu: FC<TopMenuProps> = ({ presentationName }) => {
         <PresentationName name={presentationName}></PresentationName>
       </div>
       <MenuButtons />
-      <ImageButtons />
+      <ActionsMenu></ActionsMenu>
     </>
   )
 }
