@@ -1,5 +1,7 @@
 .SubMenu {
   position: absolute;
+  display: flex;
+  flex-direction: column;
   z-index: 1;
   background-color: #f5f4f4;
   border: 2px solid #696969;

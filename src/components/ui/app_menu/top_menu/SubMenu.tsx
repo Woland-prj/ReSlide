@@ -10,9 +10,9 @@ const SubMenu: FC<TSubMenuProps> = ({ buttons }) => {
   return (
     <div className={styles.SubMenu}>
       {buttons.map(button => (
-        <div className={styles.SubMenuButtons} key={button.name}>
+        <button className={styles.SubMenuButtons} key={button.name}>
           {button.name}
-        </div>
+        </button>
       ))}
     </div>
   )
