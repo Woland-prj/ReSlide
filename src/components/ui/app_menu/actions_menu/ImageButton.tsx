@@ -6,9 +6,12 @@ type ImageButtonProps = {
 }
 
 const ImageButton: FC<ImageButtonProps> = ({ button }) => {
+  // TODO: useButton
+  // const action = useButton(button.name)
+
   return (
     <button
-      onClick={button.onClick}
+      // onClick={action}
       onMouseEnter={button.hover}
       className='ImageButton'
     >
