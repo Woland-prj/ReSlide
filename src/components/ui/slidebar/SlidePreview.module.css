@@ -1,0 +1,12 @@
+.preview {
+  height: inherit;
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: inherit;
+}
+
+.slidePreview {
+  transform-origin: top left;
+  margin-bottom: 1rem;
+  max-width: inherit;
+}

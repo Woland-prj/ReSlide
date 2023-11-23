@@ -1,0 +1,21 @@
+.layout {
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.editor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(100vw - 21.7rem);
+  border-left: 1px solid #777777;
+  border-top: 1px solid #777777;
+}
+
+.preview {
+  height: inherit;
+  max-width: 20rem;
+}
