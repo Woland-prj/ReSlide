@@ -1,0 +1,47 @@
+.top_menu {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem;
+}
+
+.pres_name {
+  margin: 0;
+  padding: 0;
+  padding-left: 0.25rem;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.logo {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.logo img {
+  width: inherit;
+  height: inherit;
+}
+
+.button_block {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+
+.button_block div button {
+  border: none;
+  padding: 0.15rem 0.35rem;
+  background: none;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.button_block div button:hover {
+  background-color: #e8e8e8;
+  border-radius: 3px;
+  color: #611cd2;
+}

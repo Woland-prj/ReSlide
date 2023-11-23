@@ -2,21 +2,19 @@ import MenuButtons from '@ui/app_menu/top_menu/MenuButtons'
 import MenuLogo from '@ui/app_menu/top_menu/MenuLogo'
 import PresentationName from '@ui/app_menu/top_menu/PresentationName'
 import { FC } from 'react'
-import ActionsMenu from '../actions_menu/ActionsMenu'
 import styles from './TopMenu.module.css'
+import ActionsMenu from './actions_menu/ActionsMenu'
 
-type TopMenuProps = {
-  presentationName: string
-}
-
-const TopMenu: FC<TopMenuProps> = ({ presentationName }) => {
+const TopMenu: FC = () => {
   return (
     <>
-      <div className={styles.LogoAndPresentationName}>
+      <div className={styles.top_menu}>
         <MenuLogo />
-        <PresentationName />
+        <div>
+          <PresentationName />
+          <MenuButtons />
+        </div>
       </div>
-      <MenuButtons />
       <ActionsMenu></ActionsMenu>
     </>
   )
