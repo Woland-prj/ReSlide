@@ -1,20 +1,21 @@
-import { ButtonProps } from '@ui/app_menu/actions_menu/ButtonProps'
+import { TActionsButton } from '@/types/action_buttons.type'
 import { FC } from 'react'
 
-type ImageButtonProps = ButtonProps & {
-  image_url: string
-  alt: string
+type ImageButtonProps = {
+  button: TActionsButton
 }
 
-const ImageButton: FC<ImageButtonProps> = ({
-  image_url,
-  alt,
-  hover,
-  onClick,
-}) => {
+const ImageButton: FC<ImageButtonProps> = ({ button }) => {
+  // TODO: useButton
+  // const action = useButton(button.name)
+
   return (
-    <button onClick={onClick} onMouseEnter={hover} className='ImageButton'>
-      <img src={image_url} alt={alt} />
+    <button
+      // onClick={action}
+      onMouseEnter={button.hover}
+      className='ImageButton'
+    >
+      <img src={button.iconUrl} alt={button.alt} />
     </button>
   )
 }

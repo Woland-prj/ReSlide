@@ -1,5 +1,6 @@
 import { TContextButton } from '@/types/menu_buttons.type'
 import { FC } from 'react'
+import styles from './SubMenu.module.css'
 
 type TSubMenuProps = {
   buttons: TContextButton[]
@@ -7,9 +8,11 @@ type TSubMenuProps = {
 
 const SubMenu: FC<TSubMenuProps> = ({ buttons }) => {
   return (
-    <div>
+    <div className={styles.SubMenu}>
       {buttons.map(button => (
-        <div key={button.name}>{button.name}</div>
+        <button className={styles.SubMenuButtons} key={button.name}>
+          {button.name}
+        </button>
       ))}
     </div>
   )
