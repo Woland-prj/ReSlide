@@ -11,6 +11,10 @@ import {
 
 export const doc: TDocument = {
   name: 'Test presentation',
+  size: {
+    width: 960,
+    height: 540,
+  },
   slides: [],
 }
 
@@ -20,10 +24,6 @@ export const slide: TSlide = {
   background: {
     variation: SlideBgType.Color,
     value: 'https://test.com/test_back.png',
-  },
-  size: {
-    width: 960,
-    height: 540,
   },
   objects: [],
 }
