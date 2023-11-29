@@ -1,4 +1,4 @@
-import { ButtonProps } from '@ui/app_menu/top_menu/ButtonProps'
+import { ButtonProps } from '@ui/app_menu/actions_menu/ButtonProps'
 import { FC } from 'react'
 
 type ImageButtonProps = ButtonProps & {
