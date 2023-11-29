@@ -15,14 +15,12 @@ const TextButton: FC<TextButtonProps> = ({ button }) => {
   }
 
   return (
-    <>
-      <div className={styles.TextButton}>
-        <button onClick={toggleSubMenu} className='TextButton'>
-          {button.name}
-        </button>
-        {isMenuOpen && <SubMenu buttons={button.contextButtons} />}
-      </div>
-    </>
+    <div className={styles.TextButton}>
+      <button onClick={toggleSubMenu} className='TextButton'>
+        {button.name}
+      </button>
+      {isMenuOpen && <SubMenu buttons={button.contextButtons} />}
+    </div>
   )
 }
 
