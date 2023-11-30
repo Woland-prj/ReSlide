@@ -4,7 +4,7 @@ type TSubscription = {
   element: HTMLDivElement
   subscribers: ((e: MouseEvent) => void)[]
 }
-
+// По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
 export const useButtonAction = (name: string) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
