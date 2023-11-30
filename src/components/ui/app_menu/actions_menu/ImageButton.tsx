@@ -1,5 +1,6 @@
 import { TActionsButton } from '@/types/action_buttons.type'
 import { FC } from 'react'
+import styles from './ActionsMenu.module.css'
 
 type ImageButtonProps = {
   button: TActionsButton
@@ -7,8 +8,8 @@ type ImageButtonProps = {
 
 const ImageButton: FC<ImageButtonProps> = ({ button }) => {
   return (
-    <button onMouseEnter={button.hover} className='ImageButton'>
-      <img src={button.iconUrl} alt={button.alt} />
+    <button className={styles.image_button}>
+      <img src={button.iconUrl} alt={button.name} />
     </button>
   )
 }

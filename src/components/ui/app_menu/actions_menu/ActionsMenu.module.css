@@ -1,2 +1,30 @@
-.BaseActions {
+.actions_menu {
+  margin: 0 1rem 1rem;
+  height: 1.5rem;
+  background: #e8e8e8;
+  border-radius: 1.5rem;
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+}
+
+.actions_block {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.image_button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: all 0.25s ease;
+}
+
+.image_button:hover {
+  background: #611cd2;
 }
