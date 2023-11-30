@@ -1,2 +1,42 @@
-.BaseActions {
+.actions_menu {
+  margin: 0 1rem 1rem;
+  height: 1.5rem;
+  background: #e8e8e8;
+  border-radius: 1.5rem;
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+}
+
+.actions_block {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.actions_block::after {
+  content: '';
+  height: 1.5rem;
+  width: 1px;
+  border-left: 1px solid #AAAAAA;
+  display: block;
+}
+
+.image_button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: all 0.25s ease;
+}
+
+.image_button:hover {
+  background: rgba(170, 170, 170, 0.5);
+}
+
+.image_button.active {
+  background: rgba(97, 28, 210, 0.5);
 }

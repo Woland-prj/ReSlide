@@ -11,11 +11,14 @@ import {
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
+import useDnd from '@/hooks/useDnd'
 import styles from './Slide.module.css'
 
 type TObjectProps = {
   object: TText | TVector | TImage
+  index: number
+  editable: boolean
 }
 
 type TSlideProps = {
@@ -23,7 +26,7 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object }) => {
+const Object: FC<TObjectProps> = ({ object, index, editable }) => {
   function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
     const styles = {
       left: object.coords.x,
@@ -35,13 +38,18 @@ const Object: FC<TObjectProps> = ({ object }) => {
 
   const params = [object.coords.x, object.coords.y, object.rotationAngle]
   const chStyles = useStyles(params, object, changeStyles)
+  const objRef = useRef<HTMLDivElement>(null)
+  const { registerItemFn, unregisterItemFn } = useDnd()
+
+  useEffect(() => {
+    if (editable) {
+      const mainFn = registerItemFn(index, { elementRef: objRef })
+      return () => unregisterItemFn(index, mainFn)
+    }
+  }, [])
 
   return (
-    <div
-      style={chStyles}
-      className={styles.object}
-      //ref={(el: HTMLDivElement) => (refItem.item = el)}
-    >
+    <div style={chStyles} className={styles.object} ref={objRef}>
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
@@ -59,11 +67,6 @@ const Object: FC<TObjectProps> = ({ object }) => {
 }
 
 const Slide: FC<TSlideProps> = ({ slide, editable }) => {
-  if (editable) {
-    // TODO: сделать драгэнддроп
-    console.log('useDnd')
-  }
-
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
       width: doc.size.width,
@@ -80,8 +83,13 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
 
   return (
     <div className={styles.slide} style={chStyles}>
-      {slide.objects.map(object => (
-        <Object key={object.id} object={object} />
+      {slide.objects.map((object, index) => (
+        <Object
+          key={object.id}
+          object={object}
+          index={index}
+          editable={editable}
+        />
       ))}
     </div>
   )
