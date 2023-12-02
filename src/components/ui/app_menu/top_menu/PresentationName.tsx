@@ -12,14 +12,20 @@ const PresentationName: FC = () => {
   const { changeDocName } = useActions()
 
   useEffect(() => {
+    document.title = docInitialName + ' - ReSlide'
+  }, [])
+
+  useEffect(() => {
     inputRef.current?.focus()
   })
 
   const saveName = () => {
     setIsTyped(false)
+    const n_name = tempName == '' ? docInitialName : tempName
     changeDocName({
-      name: tempName == '' ? docInitialName : tempName,
+      name: n_name,
     })
+    document.title = n_name + ' - ReSlide'
   }
 
   return (
