@@ -1,31 +1,12 @@
-import { SlideBgType } from '@/types/type'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { docInitialState } from '@/store/initial_states.data'
 import {
   TChangeDocFormatPayload,
   TChangeDocNamePayload,
   TInitialState,
 } from './types'
 
-const initialState: TInitialState = {
-  document: {
-    name: 'Blank presentation',
-    size: {
-      width: 960,
-      height: 540,
-    },
-    slides: [
-      {
-        id: 1,
-        background: {
-          variation: SlideBgType.Color,
-          value: '#FFFFFF',
-        },
-        objects: [],
-        isSelected: true,
-      },
-    ],
-  },
-}
+const initialState: TInitialState = docInitialState
 
 export const docSlice = createSlice({
   name: 'document',

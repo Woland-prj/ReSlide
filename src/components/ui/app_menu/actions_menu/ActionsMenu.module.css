@@ -15,10 +15,10 @@
 }
 
 .actions_block::after {
-  content: '';
-  height: 1.5rem;
   width: 1px;
-  border-left: 1px solid #AAAAAA;
+  height: 1.5rem;
+  content: '';
+  border-left: 1px solid #aaaaaa;
   display: block;
 }
 
@@ -34,9 +34,9 @@
 }
 
 .image_button:hover {
-  background: rgba(170, 170, 170, 0.5);
+  background: rgb(170 170 170 / 50%);
 }
 
 .image_button.active {
-  background: rgba(97, 28, 210, 0.5);
+  background: rgb(97 28 210 / 50%);
 }

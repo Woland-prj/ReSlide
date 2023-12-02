@@ -6,12 +6,26 @@
   padding: 1rem;
 }
 
-.pres_name {
+.pres_name_h {
   margin: 0;
-  padding: 0;
-  padding-left: 0.25rem;
+  padding: 0 0 0 0.25rem;
   font-weight: 500;
   font-size: 20px;
+  border: 2px solid transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 18.7rem;
+}
+
+.pres_name_input {
+  margin: 0;
+  font-weight: 500;
+  font-size: 20px;
+  outline: none;
+  border-radius: 5px;
+  border: 2px solid #611cd2;
+  min-width: 18.7rem;
 }
 
 .logo {

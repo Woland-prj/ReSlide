@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'fs/promises'
+import { readFile } from 'fs/promises'
 
 async function readJSONFile(root: string) {
   try {
@@ -9,3 +9,5 @@ async function readJSONFile(root: string) {
     console.error(err)
   }
 }
+
+export { readJSONFile }
