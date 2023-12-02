@@ -45,7 +45,7 @@
   gap: 0.2rem;
 }
 
-.button_block div button {
+.text_button {
   border: none;
   padding: 0.15rem 0.35rem;
   background: none;
@@ -54,7 +54,7 @@
   transition: all 0.25s ease;
 }
 
-.button_block div button:hover {
+.text_button:hover {
   background-color: #e8e8e8;
   border-radius: 3px;
   color: #611cd2;
