@@ -1,14 +1,11 @@
-import { combineReducers } from 'redux'
-import { configureStore } from 'react-redux'
+import { combineReducers, createStore } from 'redux'
 
-import { docReducer } from './reducer'
+import { docReducer } from './doc_reducer'
 
 const rootReducer = combineReducers({
   document: docReducer,
 })
 
-export const store = configureStore({
-  reducer: rootReducer,
-})
+export const store = createStore(rootReducer)
 
 export type TypeRootState = ReturnType<typeof rootReducer>

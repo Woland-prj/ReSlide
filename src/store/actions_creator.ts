@@ -1,8 +1,9 @@
-import { TSize } from '@/types/type'
+import { TSize, TSlide } from '@/types/type'
 
 enum DocActions {
   CHANGE_DOC_NAME_ACTION = 'CHANGE_DOC_NAME_ACTION',
   CHANGE_DOC_SIZE_ACTION = 'CHANGE_DOC_SIZE_ACTION',
+  ADD_SLIDE_ACTION = 'ADD_SLIDE_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -19,10 +20,14 @@ type TChangeDocSizeAction = {
   }
 }
 
-type TAction = TChangeDocNameAction | TChangeDocSizeAction
+type TAddSlideAction = {
+  type: DocActions.ADD_SLIDE_ACTION
+}
+
+type TAction = TChangeDocNameAction | TChangeDocSizeAction | TAddSlideAction
 
 const createActions = {
-  createChangeDocNameAction: (name: string): TAction => {
+  changeDocNameAction: (name: string): TAction => {
     return {
       type: DocActions.CHANGE_DOC_NAME_ACTION,
       payload: {
@@ -30,12 +35,17 @@ const createActions = {
       },
     }
   },
-  createChangeDocSizeAction: (size: TSize): TAction => {
+  changeDocSizeAction: (size: TSize): TAction => {
     return {
       type: DocActions.CHANGE_DOC_SIZE_ACTION,
       payload: {
         size: size,
       },
+    }
+  },
+  addSlideAction: (): TAction => {
+    return {
+      type: DocActions.ADD_SLIDE_ACTION,
     }
   },
 }

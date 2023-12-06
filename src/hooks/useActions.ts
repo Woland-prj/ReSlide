@@ -1,10 +1,10 @@
-import { docSlice } from '@/store/slice'
+import { createActions } from '@/store/actions_creator'
 import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const rootAction = {
-  ...docSlice.actions,
+  ...createActions,
 }
 
 export const useActions = () => {

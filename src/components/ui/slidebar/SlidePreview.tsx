@@ -1,15 +1,19 @@
 import { doc } from '@/data/data_max'
 import { TSlide } from '@/types/type'
 import Slide from '@slide/Slide'
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import styles from './SlidePreview.module.css'
+import { useDoc } from '@/hooks/useDoc'
 
 type SlidePreview = {
   slides: TSlide[]
 }
 
-export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
-  const scale: number = 300 / doc.size.width
+export const SlidePreview: FC<SlidePreview> = () => {
+  const { slides, size } = useDoc()
+  // const previewRef = useRef<HTMLDivElement>(null)
+
+  const scale: number = 200 / size.width
   return (
     <div className={styles.preview}>
       {slides.map(slide => (
@@ -18,8 +22,8 @@ export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
           className={styles.slidePreview}
           style={{
             scale: `${scale}`,
-            width: doc.size.width * scale,
-            height: doc.size.height * scale,
+            height: size.height * scale,
+            width: size.width * scale,
           }}
         >
           <Slide slide={slide} editable={false}></Slide>

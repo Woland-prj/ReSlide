@@ -9,7 +9,7 @@ const PresentationName: FC = () => {
   const [tempName, setTempName] = useState<string>(docInitialName)
   const [isTyped, setIsTyped] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const { changeDocName } = useActions()
+  const { changeDocNameAction } = useActions()
 
   useEffect(() => {
     document.title = docInitialName + ' - ReSlide'
@@ -22,9 +22,7 @@ const PresentationName: FC = () => {
   const saveName = () => {
     setIsTyped(false)
     const n_name = tempName == '' ? docInitialName : tempName
-    changeDocName({
-      name: n_name,
-    })
+    changeDocNameAction(n_name)
     document.title = n_name + ' - ReSlide'
   }
 

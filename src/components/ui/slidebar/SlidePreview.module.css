@@ -7,6 +7,12 @@
 
 .slidePreview {
   transform-origin: top left;
+  width: 2rem;
   margin-bottom: 1rem;
-  max-width: inherit;
+  /*border: 5px solid #aaaaaa;*/
+  /*border-radius: 0.3rem;*/
 }
+
+/*.slidePreview div {*/
+/*  border: none;*/
+/*}*/
