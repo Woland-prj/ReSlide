@@ -1,8 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { docSlice } from './slice'
+import { combineReducers } from 'redux'
+import { configureStore } from 'react-redux'
+
+import { docReducer } from './reducer'
 
 const rootReducer = combineReducers({
-  document: docSlice.reducer,
+  document: docReducer,
 })
 
 export const store = configureStore({

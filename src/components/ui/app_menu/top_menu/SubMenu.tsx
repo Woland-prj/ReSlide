@@ -1,7 +1,15 @@
 import { TContextButton } from '@/types/menu_buttons.type'
-import { Dispatch, FC, SetStateAction, useEffect } from 'react'
+import {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import styles from './SubMenu.module.css'
 import { SubMenuButton } from './SubMenuButton'
+import cn from 'clsx'
 
 type TSubMenuProps = {
   buttons: TContextButton[]
@@ -9,19 +17,33 @@ type TSubMenuProps = {
 }
 
 const SubMenu: FC<TSubMenuProps> = ({ buttons, setIsMenuOpen }) => {
-  // useEffect(() => {
-  //   const toggleFn = () => setIsMenuOpen(false)
-  //   window.addEventListener('click', toggleFn)
-  //   return () => window.removeEventListener('click', toggleFn)
-  // }, [])
+  const castileRef = useRef<HTMLDivElement>(null)
+  const [isMenuClosing, setIsMenuClosing] = useState<boolean>(false)
+  useEffect(() => {
+    const toggleFn = () => {
+      const closingTimeout: number = 30
+      setIsMenuClosing(true)
+      setTimeout(() => setIsMenuOpen(prev => !prev), closingTimeout)
+    }
+    castileRef.current?.addEventListener('click', toggleFn)
+    return () => castileRef.current?.removeEventListener('click', toggleFn)
+  }, [])
 
-  // TODO: компонент для кнопки в SubMenu
   return (
-    <div className={styles.sub_menu}>
-      {buttons.map(button => (
-        <SubMenuButton key={button.name} button={button}></SubMenuButton>
-      ))}
-    </div>
+    <>
+      <div
+        className={cn(
+          styles.sub_menu_castile,
+          isMenuClosing && styles.sub_menu_castile_closing,
+        )}
+        ref={castileRef}
+      />
+      <div className={styles.sub_menu}>
+        {buttons.map(button => (
+          <SubMenuButton key={button.name} button={button}></SubMenuButton>
+        ))}
+      </div>
+    </>
   )
 }
 
