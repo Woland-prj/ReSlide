@@ -54,10 +54,10 @@
   height: 100vh;
   overflow: hidden;
   background: rgb(0 0 0 / 15%);
-  animation: 0.3s close-castile ease;
+  animation: 0.1s open-castile ease;
 }
 
-@keyframes close-castile {
+@keyframes open-castile {
   from {
     background-color: transparent;
   }
@@ -69,5 +69,5 @@
 
 .sub_menu_castile_closing {
   background-color: transparent;
-  transition: 0.03s all ease;
+  transition: 0.1s all ease;
 }

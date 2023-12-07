@@ -21,7 +21,7 @@ const SubMenu: FC<TSubMenuProps> = ({ buttons, setIsMenuOpen }) => {
   const [isMenuClosing, setIsMenuClosing] = useState<boolean>(false)
   useEffect(() => {
     const toggleFn = () => {
-      const closingTimeout: number = 30
+      const closingTimeout: number = 100
       setIsMenuClosing(true)
       setTimeout(() => setIsMenuOpen(prev => !prev), closingTimeout)
     }

@@ -28,7 +28,7 @@ const voidSlide: TSlide = {
     value: '#FFFFFF',
   },
   objects: [],
-  isSelected: true,
+  isSelected: false,
 }
 
 export { docInitialState, docInitialName, voidSlide }
