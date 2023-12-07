@@ -9,31 +9,31 @@ import redo from '@/static/images/redo.svg'
 
 export const baseActions: TActionsButton[] = [
   {
-    name: 'new slide',
+    id: 'add_slide_btn',
     iconUrl: new_slide,
   },
   {
-    name: 'undo',
+    id: 'undo_btn',
     iconUrl: undo,
   },
   {
-    name: 'redo',
+    id: 'redo_btn',
     iconUrl: redo,
   },
   {
-    name: 'select',
+    id: 'select_btn',
     iconUrl: arrow,
   },
   {
-    name: 'new text',
+    id: 'new_text_btn',
     iconUrl: text,
   },
   {
-    name: 'new image',
+    id: 'new_image_btn',
     iconUrl: image,
   },
   {
-    name: 'new shape',
+    id: 'new_shape_btn',
     iconUrl: shape,
   },
 ]

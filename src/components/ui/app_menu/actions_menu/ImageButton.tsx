@@ -8,10 +8,10 @@ type ImageButtonProps = {
 }
 
 const ImageButton: FC<ImageButtonProps> = ({ button }) => {
-  const buttonRef = useButtonAction(button.name)
+  const buttonRef = useButtonAction(button.id)
   return (
     <button className={styles.image_button} ref={buttonRef}>
-      <img src={button.iconUrl} alt={button.name} />
+      <img src={button.iconUrl} alt={button.id} />
     </button>
   )
 }

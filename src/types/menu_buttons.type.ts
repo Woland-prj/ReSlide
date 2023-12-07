@@ -1,5 +1,6 @@
 // TODO: Функционал контекстной кнопки
 export type TContextButton = {
+  id: string
   name: string
 }
 
