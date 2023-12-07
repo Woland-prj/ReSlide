@@ -1,11 +1,11 @@
 import { baseActions } from '@/data/actions_menu_buttons.data'
 import { FC } from 'react'
 import ActionsBlock from './ActionsBlock'
-import { BaseActions } from './BaseActions'
+import styles from './ActionsMenu.module.css'
 
 const ActionsMenu: FC = () => {
   return (
-    <div>
+    <div className={styles.actions_menu}>
       <ActionsBlock actions={baseActions} />
       {/* <BaseActions /> */}
       {/* Не понял, чем эти два блока отличаются друг от друга. Сейчас из-за них кнопки двоятся */}

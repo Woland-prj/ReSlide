@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react'
+import { buttonFunctions } from '@/services/button_functions.service'
+import { useActions } from '@/hooks/useActions'
 
 type TSubscription = {
   element: HTMLDivElement
@@ -7,26 +9,26 @@ type TSubscription = {
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
 export const useButtonAction = (name: string) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
+
+  const { addSlideAction } = useActions()
   useEffect(() => {
-    const onClick = () => {
-      console.log('lol')
-      switch (name) {
-        case 'Создать':
-          console.log('Создание')
-          break
-        case 'Открыть':
-          console.log('Открытие')
-          break
-        case 'Экспортировать':
-          console.log('Экспорт документа')
-          break
-        default:
-          console.log('Ничего нет')
-          break
-      }
+    let onClick = () => alert('Возникли проблемы с кнопкой')
+    switch (name) {
+      case 'Создать':
+        onClick = buttonFunctions.createDoc
+        break
+      case 'Открыть':
+        onClick = buttonFunctions.openDoc
+        break
+      case 'Экспортировать':
+        onClick = buttonFunctions.saveDoc
+        break
+      case 'new slide':
+        onClick = addSlideAction
+        break
     }
-    buttonRef.current?.addEventListener('mousedown', onClick)
-    return () => buttonRef.current?.removeEventListener('mousedown', onClick)
+    buttonRef.current?.addEventListener('click', onClick)
+    return () => buttonRef.current?.removeEventListener('click', onClick)
   }, [])
   return buttonRef
 }
