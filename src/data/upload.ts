@@ -1,11 +1,11 @@
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises'
 
 async function readJSONFile(root: string) {
-    try {
-        const data = await readFile(root, 'utf8');
-        const jsonData = JSON.parse(data);
-        console.log(jsonData);
-    } catch (err) {
-        console.error(err);
-    }
+  try {
+    const data = await readFile(root, 'utf8')
+    const jsonData = JSON.parse(data)
+    console.log(jsonData)
+  } catch (err) {
+    console.error(err)
+  }
 }
