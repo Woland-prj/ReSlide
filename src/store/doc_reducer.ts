@@ -17,8 +17,7 @@ const docReducer = (
         ...state,
         size: action.payload.size,
       }
-    case DocActions.ADD_SLIDE_ACTION:
-      // eslint-disable-next-line no-case-declarations
+    case DocActions.ADD_SLIDE_ACTION: {
       const newVoidSlide: TSlide = {
         ...voidSlide,
         id: state.slides.length,
@@ -27,6 +26,9 @@ const docReducer = (
         ...state,
         slides: [...state.slides, newVoidSlide],
       }
+    }
+    case DocActions.LOAD_DOC_ACTION:
+      return action.payload.doc
     default:
       return state
   }

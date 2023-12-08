@@ -29,6 +29,7 @@ export const useButtonAction = (btnId: string) => {
           input.type = 'file'
           input.click()
           const openedFile = readJSONFile(e)
+          input.remove()
         }
         break
       case 'export_btn':
