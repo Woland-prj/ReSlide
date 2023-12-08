@@ -42,11 +42,6 @@ const useDnd = () => {
         item.elementRef.current!.style.left = `${
           item.startCoords.x - mouseDownEvt.clientX + dragEvt.clientX
         }px`
-
-        console.log(
-          item.startCoords.x + dragEvt.clientX,
-          item.startCoords.y + dragEvt.clientY,
-        )
       }
 
       const onDrop = () => {

@@ -2,7 +2,7 @@ const saveJsonObjToFile = (saveObj: object, nameDoc: string) => {
   // file setting
   const text = JSON.stringify(saveObj)
   const name = nameDoc
-  const type: string = 'text/plain'
+  const type: string = 'application/json'
 
   // create file
   const a: HTMLAnchorElement = document.createElement('a')

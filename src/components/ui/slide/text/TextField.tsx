@@ -7,8 +7,8 @@ type TTextFieldProps = {
 
 const TextField: FC<TTextFieldProps> = ({ text }) => {
   return (
-    <div contentEditable='true'>
-      <text
+    <div>
+      <span
         style={{
           color: text.formatting.color,
           width: text.size.width,
@@ -18,7 +18,7 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
         }}
       >
         {text.value}
-      </text>
+      </span>
     </div>
   )
 }

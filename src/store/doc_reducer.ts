@@ -20,7 +20,7 @@ const docReducer = (
     case DocActions.ADD_SLIDE_ACTION: {
       const newVoidSlide: TSlide = {
         ...voidSlide,
-        id: state.slides.length,
+        id: state.slides.length + 1,
       }
       return {
         ...state,

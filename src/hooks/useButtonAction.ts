@@ -10,37 +10,51 @@ type TSubscription = {
   element: HTMLDivElement
   subscribers: ((e: MouseEvent) => void)[]
 }
+
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
 export const useButtonAction = (btnId: string) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const { name, size, slides } = useDoc()
+  const { addSlideAction, loadDocAction } = useActions()
 
-  const { addSlideAction } = useActions()
+  const openDocFn = () => {
+    const input: HTMLInputElement = document.createElement('input')
+    input.type = 'file'
+    const loadFn = (e: Event) => {
+      const filePromise = readJSONFile(e)
+      filePromise.then(loadedDoc => {
+        console.log(loadedDoc)
+        loadDocAction(loadedDoc)
+      })
+      filePromise.finally(() => {
+        input.removeEventListener('change', loadFn)
+        input.remove()
+      })
+    }
+    input.addEventListener('change', loadFn)
+    input.click()
+  }
+
+  const exportDocFn = () => {
+    const savedDoc: TDocument = {
+      name: name,
+      size: size,
+      slides: slides,
+    }
+    saveJsonObjToFile(savedDoc, savedDoc.name)
+  }
+
   useEffect(() => {
     let onClick = (e: Event) => alert(`Возникли проблемы с кнопкой ${btnId}`)
     switch (btnId) {
       case 'create_btn':
-        onClick = buttonFunctions.createDoc
+        onClick = () => console.log('create button')
         break
       case 'open_btn':
-        onClick = (e: Event) => {
-          const input: HTMLInputElement = document.createElement('input')
-          input.name = 'openInput'
-          input.type = 'file'
-          input.click()
-          const openedFile = readJSONFile(e)
-          input.remove()
-        }
+        onClick = openDocFn
         break
       case 'export_btn':
-        onClick = () => {
-          const savedDoc: TDocument = {
-            name: name,
-            size: size,
-            slides: slides,
-          }
-          saveJsonObjToFile(savedDoc, savedDoc.name)
-        }
+        onClick = exportDocFn
         break
       case 'add_slide_btn':
         onClick = addSlideAction
