@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { SlidePreview } from '@ui/slidebar/SlidePreview'
+import { SlidePreviewList } from '@ui/slidebar/SlidePreviewList'
 import { doc } from '@/data/data_max'
 import Slide from '@slide/Slide'
 import styles from './Layout.module.css'
@@ -15,7 +15,7 @@ const Layout: FC = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.preview}>
-        <SlidePreview />
+        <SlidePreviewList />
       </div>
       <div className={styles.editor}>
         <Slide slide={active_slide} editable={true} />
