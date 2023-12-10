@@ -1,10 +1,12 @@
-import { createActions } from '@/store/actions_creator'
+import { createDocActions } from '@/store/doc_actions_creator'
 import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { createEditorActions } from '@/store/editor_actions_creator'
 
 const rootAction = {
-  ...createActions,
+  ...createDocActions,
+  ...createEditorActions,
 }
 
 export const useActions = () => {

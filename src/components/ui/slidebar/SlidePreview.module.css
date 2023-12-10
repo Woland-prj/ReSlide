@@ -11,7 +11,7 @@
   max-width: inherit;
 }
 
-.slidePreview div {
+.slidePreview > div {
   border: 5px solid #aaaaaa;
   border-radius: 3rem;
 }
@@ -25,6 +25,6 @@
   margin: 0.5rem 0 0 0.5rem;
 }
 
-.slidePreview_active div {
+.slidePreview_active > div {
   border: 10px solid #611cd2;
 }

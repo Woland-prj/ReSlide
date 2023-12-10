@@ -1,18 +1,14 @@
-import { doc } from '@/data/data_max'
-import { TSlide } from '@/types/type'
 import Slide from '@slide/Slide'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useEffect } from 'react'
 import styles from './SlidePreview.module.css'
 import { useDoc } from '@/hooks/useDoc'
 import cn from 'clsx'
 
-type SlidePreview = {
-  slides: TSlide[]
-}
-
-export const SlidePreview: FC<SlidePreview> = () => {
+export const SlidePreview: FC = () => {
   const { slides, size } = useDoc()
-  // const previewRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    console.log('reload')
+  }, [slides])
 
   const scale: number = 200 / size.width
   return (

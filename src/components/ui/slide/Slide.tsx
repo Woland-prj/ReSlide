@@ -28,18 +28,17 @@ type TSlideProps = {
 
 const Object: FC<TObjectProps> = ({ object, index, editable }) => {
   function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
-    const styles = {
+    return {
       left: object.coords.x,
       top: object.coords.y,
       transform: `rotate(${object.rotationAngle}deg)`,
     }
-    return styles
   }
 
   const params = [object.coords.x, object.coords.y, object.rotationAngle]
   const chStyles = useStyles(params, object, changeStyles)
   const objRef = useRef<HTMLDivElement>(null)
-  const { registerItemFn, unregisterItemFn } = useDnd()
+  const { registerItemFn, unregisterItemFn } = useDnd(object.id)
 
   useEffect(() => {
     if (editable) {

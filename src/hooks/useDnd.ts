@@ -1,5 +1,6 @@
 import { RefObject, useRef } from 'react'
 import { TCoords } from '@/types/type'
+import { useActions } from '@/hooks/useActions'
 
 type TRefItemInfo = {
   elementRef: RefObject<HTMLDivElement>
@@ -11,8 +12,9 @@ type TItemInfo = TRefItemInfo & {
 
 type onDragFn = (e: MouseEvent) => void
 
-const useDnd = () => {
+const useDnd = (objId: number) => {
   const itemsRef = useRef<TItemInfo[]>([])
+  const { changeObjectCoords } = useActions()
 
   const registerItemFn = (index: number, info: TRefItemInfo): onDragFn => {
     const item: TItemInfo = {
@@ -48,6 +50,14 @@ const useDnd = () => {
         item.elementRef.current!.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)
+        changeObjectCoords(
+          objId,
+          item.elementRef.current!.getBoundingClientRect().left -
+            item.elementRef.current!.parentElement!.getBoundingClientRect()
+              .left,
+          item.elementRef.current!.getBoundingClientRect().top -
+            item.elementRef.current!.parentElement!.getBoundingClientRect().top,
+        )
       }
 
       window.addEventListener('mousemove', onDrag)

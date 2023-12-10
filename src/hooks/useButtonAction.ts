@@ -1,15 +1,9 @@
 import { useEffect, useRef } from 'react'
-import { buttonFunctions } from '@/services/button_functions.service'
 import { useActions } from '@/hooks/useActions'
 import { saveJsonObjToFile } from '@/services/save_doc.service'
 import { useDoc } from '@/hooks/useDoc'
 import { TDocument } from '@/types/type'
 import { readJSONFile } from '@/services/upload_doc.service'
-
-type TSubscription = {
-  element: HTMLDivElement
-  subscribers: ((e: MouseEvent) => void)[]
-}
 
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
 export const useButtonAction = (btnId: string) => {
