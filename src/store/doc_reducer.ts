@@ -35,7 +35,6 @@ const docReducer = (
       state.slides.forEach((slide, indexS) => {
         slide.objects.forEach((object, indexO) => {
           if (object.id === action.payload.objectId) {
-            console.log(indexS, indexO, action.payload.coords)
             objectIndex = indexO
             slideIndex = indexS
           }
@@ -44,7 +43,6 @@ const docReducer = (
       const newState: TDocument = state
       newState.slides[slideIndex].objects[objectIndex].coords =
         action.payload.coords
-      console.log(newState)
       return {
         ...newState,
       }
