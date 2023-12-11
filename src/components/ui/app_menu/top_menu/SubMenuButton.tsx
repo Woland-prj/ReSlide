@@ -9,13 +9,9 @@ type SubMenuButtonProps = {
 }
 
 export const SubMenuButton: FC<SubMenuButtonProps> = ({ button }) => {
-  const buttonRef = useButtonAction(button.name)
+  const buttonRef = useButtonAction(button.id)
   return (
-    <button
-      ref={buttonRef}
-      className={styles.sub_menu_button}
-      key={button.name}
-    >
+    <button ref={buttonRef} className={styles.sub_menu_button} key={button.id}>
       {button.name}
     </button>
   )

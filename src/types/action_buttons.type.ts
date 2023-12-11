@@ -1,4 +1,4 @@
 export type TActionsButton = {
-  name: string
+  id: string
   iconUrl: string
 }

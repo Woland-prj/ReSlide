@@ -87,3 +87,8 @@ export type TDocument = {
   size: TSize
   slides: TSlide[]
 }
+
+export type TEditor = {
+  activeSlideId: number
+  activeToolId: string
+}

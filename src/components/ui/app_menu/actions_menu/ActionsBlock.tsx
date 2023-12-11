@@ -11,7 +11,7 @@ const ActionsBlock: FC<TActionsBlockProps> = ({ actions }) => {
   return (
     <div className={styles.actions_block}>
       {actions.map(action => (
-        <ImageButton key={action.name} button={action} />
+        <ImageButton key={action.id} button={action} />
       ))}
     </div>
   )

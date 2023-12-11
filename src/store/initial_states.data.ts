@@ -1,4 +1,11 @@
-import { SlideBgType, TDocument, TSlide } from '@/types/type'
+import {
+  ObjectType,
+  ShapeVariation,
+  SlideBgType,
+  TDocument,
+  TEditor,
+  TSlide,
+} from '@/types/type'
 
 const docInitialName: string = 'Презентация без названия'
 
@@ -15,7 +22,26 @@ const docInitialState: TDocument = {
         variation: SlideBgType.Color,
         value: '#FFFFFF',
       },
-      objects: [],
+      objects: [
+        {
+          id: 1,
+          type: ObjectType.Vector,
+          shape: ShapeVariation.Rectangle,
+          fillColor: 'purple',
+          strokeColor: 'blue',
+          strokeSize: 5,
+          size: {
+            width: 200,
+            height: 300,
+          },
+          coords: {
+            x: 50,
+            y: 50,
+          },
+          rotationAngle: 0,
+          isSelected: false,
+        },
+      ],
       isSelected: true,
     },
   ],
@@ -28,7 +54,12 @@ const voidSlide: TSlide = {
     value: '#FFFFFF',
   },
   objects: [],
-  isSelected: true,
+  isSelected: false,
 }
 
-export { docInitialState, docInitialName, voidSlide }
+const initialEditor: TEditor = {
+  activeSlideId: 1,
+  activeToolId: 'select_btn',
+}
+
+export { docInitialState, docInitialName, voidSlide, initialEditor }

@@ -7,7 +7,7 @@ export const BaseActions: FC = () => {
   return (
     <div className={styles.BaseActions}>
       {baseActions.map(button => (
-        <ImageButton key={button.name} button={button}></ImageButton>
+        <ImageButton key={button.id} button={button}></ImageButton>
       ))}
     </div>
   )
