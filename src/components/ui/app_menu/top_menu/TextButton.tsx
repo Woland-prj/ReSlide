@@ -1,5 +1,5 @@
 import { TMenuButton } from '@/types/menu_buttons.type'
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import SubMenu from './SubMenu'
 import styles from '../TopMenu.module.css'
 

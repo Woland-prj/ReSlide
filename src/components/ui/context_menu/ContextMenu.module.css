@@ -1,0 +1,17 @@
+.context_menu_button {
+  display: inline;
+
+  border: none;
+  padding: 0.15rem 0.35rem;
+  background: none;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+  
+.context_menu_button:hover {
+  background-color: #e8e8e8;
+  border-radius: 3px;
+  color: #611cd2;
+}
+  
