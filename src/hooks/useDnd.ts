@@ -15,7 +15,7 @@ type onDragFn = (e: MouseEvent) => void
 
 const useDnd = (objId: number) => {
   const itemsRef = useRef<TItemInfo[]>([])
-  const { changeObjectCoords } = useActions()
+  const { changeObjectCoordsAction } = useActions()
   const { slides, size } = useDoc()
   let movedObj: TText | TImage | TVector | null = null
   slides.forEach(slide => {
@@ -67,7 +67,7 @@ const useDnd = (objId: number) => {
         item.elementRef.current!.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)
-        changeObjectCoords(
+        changeObjectCoordsAction(
           objId,
           item.elementRef.current!.getBoundingClientRect().left - parentX,
           item.elementRef.current!.getBoundingClientRect().top - parentY,

@@ -6,6 +6,7 @@ enum DocActions {
   ADD_SLIDE_ACTION = 'ADD_SLIDE_ACTION',
   LOAD_DOC_ACTION = 'LOAD_DOC_ACTION',
   CHANGE_OBJECT_COORDS = 'CHANGE_OBJECT_COORDS',
+  ADD_TEXT_ACTION = 'ADD_TEXT_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -41,12 +42,20 @@ type TChangeObjectCoordsAction = {
   }
 }
 
+type TAddTextAction = {
+  type: DocActions.ADD_TEXT_ACTION
+  payload: {
+    slideId: number
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
   | TAddSlideAction
   | TLoadDocAction
   | TChangeObjectCoordsAction
+  | TAddTextAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -78,7 +87,7 @@ const createDocActions = {
       },
     }
   },
-  changeObjectCoords: (id: number, x: number, y: number): TDocAction => {
+  changeObjectCoordsAction: (id: number, x: number, y: number): TDocAction => {
     return {
       type: DocActions.CHANGE_OBJECT_COORDS,
       payload: {
@@ -87,6 +96,14 @@ const createDocActions = {
           x: x,
           y: y,
         },
+      },
+    }
+  },
+  addTextAction: (slideID: number): TDocAction => {
+    return {
+      type: DocActions.ADD_TEXT_ACTION,
+      payload: {
+        slideId: slideID,
       },
     }
   },
