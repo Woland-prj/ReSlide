@@ -1,6 +1,7 @@
 const enum EditorActions {
   SET_ACTIVE_SLIDE = 'SET_ACTIVE_SLIDE',
   SET_ACTIVE_TOOL = 'SET_ACTIVE_TOOL',
+  GENERATE_ID = 'GENERATE_ID',
 }
 
 type TSetActiveSlideAction = {
@@ -17,7 +18,17 @@ type TSetActiveToolAction = {
   }
 }
 
-type TEditorAction = TSetActiveSlideAction | TSetActiveToolAction
+type TGenerateIdAction = {
+  type: EditorActions.GENERATE_ID
+  payload: {
+    type: 'slideId' | 'objectId'
+  }
+}
+
+type TEditorAction =
+  | TSetActiveSlideAction
+  | TSetActiveToolAction
+  | TGenerateIdAction
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -33,6 +44,14 @@ const createEditorActions = {
       type: EditorActions.SET_ACTIVE_TOOL,
       payload: {
         id: id,
+      },
+    }
+  },
+  generateIdAction: (type: 'slideId' | 'objectId') => {
+    return {
+      type: EditorActions.GENERATE_ID,
+      payload: {
+        type: type,
       },
     }
   },

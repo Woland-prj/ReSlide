@@ -25,6 +25,9 @@ type TChangeDocSizeAction = {
 
 type TAddSlideAction = {
   type: DocActions.ADD_SLIDE_ACTION
+  payload: {
+    slideId: number
+  }
 }
 
 type TLoadDocAction = {
@@ -74,9 +77,12 @@ const createDocActions = {
       },
     }
   },
-  addSlideAction: (): TDocAction => {
+  addSlideAction: (slideId: number): TDocAction => {
     return {
       type: DocActions.ADD_SLIDE_ACTION,
+      payload: {
+        slideId: slideId,
+      },
     }
   },
   loadDocAction: (doc: TDocument): TDocAction => {

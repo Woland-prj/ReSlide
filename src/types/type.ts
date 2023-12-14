@@ -91,4 +91,6 @@ export type TDocument = {
 export type TEditor = {
   activeSlideId: number
   activeToolId: string
+  globalSlideId: number
+  globalObjectId: number
 }

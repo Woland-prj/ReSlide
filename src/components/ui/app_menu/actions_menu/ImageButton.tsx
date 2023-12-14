@@ -11,12 +11,12 @@ type ImageButtonProps = {
 
 const ImageButton: FC<ImageButtonProps> = ({ button }) => {
   const buttonRef = useButtonAction(button.id)
-  const { active_tool_id } = useEditor()
+  const { activeToolId } = useEditor()
   return (
     <button
       className={cn(
         styles.image_button,
-        active_tool_id == button.id && styles.active,
+        activeToolId == button.id && styles.active,
       )}
       ref={buttonRef}
     >

@@ -1,6 +1,5 @@
 import {
   ObjectType,
-  ShapeVariation,
   SlideBgType,
   TDocument,
   TEditor,
@@ -23,26 +22,7 @@ const docInitialState: TDocument = {
         variation: SlideBgType.Color,
         value: '#FFFFFF',
       },
-      objects: [
-        {
-          id: 1,
-          type: ObjectType.Vector,
-          shape: ShapeVariation.Rectangle,
-          fillColor: 'purple',
-          strokeColor: 'blue',
-          strokeSize: 5,
-          size: {
-            width: 200,
-            height: 300,
-          },
-          coords: {
-            x: 50,
-            y: 50,
-          },
-          rotationAngle: 0,
-          isSelected: false,
-        },
-      ],
+      objects: [],
       isSelected: true,
     },
   ],
@@ -61,6 +41,8 @@ const voidSlide: TSlide = {
 const initialEditor: TEditor = {
   activeSlideId: 1,
   activeToolId: 'select_btn',
+  globalSlideId: 0,
+  globalObjectId: 0,
 }
 
 const initText: TText = {
@@ -90,3 +72,22 @@ const initText: TText = {
 }
 
 export { docInitialState, docInitialName, voidSlide, initialEditor, initText }
+
+// {
+//   id: 1,
+//     type: ObjectType.Vector,
+//   shape: ShapeVariation.Rectangle,
+//   fillColor: 'purple',
+//   strokeColor: 'blue',
+//   strokeSize: 5,
+//   size: {
+//   width: 200,
+//     height: 300,
+// },
+//   coords: {
+//     x: 50,
+//       y: 50,
+//   },
+//   rotationAngle: 0,
+//     isSelected: false,
+// },

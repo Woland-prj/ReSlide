@@ -10,8 +10,9 @@ import { useEditor } from '@/hooks/useEditor'
 export const useButtonAction = (btnId: string) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const { name, size, slides } = useDoc()
-  const { addSlideAction, loadDocAction, addTextAction } = useActions()
-  const { active_slide_id } = useEditor()
+  const { addSlideAction, loadDocAction, addTextAction, generateIdAction } =
+    useActions()
+  const { activeSlideId, globalSlideId } = useEditor()
 
   const openDocFn = () => {
     const input: HTMLInputElement = document.createElement('input')
@@ -53,17 +54,19 @@ export const useButtonAction = (btnId: string) => {
         onClick = exportDocFn
         break
       case 'add_slide_btn':
-        onClick = addSlideAction
+        generateIdAction('slideId')
+        console.log(globalSlideId, 'lol')
+        onClick = () => addSlideAction(globalSlideId)
         break
       case 'new_text_btn':
         onClick = () => {
-          console.log(active_slide_id)
-          addTextAction(active_slide_id)
+          console.log(activeSlideId)
+          addTextAction(activeSlideId)
         }
         break
     }
     buttonRef.current?.addEventListener('click', onClick)
     return () => buttonRef.current?.removeEventListener('click', onClick)
-  }, [])
+  }, [activeSlideId])
   return buttonRef
 }

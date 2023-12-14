@@ -15,7 +15,7 @@ type TSlidePreviewProps = {
 const SlidePreview: FC<TSlidePreviewProps> = ({ slide, index }) => {
   const previewRef = useRef<HTMLDivElement>(null)
   const { size } = useDoc()
-  const { active_slide_id } = useEditor()
+  const { activeSlideId } = useEditor()
   const { setActiveSlideAction } = useActions()
   const scale: number = 200 / size.width
   useEffect(() => {
@@ -32,7 +32,7 @@ const SlidePreview: FC<TSlidePreviewProps> = ({ slide, index }) => {
       <div
         className={cn(
           styles.slidePreview,
-          slide.id === active_slide_id && styles.slidePreview_active,
+          slide.id === activeSlideId && styles.slidePreview_active,
         )}
         style={{
           scale: `${scale}`,

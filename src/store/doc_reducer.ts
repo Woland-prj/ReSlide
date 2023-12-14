@@ -52,11 +52,14 @@ const docReducer = (
       state.slides.forEach((slide, index) => {
         if (slide.id == action.payload.slideId) slideIndex = index
       })
-      initText.id = state.slides[slideIndex].objects.length + 1
+      const newText = {
+        ...initText,
+        id: state.slides[slideIndex].objects.length + 1,
+      }
       const newState = state
       newState.slides[slideIndex].objects = [
         ...newState.slides[slideIndex].objects,
-        initText,
+        newText,
       ]
       return {
         ...newState,

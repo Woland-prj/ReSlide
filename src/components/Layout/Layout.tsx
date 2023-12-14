@@ -7,10 +7,10 @@ import { useEditor } from '@/hooks/useEditor'
 import { useDoc } from '@/hooks/useDoc'
 
 const Layout: FC = () => {
-  const { active_slide_id } = useEditor()
+  const { activeSlideId } = useEditor()
   const { slides } = useDoc()
 
-  const active_slide = slides.filter(slide => slide.id === active_slide_id)[0]
+  const active_slide = slides.filter(slide => slide.id === activeSlideId)[0]
 
   return (
     <div className={styles.layout}>
