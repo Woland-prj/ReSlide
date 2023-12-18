@@ -1,4 +1,4 @@
-import { docInitialState, voidSlide, initText } from './initial_states.data'
+import { docInitialState, initText, voidSlide } from './initial_states.data'
 import { TDocument, TSlide } from '@/types/type'
 import { DocActions, TDocAction } from '@/store/doc_actions_creator'
 
@@ -61,6 +61,26 @@ const docReducer = (
         ...newState.slides[slideIndex].objects,
         newText,
       ]
+      return {
+        ...newState,
+      }
+    }
+    case DocActions.CHANGE_OBJECT_SIZE: {
+      let slideIndex: number = -1
+      let objectIndex: number = -1
+      state.slides.forEach((slide, indexS) => {
+        slide.objects.forEach((object, indexO) => {
+          if (object.id === action.payload.objectId) {
+            objectIndex = indexO
+            slideIndex = indexS
+          }
+        })
+      })
+      const newState = state
+      newState.slides[slideIndex].objects[objectIndex] = {
+        ...newState.slides[slideIndex].objects[objectIndex],
+        size: action.payload.size,
+      }
       return {
         ...newState,
       }
