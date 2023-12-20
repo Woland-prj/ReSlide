@@ -7,9 +7,12 @@ type ContextMenuButtonProps = {
 }
 
 const ContextMenuButton: FC<ContextMenuButtonProps> = ({ button }) => {
+  const IsThereAnIcon = button.iconUrl != undefined
   return (
     <button className={styles.context_menu_button}>
-      <img src={button.image} className={styles.button_image} />
+      {IsThereAnIcon && (
+        <img src={button.iconUrl} className={styles.button_image} />
+      )}
       <span className={styles.button_text}>{button.name}</span>
     </button>
   )

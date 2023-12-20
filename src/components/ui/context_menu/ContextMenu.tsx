@@ -1,7 +1,19 @@
-const ContextMenu: FC = () => {
-    return (
-        <div className='contextMenu'>
-            {}
-        </div>
-    )
+import { TButtonGroup } from '@/types/context_menu_buttons.type'
+import { FC } from 'react'
+import ButtonGroup from './ButtonGroup'
+
+type ContextMenuProps = {
+  buttonGroups: TButtonGroup[]
+}
+const ContextMenu: FC<ContextMenuProps> = ({ buttonGroups }) => {
+  return (
+    <div className='contextMenu'>
+      {buttonGroups.map(buttonGroup => (
+        <ButtonGroup
+          buttons={buttonGroup.buttons}
+          key={buttonGroup.id}
+        ></ButtonGroup>
+      ))}
+    </div>
+  )
 }

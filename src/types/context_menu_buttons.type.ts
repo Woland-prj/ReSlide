@@ -1,4 +1,10 @@
 export type TContextMenuButton = {
+  id: string
   name: string
-  image: string
+  iconUrl: string
+}
+
+export type TButtonGroup = {
+  buttons: TContextMenuButton[]
+  id: string
 }
