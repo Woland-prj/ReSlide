@@ -15,9 +15,9 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
     const charCount = Math.floor(text.size.width / text.formatting.fontSize)
     const tempStrs: string[] = []
     text.value.split('\n').forEach(str => {
-      if (str.split('').length * text.formatting.fontSize < text.size.width)
-        //
-        // использовать slice
+      const strArr = str.split('')
+      // while (strArr.length * text.formatting.fontSize < text.size.width) {
+      // }
     })
   }, [text])
 
