@@ -77,6 +77,12 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
     return styles
   }
 
+  useEffect(() => {
+    document.addEventListener('contextmenu', e => {
+      console.log(e)
+    })
+  })
+
   const params = [doc.size.width, doc.size.height]
   const chStyles = useStyles(params, slide, changeStyles)
 
