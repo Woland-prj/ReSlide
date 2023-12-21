@@ -1,6 +1,24 @@
 import { docInitialState, initText, voidSlide } from './initial_states.data'
-import { TDocument, TSlide } from '@/types/type'
+import { ObjectType, TDocument, TSlide } from '@/types/type'
 import { DocActions, TDocAction } from '@/store/doc_actions_creator'
+
+type TIndexes = {
+  slideIndex: number
+  objectIndex: number
+}
+const getIndexesByObjectId = (id: number, state: TDocument): TIndexes => {
+  let slideIndex: number = -1
+  let objectIndex: number = -1
+  state.slides.forEach((slide, indexS) => {
+    slide.objects.forEach((object, indexO) => {
+      if (object.id === id) {
+        objectIndex = indexO
+        slideIndex = indexS
+      }
+    })
+  })
+  return { slideIndex, objectIndex }
+}
 
 const docReducer = (
   state: TDocument = docInitialState,
@@ -30,22 +48,14 @@ const docReducer = (
     case DocActions.LOAD_DOC_ACTION:
       return action.payload.doc
     case DocActions.CHANGE_OBJECT_COORDS: {
-      let slideIndex: number = -1
-      let objectIndex: number = -1
-      state.slides.forEach((slide, indexS) => {
-        slide.objects.forEach((object, indexO) => {
-          if (object.id === action.payload.objectId) {
-            objectIndex = indexO
-            slideIndex = indexS
-          }
-        })
-      })
-      const newState: TDocument = state
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState: TDocument = { ...state }
       newState.slides[slideIndex].objects[objectIndex].coords =
         action.payload.coords
-      return {
-        ...newState,
-      }
+      return newState
     }
     case DocActions.ADD_TEXT_ACTION: {
       let slideIndex: number = 0
@@ -56,34 +66,34 @@ const docReducer = (
         ...initText,
         id: state.slides[slideIndex].objects.length + 1,
       }
-      const newState = state
+      const newState = { ...state }
       newState.slides[slideIndex].objects = [
         ...newState.slides[slideIndex].objects,
         newText,
       ]
-      return {
-        ...newState,
-      }
+      return newState
     }
     case DocActions.CHANGE_OBJECT_SIZE: {
-      let slideIndex: number = -1
-      let objectIndex: number = -1
-      state.slides.forEach((slide, indexS) => {
-        slide.objects.forEach((object, indexO) => {
-          if (object.id === action.payload.objectId) {
-            objectIndex = indexO
-            slideIndex = indexS
-          }
-        })
-      })
-      const newState = state
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
       newState.slides[slideIndex].objects[objectIndex] = {
         ...newState.slides[slideIndex].objects[objectIndex],
         size: action.payload.size,
       }
-      return {
-        ...newState,
-      }
+      return newState
+    }
+    case DocActions.CHANGE_TEXT_VALUE_ACTION: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      const object = newState.slides[slideIndex].objects[objectIndex]
+      if (object.type === ObjectType.Text) object.value = action.payload.value
+      return newState
     }
     default:
       return state

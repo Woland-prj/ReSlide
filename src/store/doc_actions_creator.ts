@@ -8,6 +8,7 @@ enum DocActions {
   CHANGE_OBJECT_COORDS = 'CHANGE_OBJECT_COORDS',
   CHANGE_OBJECT_SIZE = 'CHANGE_OBJECT_SIZE',
   ADD_TEXT_ACTION = 'ADD_TEXT_ACTION',
+  CHANGE_TEXT_VALUE_ACTION = 'CHANGE_TEXT_VALUE_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -61,6 +62,14 @@ type TChangeObjectSizeAction = {
   }
 }
 
+type TChangeTextValueAction = {
+  type: DocActions.CHANGE_TEXT_VALUE_ACTION
+  payload: {
+    objectId: number
+    value: string
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -69,6 +78,7 @@ type TDocAction =
   | TChangeObjectCoordsAction
   | TAddTextAction
   | TChangeObjectSizeAction
+  | TChangeTextValueAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -129,6 +139,15 @@ const createDocActions = {
       payload: {
         objectId: objectID,
         size: size,
+      },
+    }
+  },
+  changeTextValueAction: (objectID: number, value: string): TDocAction => {
+    return {
+      type: DocActions.CHANGE_TEXT_VALUE_ACTION,
+      payload: {
+        objectId: objectID,
+        value: value,
       },
     }
   },

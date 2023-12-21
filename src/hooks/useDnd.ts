@@ -36,6 +36,7 @@ const useDnd = (objId: number) => {
     itemsRef.current![index] = item
 
     const onDragStart = (mouseDownEvt: MouseEvent) => {
+      console.log('onmousedown')
       const parentX: number =
         item.elementRef.current!.parentElement!.getBoundingClientRect().left
       const parentY: number =
@@ -46,7 +47,7 @@ const useDnd = (objId: number) => {
         item.elementRef.current!.getBoundingClientRect().top - parentY
 
       const onDrag = (dragEvt: MouseEvent) => {
-        const stroke: number | null = null
+        console.log('onmousemove')
         let newY: number =
           item.startCoords.y - mouseDownEvt.clientY + dragEvt.clientY
         if (newY < 0) newY = 0
@@ -64,6 +65,7 @@ const useDnd = (objId: number) => {
       }
 
       const onDrop = () => {
+        console.log('onmouseup')
         item.elementRef.current!.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)

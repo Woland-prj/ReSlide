@@ -58,7 +58,7 @@ const initText: TText = {
   rotationAngle: 0,
   isSelected: true,
   type: ObjectType.Text,
-  value: 'Новый текст\nlol\nlol\nlolipop',
+  value: 'Новый текст',
   formatting: {
     variation: {
       italic: 'normal',
