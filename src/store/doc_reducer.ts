@@ -1,6 +1,6 @@
-import { docInitialState, initText, voidSlide } from './initial_states.data'
-import { ObjectType, TDocument, TSlide } from '@/types/type'
 import { DocActions, TDocAction } from '@/store/doc_actions_creator'
+import { ObjectType, TDocument, TSlide } from '@/types/type'
+import { docInitialState, initText, voidSlide } from './initial_states.data'
 
 type TIndexes = {
   slideIndex: number
@@ -95,8 +95,19 @@ const docReducer = (
       if (object.type === ObjectType.Text) object.value = action.payload.value
       return newState
     }
+    case DocActions.SET_OBJECT_SELECTION: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      newState.slides[slideIndex].objects[objectIndex].isSelected =
+        action.payload.selectState
+
+      return newState
+    }
     default:
-      return state
+      return { ...state }
   }
 }
 
