@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from '../ContextMenu.module.css'
+import styles from './ContextMenu.module.css'
 import { TContextMenuButton } from '@/types/context_menu_buttons.type'
 
 type ContextMenuButtonProps = {
