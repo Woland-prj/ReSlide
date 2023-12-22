@@ -1,6 +1,4 @@
 import { doc } from '@/data/data_max'
-import useDnd from '@/hooks/useDnd'
-import useSelection from '@/hooks/useSelection'
 import { useStyles } from '@/hooks/useStyles'
 import {
   ObjectType,
@@ -13,7 +11,7 @@ import {
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC, useEffect, useRef } from 'react'
+import { FC } from 'react'
 import styles from './Slide.module.css'
 
 type TObjectProps = {
@@ -38,35 +36,23 @@ const Object: FC<TObjectProps> = ({ object, index, editable }) => {
 
   const params = [object.coords.x, object.coords.y, object.rotationAngle]
   const chStyles = useStyles(params, object, changeStyles)
-  const objRef = useRef<HTMLDivElement>(null)
-  const { setSelection, deleteSelection } = useSelection(object.id)
-  const { registerItemFn, unregisterItemFn } = useDnd(object.id)
-
-  useEffect(() => {
-    if (editable) {
-      const dndFn = registerItemFn(index, { elementRef: objRef })
-      const selectFn = setSelection(objRef)
-      return () => {
-        unregisterItemFn(index, dndFn)
-        deleteSelection(objRef, selectFn)
-      }
-    }
-  }, [])
 
   return (
-    <div style={chStyles} className={styles.object} ref={objRef}>
-      {(() => {
-        switch (object.type) {
-          case ObjectType.Text:
-            return <TextField text={object} />
-          case ObjectType.Image:
-            return <Image image={object} />
-          case ObjectType.Vector:
-            return <Vector vector={object} />
-          default:
-            return <div>Incorrect object</div>
-        }
-      })()}
+    <div style={chStyles} className={styles.object}>
+      <div>
+        {(() => {
+          switch (object.type) {
+            case ObjectType.Text:
+              return <TextField text={object} editable={editable} />
+            case ObjectType.Image:
+              return <Image image={object} editable={editable} />
+            case ObjectType.Vector:
+              return <Vector vector={object} editable={editable} />
+            default:
+              return <div>Incorrect object</div>
+          }
+        })()}
+      </div>
     </div>
   )
 }

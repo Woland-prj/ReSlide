@@ -1,7 +1,7 @@
-import { RefObject, useRef } from 'react'
-import { TCoords, TImage, TText, TVector } from '@/types/type'
 import { useActions } from '@/hooks/useActions'
 import { useDoc } from '@/hooks/useDoc'
+import { TCoords, TImage, TText, TVector } from '@/types/type'
+import { RefObject } from 'react'
 
 type TRefItemInfo = {
   elementRef: RefObject<HTMLDivElement>
@@ -14,7 +14,6 @@ type TItemInfo = TRefItemInfo & {
 type onDragFn = (e: MouseEvent) => void
 
 const useDnd = (objId: number) => {
-  const itemsRef = useRef<TItemInfo[]>([])
   const { changeObjectCoordsAction } = useActions()
   const { slides, size } = useDoc()
   let movedObj: TText | TImage | TVector | null = null
@@ -24,55 +23,45 @@ const useDnd = (objId: number) => {
     })
   })
 
-  const registerItemFn = (index: number, info: TRefItemInfo): onDragFn => {
-    const item: TItemInfo = {
-      ...info,
-      startCoords: {
-        x: 0,
-        y: 0,
-      },
-    }
-
-    itemsRef.current![index] = item
+  const registerItemFn = (elementRef: RefObject<HTMLDivElement>): onDragFn => {
+    const item: HTMLDivElement = elementRef.current!
 
     const onDragStart = (mouseDownEvt: MouseEvent) => {
       console.log('onmousedown')
-      const parentX: number =
-        item.elementRef.current!.parentElement!.getBoundingClientRect().left
-      const parentY: number =
-        item.elementRef.current!.parentElement!.getBoundingClientRect().top
-      item.startCoords.x =
-        item.elementRef.current!.getBoundingClientRect().left - parentX
-      item.startCoords.y =
-        item.elementRef.current!.getBoundingClientRect().top - parentY
+      const parentX: number = item.parentElement!.getBoundingClientRect().left
+      const parentY: number = item.parentElement!.getBoundingClientRect().top
+      const startCoords: TCoords = {
+        x: item.getBoundingClientRect().left - parentX,
+        y: item.getBoundingClientRect().top - parentY,
+      }
 
       const onDrag = (dragEvt: MouseEvent) => {
         console.log('onmousemove')
         let newY: number =
-          item.startCoords.y - mouseDownEvt.clientY + dragEvt.clientY
+          startCoords.y - mouseDownEvt.clientY + dragEvt.clientY
         if (newY < 0) newY = 0
         if (newY > size.height - movedObj!.size.height)
           newY = size.height - movedObj!.size.height
         let newX: number =
-          item.startCoords.x - mouseDownEvt.clientX + dragEvt.clientX
+          startCoords.x - mouseDownEvt.clientX + dragEvt.clientX
         if (newX < 0) newX = 0
         if (newX > size.width - movedObj!.size.width)
           newX = size.width - movedObj!.size.width
-        item.elementRef.current!.style.position = 'absolute'
-        item.elementRef.current!.style.zIndex = '1'
-        item.elementRef.current!.style.top = `${newY}px`
-        item.elementRef.current!.style.left = `${newX}px`
+        item.style.position = 'absolute'
+        item.style.zIndex = '1'
+        item.style.top = `${newY}px`
+        item.style.left = `${newX}px`
       }
 
       const onDrop = () => {
         console.log('onmouseup')
-        item.elementRef.current!.style.zIndex = ''
+        item.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)
         changeObjectCoordsAction(
           objId,
-          item.elementRef.current!.getBoundingClientRect().left - parentX,
-          item.elementRef.current!.getBoundingClientRect().top - parentY,
+          item.getBoundingClientRect().left - parentX,
+          item.getBoundingClientRect().top - parentY,
         )
       }
 
@@ -80,7 +69,7 @@ const useDnd = (objId: number) => {
       window.addEventListener('mouseup', onDrop)
     }
 
-    item.elementRef.current?.addEventListener('mousedown', onDragStart)
+    item.addEventListener('mousedown', onDragStart)
 
     return onDragStart
   }

@@ -3,6 +3,7 @@ import { FC } from 'react'
 
 type TImageProps = {
   image: TImage
+  editable: boolean
 }
 
 const Image: FC<TImageProps> = ({ image }) => {
