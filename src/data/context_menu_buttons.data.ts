@@ -3,6 +3,13 @@ import shape from '@/static/images/shape.svg'
 import text from '@/static/images/text.svg'
 import image from '@/static/images/image.svg'
 
+export enum slideButtonGroupNames {
+  'new_object_buttons',
+}
+export enum slidebarButtonGroupNames {
+  'slidebar_buttons',
+}
+
 export const context_menu_button_groups: TButtonGroup[] = [
   {
     id: 'new_object_buttons',

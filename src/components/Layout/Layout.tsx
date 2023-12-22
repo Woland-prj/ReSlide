@@ -5,8 +5,12 @@ import styles from './Layout.module.css'
 import { useEditor } from '@/hooks/useEditor'
 import { useDoc } from '@/hooks/useDoc'
 import ContextMenu from '@ui/context_menu/ContextMenu'
-import { context_menu_button_groups } from '@/data/context_menu_buttons.data'
 import { TButtonGroup } from '@/types/context_menu_buttons.type'
+import {
+  context_menu_button_groups,
+  slideButtonGroupNames,
+  slidebarButtonGroupNames,
+} from '@/data/context_menu_buttons.data'
 
 const Layout: FC = () => {
   const { active_slide_id } = useEditor()
@@ -14,7 +18,19 @@ const Layout: FC = () => {
   const ref_slide = useRef<HTMLDivElement>(null)
   const ref_slidebar = useRef<HTMLDivElement>(null)
   const active_slide = slides.filter(slide => slide.id === active_slide_id)[0]
-  const [menuState, setMenuState] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  // slideGroups_undefined и slidebarGroups_undefined - массивы с группами кнопок. Undefined у них появляется из-за map.
+  // Чтобы компилятор не выдавал ошибок, цикл for переводит массив с возможным undefined в нормальный массив
+  const slidebarGroups = context_menu_button_groups
+    .map(group => {
+      if (group!.id in slidebarButtonGroupNames) return group
+    })
+    .filter(group => group != undefined)
+  const slideGroups = context_menu_button_groups
+    .map(group => {
+      if (group!.id in slidebarButtonGroupNames) return group
+    })
+    .filter(group => group != undefined)
 
   useEffect(() => {
     ref_slidebar.current?.addEventListener('contextmenu', () => {
@@ -22,20 +38,12 @@ const Layout: FC = () => {
     })
 
     ref_slide.current?.addEventListener('contextmenu', e => {
-      //if (!menuState) setMenuState(true)
       e.preventDefault()
-      //console.log(menuState)
-      // if (menuState) {
-      // context_menu_button_groups.map(buttonGroup => {
-      //   console.log(buttonGroup.id)
-      //    buttonGroup.id == 'new_object_buttons'
-      //     && (
-      //     <ContextMenu buttonGroups={[buttonGroup]}></ContextMenu>
-      //   )
-      // })
-      //console.log(menuState)
-      // setMenuState(false)
-      // }
+      if (isMenuOpen) {
+        setIsMenuOpen(false)
+      } else {
+        setIsMenuOpen(true)
+      }
     })
   }, [])
 
@@ -46,6 +54,7 @@ const Layout: FC = () => {
       </div>
       <div className={styles.editor} ref={ref_slide}>
         <Slide slide={active_slide} editable={true} />
+        {isMenuOpen && <ContextMenu buttonGroups={slideGroups}></ContextMenu>}
       </div>
     </div>
   )

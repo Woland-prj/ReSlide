@@ -9,10 +9,10 @@ type ContextMenuProps = {
 const ContextMenu: FC<ContextMenuProps> = ({ buttonGroups }) => {
   return (
     <div className={styles.context_menu}>
-      {buttonGroups.map(buttonGroup => (
+      {buttonGroups?.map(buttonGroup => (
         <ButtonGroup
-          buttons={buttonGroup.buttons}
-          key={buttonGroup.id}
+          buttons={buttonGroup?.buttons}
+          key={buttonGroup?.id}
         ></ButtonGroup>
       ))}
     </div>

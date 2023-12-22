@@ -10,7 +10,7 @@ const ButtonGroup: FC<ButtonGroupProps> = ({ buttons }) => {
   return (
     <div>
       {buttons.map(button => (
-        <ContextMenuButton key={button.id} button={button}></ContextMenuButton>
+        <ContextMenuButton key={button?.id} button={button}></ContextMenuButton>
       ))}
     </div>
   )
