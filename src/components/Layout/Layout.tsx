@@ -20,6 +20,7 @@ const Layout: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   // slideGroups_undefined и slidebarGroups_undefined - массивы с группами кнопок. Undefined у них появляется из-за map.
   // Чтобы компилятор не выдавал ошибок, цикл for переводит массив с возможным undefined в нормальный массив
+
   const slidebarGroups = context_menu_button_groups
     .map(group => {
       if (group!.id in slidebarButtonGroupNames) return group
