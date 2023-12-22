@@ -48,8 +48,8 @@ const initialEditor: TEditor = {
 const initText: TText = {
   id: 0,
   size: {
-    width: 100,
-    height: 50,
+    width: 150,
+    height: 80,
   },
   coords: {
     x: 0,
@@ -71,7 +71,7 @@ const initText: TText = {
   },
 }
 
-export { docInitialState, docInitialName, voidSlide, initialEditor, initText }
+export { docInitialName, docInitialState, initText, initialEditor, voidSlide }
 
 // {
 //   id: 1,
