@@ -51,6 +51,7 @@ type TChangeObjectCoordsAction = {
 type TAddTextAction = {
   type: DocActions.ADD_TEXT_ACTION
   payload: {
+    objectId: number
     slideId: number
   }
 }
@@ -135,10 +136,11 @@ const createDocActions = {
       },
     }
   },
-  addTextAction: (slideID: number): TDocAction => {
+  addTextAction: (objectID: number, slideID: number): TDocAction => {
     return {
       type: DocActions.ADD_TEXT_ACTION,
       payload: {
+        objectId: objectID,
         slideId: slideID,
       },
     }

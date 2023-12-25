@@ -26,17 +26,6 @@ type TSlideProps = {
 }
 
 const Object: FC<TObjectProps> = ({ object, slideRef, editable }) => {
-  function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
-    return {
-      left: object.coords.x,
-      top: object.coords.y,
-      transform: `rotate(${object.rotationAngle}deg)`,
-    }
-  }
-
-  const params = [object.coords.x, object.coords.y, object.rotationAngle]
-  const chStyles = useStyles(params, object, changeStyles)
-
   return (
     <>
       {(() => {

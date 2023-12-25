@@ -17,7 +17,7 @@ const docInitialState: TDocument = {
   },
   slides: [
     {
-      id: 1,
+      id: 0,
       background: {
         variation: SlideBgType.Color,
         value: '#FFFFFF',
@@ -39,7 +39,7 @@ const voidSlide: TSlide = {
 }
 
 const initialEditor: TEditor = {
-  activeSlideId: 1,
+  activeSlideId: 0,
   activeToolId: 'select_btn',
   globalSlideId: 0,
   globalObjectId: 0,

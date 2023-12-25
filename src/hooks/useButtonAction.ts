@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react'
 import { useActions } from '@/hooks/useActions'
-import { saveJsonObjToFile } from '@/services/save_doc.service'
 import { useDoc } from '@/hooks/useDoc'
-import { TDocument } from '@/types/type'
-import { readJSONFile } from '@/services/upload_doc.service'
 import { useEditor } from '@/hooks/useEditor'
+import { saveJsonObjToFile } from '@/services/save_doc.service'
+import { readJSONFile } from '@/services/upload_doc.service'
+import { TDocument } from '@/types/type'
+import { useEffect, useRef } from 'react'
 
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
 export const useButtonAction = (btnId: string) => {
@@ -12,7 +12,7 @@ export const useButtonAction = (btnId: string) => {
   const { name, size, slides } = useDoc()
   const { addSlideAction, loadDocAction, addTextAction, generateIdAction } =
     useActions()
-  const { activeSlideId, globalSlideId } = useEditor()
+  const { activeSlideId, globalSlideId, globalObjectId } = useEditor()
 
   const openDocFn = () => {
     const input: HTMLInputElement = document.createElement('input')
@@ -54,19 +54,21 @@ export const useButtonAction = (btnId: string) => {
         onClick = exportDocFn
         break
       case 'add_slide_btn':
-        generateIdAction('slideId')
-        console.log(globalSlideId, 'lol')
-        onClick = () => addSlideAction(globalSlideId)
+        onClick = () => {
+          generateIdAction('slideId')
+          addSlideAction(globalSlideId + 1)
+        }
         break
       case 'new_text_btn':
         onClick = () => {
           console.log(activeSlideId)
-          addTextAction(activeSlideId)
+          generateIdAction('objectId')
+          addTextAction(globalObjectId + 1, activeSlideId)
         }
         break
     }
     buttonRef.current?.addEventListener('click', onClick)
     return () => buttonRef.current?.removeEventListener('click', onClick)
-  }, [activeSlideId])
+  }, [activeSlideId, globalObjectId, globalSlideId])
   return buttonRef
 }

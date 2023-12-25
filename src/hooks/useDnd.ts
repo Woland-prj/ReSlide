@@ -51,7 +51,6 @@ const useDnd = (objId: number) => {
         if (newX < 0) newX = 0
         if (newX > size.width - movedObj!.size.width)
           newX = size.width - movedObj!.size.width
-        console.log(startCoords.x, startCoords.y)
         item.style.position = 'absolute'
         item.style.zIndex = '1'
         item.style.top = `${newY}px`
