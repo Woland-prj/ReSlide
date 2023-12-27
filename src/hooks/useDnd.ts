@@ -3,17 +3,12 @@ import { useDoc } from '@/hooks/useDoc'
 import { TCoords, TImage, TText, TVector } from '@/types/type'
 import { RefObject } from 'react'
 
-type TRefItemInfo = {
-  elementRef: RefObject<HTMLDivElement>
+type TDndHandlers = {
+  onDragStart: (e: MouseEvent) => void
+  safeFn: (e: MouseEvent) => void
 }
 
-type TItemInfo = TRefItemInfo & {
-  startCoords: TCoords
-}
-
-type onDragFn = (e: MouseEvent) => void
-
-const useDnd = (objId: number) => {
+export const useDnd = (objId: number) => {
   const { changeObjectCoordsAction } = useActions()
   const { slides, size } = useDoc()
   let movedObj: TText | TImage | TVector | null = null
@@ -25,15 +20,18 @@ const useDnd = (objId: number) => {
 
   const registerItemFn = (
     elementRef: RefObject<HTMLDivElement>,
-    slideRef: RefObject<HTMLDivElement>,
-  ): onDragFn => {
+  ): TDndHandlers => {
     const item: HTMLDivElement = elementRef.current!
-    const slide: HTMLDivElement = slideRef.current!
+
+    const safeFn = (clickEvt: MouseEvent) => {
+      clickEvt.stopImmediatePropagation()
+    }
 
     const onDragStart = (mouseDownEvt: MouseEvent) => {
+      mouseDownEvt.stopImmediatePropagation
       console.log('onmousedown')
-      const parentX: number = slide.getBoundingClientRect().left
-      const parentY: number = slide.getBoundingClientRect().top
+      const parentX: number = item.parentElement!.getBoundingClientRect().left
+      const parentY: number = item.parentElement!.getBoundingClientRect().top
       const startCoords: TCoords = {
         x: item.getBoundingClientRect().left - parentX,
         y: item.getBoundingClientRect().top - parentY,
@@ -75,17 +73,15 @@ const useDnd = (objId: number) => {
 
     item.addEventListener('mousedown', onDragStart)
 
-    return onDragStart
+    return { onDragStart, safeFn }
   }
 
   const unregisterItemFn = (
     elementRef: RefObject<HTMLDivElement>,
-    onDragFn: onDragFn,
+    handlers: TDndHandlers,
   ) => {
-    elementRef.current?.removeEventListener('mousedown', onDragFn)
+    elementRef.current?.removeEventListener('mousedown', handlers.onDragStart)
   }
 
   return { registerItemFn, unregisterItemFn }
 }
-
-export default useDnd

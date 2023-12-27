@@ -13,6 +13,7 @@ import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
 import { FC, RefObject, useRef } from 'react'
 import styles from './Slide.module.css'
+import SelectionBox from './selection_box/SelectionBox'
 
 type TObjectProps = {
   object: TText | TVector | TImage
@@ -25,19 +26,13 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object, slideRef, editable }) => {
+const Object: FC<TObjectProps> = ({ object, editable }) => {
   return (
-    <>
+    <SelectionBox editable={editable} obj={object}>
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
-            return (
-              <TextField
-                text={object}
-                editable={editable}
-                slideRef={slideRef}
-              />
-            )
+            return <TextField text={object} />
           case ObjectType.Image:
             return <Image image={object} editable={editable} />
           case ObjectType.Vector:
@@ -46,7 +41,7 @@ const Object: FC<TObjectProps> = ({ object, slideRef, editable }) => {
             return <div>Incorrect object</div>
         }
       })()}
-    </>
+    </SelectionBox>
   )
 }
 

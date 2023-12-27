@@ -1,10 +1,22 @@
 import { RefObject } from 'react'
 import { useActions } from './useActions'
 
-const useSelection = (objId: number) => {
+export type TSelectionHandlers = {
+  selectHandler: () => void
+  unselectHandler: () => void
+}
+
+export const useSelection = (objId: number) => {
   const { setObjectSelection } = useActions()
 
-  const setSelection = (itemRef: RefObject<HTMLDivElement>): (() => void) => {
+  const setSelection = (
+    itemRef: RefObject<HTMLDivElement>,
+  ): TSelectionHandlers => {
+    const handlers: TSelectionHandlers = {
+      selectHandler: () => {},
+      unselectHandler: () => {},
+    }
+
     const realizeSelection = () => {
       console.log('active select')
       setObjectSelection(objId, true)
@@ -15,7 +27,9 @@ const useSelection = (objId: number) => {
           'click',
           realizeUnselection,
         )
-
+        itemRef.current?.removeEventListener('click', (e: MouseEvent) =>
+          e.stopPropagation(),
+        )
         setTimeout(() => {
           itemRef.current?.addEventListener('click', realizeSelection)
         }, 100)
@@ -26,23 +40,30 @@ const useSelection = (objId: number) => {
           'click',
           realizeUnselection,
         )
+        itemRef.current?.addEventListener('click', (e: MouseEvent) =>
+          e.stopPropagation(),
+        )
       }, 100)
 
       itemRef.current?.removeEventListener('click', realizeSelection)
+      handlers.unselectHandler = realizeUnselection
     }
 
     itemRef.current?.addEventListener('click', realizeSelection)
-    return realizeSelection
+    handlers.selectHandler = realizeSelection
+    return handlers
   }
 
   const deleteSelection = (
     itemRef: RefObject<HTMLDivElement>,
-    setFn: () => void,
+    handlers: TSelectionHandlers,
   ) => {
-    itemRef.current?.removeEventListener('click', setFn)
+    itemRef.current?.removeEventListener('click', handlers.selectHandler)
+    itemRef.current?.parentElement?.removeEventListener(
+      'click',
+      handlers.unselectHandler,
+    )
   }
 
   return { setSelection, deleteSelection }
 }
-
-export default useSelection
