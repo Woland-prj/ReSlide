@@ -2,6 +2,7 @@ import { useDnd } from '@/hooks/useDnd'
 import { useObjectsStyles } from '@/hooks/useObjectsStyles'
 import { useSelection } from '@/hooks/useSelection'
 import { TImage, TText, TVector } from '@/types/type'
+import cn from 'clsx'
 import { FC, PropsWithChildren, useEffect, useRef } from 'react'
 import styles from './SelectionBox.module.css'
 
@@ -30,7 +31,11 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
     }
   }, [])
   return (
-    <div ref={boxRef} style={chStyles} className={styles.box}>
+    <div
+      ref={boxRef}
+      style={chStyles}
+      className={cn(styles.box, obj.isSelected && styles.active_box)}
+    >
       {children}
     </div>
   )
