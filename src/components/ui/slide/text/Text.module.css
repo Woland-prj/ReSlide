@@ -1,7 +1,5 @@
 .textObject {
   user-select: none;
-}
-
-.box {
-  position: absolute;
+  cursor: text;
+  outline: none;
 }

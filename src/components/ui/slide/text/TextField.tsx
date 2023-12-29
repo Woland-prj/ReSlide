@@ -13,21 +13,31 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
 
   useEffect(() => {
     const editFn = (e: Event) => {
-      e.stopPropagation()
-      const moveHandler = (e: Event) => e.stopPropagation()
-      const upHandler = (e: Event) => {
+      if (text.isSelected) {
         e.stopPropagation()
-        textBlockRef.current?.removeEventListener('mousemove', moveHandler)
-        textBlockRef.current?.removeEventListener('mouseup', upHandler)
+        const moveHandler = (e: Event) => e.stopPropagation()
+        const upHandler = (e: Event) => {
+          e.stopPropagation()
+          textBlockRef.current?.removeEventListener('mousemove', moveHandler)
+          textBlockRef.current?.removeEventListener('mouseup', upHandler)
+        }
+        textBlockRef.current?.addEventListener('mousemove', moveHandler)
+        textBlockRef.current?.addEventListener('mouseup', upHandler)
       }
-      textBlockRef.current?.addEventListener('mousemove', moveHandler)
-      textBlockRef.current?.addEventListener('mouseup', upHandler)
     }
     textBlockRef.current?.addEventListener('mousedown', editFn)
-    if (!text.isSelected)
-      return () =>
-        textBlockRef.current?.removeEventListener('mousedown', editFn)
+    return () => textBlockRef.current?.removeEventListener('mousedown', editFn)
   }, [text.isSelected])
+
+  const saveValue = () => {
+    changeTextValueAction(
+      text.id,
+      textBlockRef.current?.innerText &&
+        textBlockRef.current?.innerText.length != 1
+        ? textBlockRef.current?.innerText
+        : 'Введите текст',
+    )
+  }
 
   return (
     <div
@@ -35,6 +45,7 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
       ref={textBlockRef}
       suppressContentEditableWarning={true}
       contentEditable={text.isSelected ? 'true' : 'false'}
+      onBlur={saveValue}
     >
       {text.value}
     </div>

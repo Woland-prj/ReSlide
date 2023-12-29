@@ -23,7 +23,7 @@ const docInitialState: TDocument = {
         value: '#FFFFFF',
       },
       objects: [],
-      isSelected: true,
+      isSelected: false,
     },
   ],
 }
@@ -56,7 +56,7 @@ const initText: TText = {
     y: 0,
   },
   rotationAngle: 0,
-  isSelected: true,
+  isSelected: false,
   type: ObjectType.Text,
   value: 'Новый текст',
   formatting: {
