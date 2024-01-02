@@ -30,6 +30,7 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
   }, [text.isSelected])
 
   const saveValue = () => {
+    console.log('save')
     changeTextValueAction(
       text.id,
       textBlockRef.current?.innerText &&
@@ -45,6 +46,7 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
       ref={textBlockRef}
       suppressContentEditableWarning={true}
       contentEditable={text.isSelected ? 'true' : 'false'}
+      tabIndex={0}
       onBlur={saveValue}
     >
       {text.value}

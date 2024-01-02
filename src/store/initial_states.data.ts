@@ -1,10 +1,13 @@
 import {
   ObjectType,
+  ShapeVariation,
   SlideBgType,
   TDocument,
   TEditor,
+  TImage,
   TSlide,
   TText,
+  TVector,
 } from '@/types/type'
 
 const docInitialName: string = 'Презентация без названия'
@@ -71,7 +74,51 @@ const initText: TText = {
   },
 }
 
-export { docInitialName, docInitialState, initText, initialEditor, voidSlide }
+const initShape: TVector = {
+  id: 0,
+  size: {
+    width: 150,
+    height: 80,
+  },
+  coords: {
+    x: 0,
+    y: 0,
+  },
+  rotationAngle: 0,
+  isSelected: false,
+  type: ObjectType.Vector,
+  shape: ShapeVariation.Rectangle,
+  strokeColor: 'red',
+  strokeSize: 3,
+  fillColor: '#aaaaaa',
+}
+
+const initImg: TImage = {
+  id: 0,
+  size: {
+    width: 300,
+    height: 190,
+  },
+  coords: {
+    x: 0,
+    y: 0,
+  },
+  rotationAngle: 0,
+  isSelected: false,
+  type: ObjectType.Image,
+  name: 'init name',
+  data: '',
+}
+
+export {
+  docInitialName,
+  docInitialState,
+  initImg,
+  initShape,
+  initText,
+  initialEditor,
+  voidSlide,
+}
 
 // {
 //   id: 1,

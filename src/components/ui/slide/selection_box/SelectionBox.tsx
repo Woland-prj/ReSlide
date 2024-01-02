@@ -22,11 +22,11 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
   const { registerItemFn, unregisterItemFn } = useDnd(obj.id)
   useEffect(() => {
     if (editable) {
-      const handlers = setSelection(boxRef)
+      setSelection(boxRef)
       const dndFn = registerItemFn(boxRef)
       return () => {
         unregisterItemFn(boxRef, dndFn)
-        deleteSelection(boxRef, handlers)
+        deleteSelection(boxRef)
       }
     }
   }, [])

@@ -1,7 +1,7 @@
 import { TActionsButton } from '@/types/action_buttons.type'
 import { FC } from 'react'
-import ImageButton from './ImageButton'
 import styles from './ActionsMenu.module.css'
+import ImageButton from './ImageButton'
 
 type TActionsBlockProps = {
   actions: TActionsButton[]

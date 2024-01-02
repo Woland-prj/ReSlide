@@ -72,7 +72,8 @@ export type TVector = TSlideObject & {
 
 export type TImage = TSlideObject & {
   type: ObjectType.Image
-  link: string
+  data: string
+  name: string
 }
 
 export type TSlide = {
