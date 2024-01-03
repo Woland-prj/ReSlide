@@ -1,6 +1,7 @@
 import {
   context_menu_button_groups,
   slidebarButtonGroupNames,
+  slideButtonGroupNames,
 } from '@/data/context_menu_buttons.data'
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
@@ -17,29 +18,35 @@ const Layout: FC = () => {
   const ref_slide = useRef<HTMLDivElement>(null)
   const ref_slidebar = useRef<HTMLDivElement>(null)
   const active_slide = slides.filter(slide => slide.id === active_slide_id)[0]
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  // slideGroups_undefined и slidebarGroups_undefined - массивы с группами кнопок. Undefined у них появляется из-за map.
-  // Чтобы компилятор не выдавал ошибок, цикл for переводит массив с возможным undefined в нормальный массив
-  const slidebarGroups = context_menu_button_groups
-    .map(group => {
-      if (group!.id in slidebarButtonGroupNames) return group
-    })
-    .filter(group => group != undefined)
-  const slideGroups: TButtonGroup[] = context_menu_button_groups.filter(
+  const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
+  const [isSlideBarMenuOpen, setIsSlideBarMenuOpen] = useState(false)
+  const slidebarGroups: TButtonGroup[] = context_menu_button_groups.filter(
     group => group.id in slidebarButtonGroupNames,
+  )
+  const slideGroups: TButtonGroup[] = context_menu_button_groups.filter(
+    group => group.id in slideButtonGroupNames,
   )
 
   useEffect(() => {
-    ref_slidebar.current?.addEventListener('contextmenu', () => {
-      console.log('ПКМ-меню у slidebar')
+    ref_slidebar.current?.addEventListener('contextmenu', e => {
+      e.preventDefault()
+      if (isSlideBarMenuOpen) {
+        setIsSlideBarMenuOpen(false)
+        setIsSlideMenuOpen(false)
+      } else {
+        setIsSlideBarMenuOpen(true)
+        setIsSlideMenuOpen(false)
+      }
     })
 
     ref_slide.current?.addEventListener('contextmenu', e => {
       e.preventDefault()
-      if (isMenuOpen) {
-        setIsMenuOpen(false)
+      if (isSlideMenuOpen) {
+        setIsSlideBarMenuOpen(false)
+        setIsSlideMenuOpen(false)
       } else {
-        setIsMenuOpen(true)
+        setIsSlideBarMenuOpen(false)
+        setIsSlideMenuOpen(true)
       }
     })
   }, [])
@@ -48,10 +55,29 @@ const Layout: FC = () => {
     <div className={styles.layout}>
       <div className={styles.preview} ref={ref_slidebar}>
         <SlidePreviewList />
+        {isSlideBarMenuOpen && (
+          <ContextMenu
+            buttonGroups={slidebarGroups}
+            setIsContextMenuOpen={setIsSlideBarMenuOpen}
+          ></ContextMenu>
+        )}
       </div>
-      <div className={styles.editor} ref={ref_slide}>
+      <div
+        className={styles.editor}
+        ref={ref_slide}
+        onClick={event => {
+          if (event.button == 2) {
+            // TODO: доделать сохранение координат при ПКМ-клике
+          }
+        }}
+      >
         <Slide slide={active_slide} editable={true} />
-        {isMenuOpen && <ContextMenu buttonGroups={slideGroups}></ContextMenu>}
+        {isSlideMenuOpen && (
+          <ContextMenu
+            buttonGroups={slideGroups}
+            setIsContextMenuOpen={setIsSlideMenuOpen}
+          ></ContextMenu>
+        )}
       </div>
     </div>
   )

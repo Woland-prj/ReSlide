@@ -15,6 +15,19 @@
 }
 
 .context_menu {
+  position: absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.context_menu_castile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: rgb(0 0 0 / 15%);
+  animation: 0.1s open-castile ease;
 }

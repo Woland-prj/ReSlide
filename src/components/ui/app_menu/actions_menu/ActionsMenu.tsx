@@ -7,9 +7,6 @@ const ActionsMenu: FC = () => {
   return (
     <div className={styles.actions_menu}>
       <ActionsBlock actions={baseActions} />
-      {/* <BaseActions /> */}
-      {/* Не понял, чем эти два блока отличаются друг от друга. Сейчас из-за них кнопки двоятся */}
-      {/* <ChangedActions /> */}
     </div>
   )
 }
