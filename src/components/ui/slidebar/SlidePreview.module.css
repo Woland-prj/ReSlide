@@ -8,11 +8,11 @@
 .slidePreview {
   transform-origin: top left;
   margin-bottom: 1rem;
-  max-width: inherit;
+  width: 10rem;
 }
 
 .slidePreview > div {
-  border: 5px solid #aaaaaa;
+  box-shadow: 0 0 0 5px #aaaaaa;
   border-radius: 3rem;
 }
 
@@ -26,5 +26,5 @@
 }
 
 .slidePreview_active > div {
-  border: 10px solid #611cd2;
+  box-shadow: 0 0 0 13px #611cd2;
 }
