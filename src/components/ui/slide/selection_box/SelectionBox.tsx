@@ -34,7 +34,10 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
     <div
       ref={boxRef}
       style={chStyles}
-      className={cn(styles.box, obj.isSelected && styles.active_box)}
+      className={cn(
+        styles.box,
+        editable && obj.isSelected ? styles.active_box : null,
+      )}
     >
       {children}
     </div>

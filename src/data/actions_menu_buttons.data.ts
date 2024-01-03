@@ -1,5 +1,6 @@
 import arrow from '@/static/images/arrow.svg'
 import image from '@/static/images/image.svg'
+import log from '@/static/images/log.svg'
 import new_slide from '@/static/images/new_slide.svg'
 import redo from '@/static/images/redo.svg'
 import shape from '@/static/images/shape.svg'
@@ -62,5 +63,14 @@ export const baseActions: TActionsButton[] = [
         name: 'Треугольник',
       },
     ],
+  },
+]
+
+export const devActions: TActionsButton[] = [
+  {
+    id: 'log_btn',
+    name: 'Print model',
+    iconUrl: log,
+    contextMenu: null,
   },
 ]

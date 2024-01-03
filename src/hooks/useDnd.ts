@@ -38,7 +38,7 @@ export const useDnd = (objId: number) => {
       }
 
       const onDrag = (dragEvt: MouseEvent) => {
-        console.log('onmousemove')
+        // console.log('onmousemove')
         let newY: number =
           startCoords.y - mouseDownEvt.clientY + dragEvt.clientY
         if (newY < 0) newY = 0
@@ -56,7 +56,7 @@ export const useDnd = (objId: number) => {
       }
 
       const onDrop = () => {
-        console.log('onmouseup')
+        // console.log('onmouseup')
         item.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)

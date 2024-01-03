@@ -20,6 +20,7 @@
   content: '';
   background: rgba(190 190 190 / 70%);
   display: block;
+  margin-right: 0.4rem;
 }
 
 .image_button {

@@ -43,19 +43,21 @@ export const useButtonAction = (
   }
 
   const loadImageFn = () => {
+    generateIdAction('objectId')
     const input: HTMLInputElement = document.createElement('input')
     input.type = 'file'
     const loadFn = (e: Event) => {
       const filePromise = imageToBase64(e)
       filePromise.then(loadedImg => {
-        if (loadedImg.name)
+        if (loadedImg.name) {
           addImageAction(
-            globalSlideId + 1,
+            globalObjectId,
             activeSlideId,
             loadedImg.data,
             loadedImg.name,
             loadedImg.size,
           )
+        }
       })
       filePromise.finally(() => {
         input.removeEventListener('change', loadFn)
@@ -77,14 +79,19 @@ export const useButtonAction = (
 
   const generateFnByShape = (shape: ShapeVariation) => {
     return () => {
+      console.log(globalSlideId)
       generateIdAction('objectId')
-      addShapeAction(globalObjectId + 1, activeSlideId, shape)
+      console.log(globalSlideId)
+      addShapeAction(globalObjectId, activeSlideId, shape)
     }
   }
 
   useEffect(() => {
     let onClick = (e: Event) => alert(`Возникли проблемы с кнопкой ${btnId}`)
     switch (btnId) {
+      case 'log_btn':
+        onClick = () => console.log('Document model:', name, size, slides)
+        break
       case 'create_btn':
         onClick = () => console.log('create button')
         break
@@ -103,7 +110,7 @@ export const useButtonAction = (
       case 'new_text_btn':
         onClick = () => {
           generateIdAction('objectId')
-          addTextAction(globalObjectId + 1, activeSlideId)
+          addTextAction(globalObjectId, activeSlideId)
         }
         break
       case 'new_shape_btn': {
@@ -122,10 +129,7 @@ export const useButtonAction = (
         onClick = generateFnByShape(ShapeVariation.Triangle)
         break
       case 'new_image_btn':
-        onClick = () => {
-          generateIdAction('objectId')
-          loadImageFn()
-        }
+        onClick = loadImageFn
         break
     }
     buttonRef.current?.addEventListener('click', onClick)
