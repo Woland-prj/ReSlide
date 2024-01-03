@@ -14,11 +14,11 @@ import styles from './Layout.module.css'
 import { TCoords } from '@/types/type'
 
 const Layout: FC = () => {
-  const { active_slide_id } = useEditor()
+  const { activeSlideId } = useEditor()
   const { slides } = useDoc()
   const ref_slide = useRef<HTMLDivElement>(null)
   const ref_slidebar = useRef<HTMLDivElement>(null)
-  const active_slide = slides.filter(slide => slide.id === active_slide_id)[0]
+  const active_slide = slides.filter(slide => slide.id === activeSlideId)[0]
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
   const [isSlideBarMenuOpen, setIsSlideBarMenuOpen] = useState(false)
   const slidebarGroups: TButtonGroup[] = context_menu_button_groups.filter(

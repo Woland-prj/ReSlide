@@ -17,6 +17,17 @@ const editorReducer = (
         ...state,
         activeToolId: action.payload.id,
       }
+    case EditorActions.GENERATE_ID:
+      if (action.payload.type == 'slideId')
+        return {
+          ...state,
+          globalSlideId: state.globalSlideId + 1,
+        }
+      else
+        return {
+          ...state,
+          globalObjectId: state.globalObjectId + 1,
+        }
     default:
       return state
   }

@@ -1,7 +1,7 @@
 .actions_menu {
   margin: 0 1rem 1rem;
   height: 1.5rem;
-  background: #e8e8e8;
+  background: rgba(190, 190, 190, 0.3);
   border-radius: 1.5rem;
   padding: 0.7rem;
   display: flex;
@@ -18,8 +18,9 @@
   width: 1px;
   height: 1.5rem;
   content: '';
-  border-left: 1px solid #aaaaaa;
+  background: rgba(190 190 190 / 70%);
   display: block;
+  margin-right: 0.4rem;
 }
 
 .image_button {
@@ -34,9 +35,13 @@
 }
 
 .image_button:hover {
-  background: rgb(170 170 170 / 50%);
+  background: rgba(190 190 190 / 70%);
 }
 
 .image_button.active {
   background: rgb(97 28 210 / 50%);
 }
+
+/* .button_wrapper {
+  position: relative;
+} */

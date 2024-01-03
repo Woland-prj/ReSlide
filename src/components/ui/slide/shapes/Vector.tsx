@@ -6,6 +6,7 @@ import Triangle from './Triangle'
 
 type TVectorProps = {
   vector: TVector
+  editable: boolean
 }
 
 const Vector: FC<TVectorProps> = ({ vector }) => {

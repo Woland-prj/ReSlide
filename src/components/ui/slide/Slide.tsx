@@ -11,14 +11,14 @@ import {
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC, useEffect, useRef } from 'react'
-import useDnd from '@/hooks/useDnd'
+import { FC, RefObject, useRef } from 'react'
 import styles from './Slide.module.css'
+import SelectionBox from './selection_box/SelectionBox'
 
 type TObjectProps = {
   object: TText | TVector | TImage
-  index: number
   editable: boolean
+  slideRef: RefObject<HTMLDivElement>
 }
 
 type TSlideProps = {
@@ -26,42 +26,22 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object, index, editable }) => {
-  function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
-    return {
-      left: object.coords.x,
-      top: object.coords.y,
-      transform: `rotate(${object.rotationAngle}deg)`,
-    }
-  }
-
-  const params = [object.coords.x, object.coords.y, object.rotationAngle]
-  const chStyles = useStyles(params, object, changeStyles)
-  const objRef = useRef<HTMLDivElement>(null)
-  const { registerItemFn, unregisterItemFn } = useDnd(object.id)
-
-  useEffect(() => {
-    if (editable) {
-      const mainFn = registerItemFn(index, { elementRef: objRef })
-      return () => unregisterItemFn(index, mainFn)
-    }
-  }, [])
-
+const Object: FC<TObjectProps> = ({ object, editable }) => {
   return (
-    <div style={chStyles} className={styles.object} ref={objRef}>
+    <SelectionBox editable={editable} obj={object}>
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
             return <TextField text={object} />
           case ObjectType.Image:
-            return <Image image={object} />
+            return <Image image={object} editable={editable} />
           case ObjectType.Vector:
-            return <Vector vector={object} />
+            return <Vector vector={object} editable={editable} />
           default:
             return <div>Incorrect object</div>
         }
       })()}
-    </div>
+    </SelectionBox>
   )
 }
 
@@ -79,14 +59,15 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
 
   const params = [doc.size.width, doc.size.height]
   const chStyles = useStyles(params, slide, changeStyles)
+  const slRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div className={styles.slide} style={chStyles}>
-      {slide.objects.map((object, index) => (
+    <div className={styles.slide} style={chStyles} ref={slRef}>
+      {slide.objects.map(object => (
         <Object
           key={object.id}
           object={object}
-          index={index}
+          slideRef={slRef}
           editable={editable}
         />
       ))}

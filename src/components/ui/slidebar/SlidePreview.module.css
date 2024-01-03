@@ -13,8 +13,12 @@
 }
 
 .slidePreview > div {
-  border: 5px solid #aaaaaa;
+  box-shadow: 0 0 0 5px #aaaaaa;
   border-radius: 3rem;
+}
+
+.slidePreview > div:hover {
+  box-shadow: 0 0 0 11px #aaaaaa;
 }
 
 .preview_wrapper {
@@ -27,5 +31,9 @@
 }
 
 .slidePreview_active > div {
-  border: 10px solid #611cd2;
+  box-shadow: 0 0 0 11px #611cd2;
+}
+
+.slidePreview_active > div:hover {
+  box-shadow: 0 0 0 11px #611cd2;
 }

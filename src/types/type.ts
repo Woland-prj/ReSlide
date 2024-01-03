@@ -72,7 +72,8 @@ export type TVector = TSlideObject & {
 
 export type TImage = TSlideObject & {
   type: ObjectType.Image
-  link: string
+  data: string
+  name: string
 }
 
 export type TSlide = {
@@ -91,4 +92,6 @@ export type TDocument = {
 export type TEditor = {
   activeSlideId: number
   activeToolId: string
+  globalSlideId: number
+  globalObjectId: number
 }
