@@ -10,21 +10,25 @@ import {
 import ButtonGroup from './ButtonGroup'
 import styles from './ContextMenu.module.css'
 import cn from 'clsx'
+import { TCoords } from '@/types/type'
 
 type ContextMenuProps = {
+  coords: TCoords
   buttonGroups: TButtonGroup[]
   setIsContextMenuOpen: Dispatch<SetStateAction<boolean>>
 }
-const menuCoords = {
-  x = 
-}
+
 const ContextMenu: FC<ContextMenuProps> = ({
   buttonGroups,
   setIsContextMenuOpen,
+  coords,
 }) => {
+  const ref_context_menu = useRef<HTMLDivElement>(null)
   const castileRef = useRef<HTMLDivElement>(null)
   const [isMenuClosing, setIsMenuClosing] = useState<boolean>(false)
   useEffect(() => {
+    ref_context_menu.current!.style.left = coords.x.toString() + 'px'
+    ref_context_menu.current!.style.top = coords.y.toString() + 'px'
     const toggleFn = () => {
       const closingTimeout: number = 100
       setIsMenuClosing(true)
@@ -42,7 +46,7 @@ const ContextMenu: FC<ContextMenuProps> = ({
         )}
         ref={castileRef}
       />
-      <div className={styles.context_menu}>
+      <div className={styles.context_menu} ref={ref_context_menu}>
         {buttonGroups?.map(buttonGroup => (
           <ButtonGroup
             buttons={buttonGroup?.buttons}

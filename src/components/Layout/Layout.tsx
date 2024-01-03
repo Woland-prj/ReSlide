@@ -11,6 +11,7 @@ import ContextMenu from '@ui/context_menu/ContextMenu'
 import { SlidePreviewList } from '@ui/slidebar/SlidePreviewList'
 import { FC, useEffect, useRef, useState } from 'react'
 import styles from './Layout.module.css'
+import { TCoords } from '@/types/type'
 
 const Layout: FC = () => {
   const { active_slide_id } = useEditor()
@@ -26,10 +27,15 @@ const Layout: FC = () => {
   const slideGroups: TButtonGroup[] = context_menu_button_groups.filter(
     group => group.id in slideButtonGroupNames,
   )
+  const [mouseCoords, setMouseCoords] = useState<TCoords>({ x: 0, y: 0 })
 
   useEffect(() => {
-    ref_slidebar.current?.addEventListener('contextmenu', e => {
-      e.preventDefault()
+    ref_slidebar.current?.addEventListener('contextmenu', event => {
+      event.preventDefault()
+      setMouseCoords({
+        x: event.clientX,
+        y: event.clientY,
+      })
       if (isSlideBarMenuOpen) {
         setIsSlideBarMenuOpen(false)
         setIsSlideMenuOpen(false)
@@ -39,8 +45,12 @@ const Layout: FC = () => {
       }
     })
 
-    ref_slide.current?.addEventListener('contextmenu', e => {
-      e.preventDefault()
+    ref_slide.current?.addEventListener('contextmenu', event => {
+      event.preventDefault()
+      setMouseCoords({
+        x: event.clientX,
+        y: event.clientY,
+      })
       if (isSlideMenuOpen) {
         setIsSlideBarMenuOpen(false)
         setIsSlideMenuOpen(false)
@@ -53,27 +63,27 @@ const Layout: FC = () => {
 
   return (
     <div className={styles.layout}>
-      <div className={styles.preview} ref={ref_slidebar}>
+      <div // Элемент, по правому клику на который, активируется ПКМ-меню на слайдбаре
+        className={styles.preview}
+        ref={ref_slidebar}
+      >
         <SlidePreviewList />
         {isSlideBarMenuOpen && (
           <ContextMenu
+            coords={mouseCoords}
             buttonGroups={slidebarGroups}
             setIsContextMenuOpen={setIsSlideBarMenuOpen}
           ></ContextMenu>
         )}
       </div>
-      <div
+      <div // Элемент, по правому клику на который, активируется ПКМ-меню на
         className={styles.editor}
         ref={ref_slide}
-        onClick={event => {
-          if (event.button == 2) {
-            // TODO: доделать сохранение координат при ПКМ-клике
-          }
-        }}
       >
         <Slide slide={active_slide} editable={true} />
         {isSlideMenuOpen && (
           <ContextMenu
+            coords={mouseCoords}
             buttonGroups={slideGroups}
             setIsContextMenuOpen={setIsSlideMenuOpen}
           ></ContextMenu>
