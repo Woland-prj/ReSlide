@@ -7,18 +7,21 @@ type TCircleProps = {
 
 const Triangle: FC<TCircleProps> = ({ vector }) => {
   const points: string =
-    '0,' +
-    vector.size.height +
+    vector.strokeSize +
+    ', ' +
+    (vector.size.height - vector.strokeSize / 2) +
     ' ' +
     vector.size.width / 2 +
-    ',0 ' +
-    vector.size.width +
     ',' +
-    vector.size.height
+    vector.strokeSize / 2 +
+    ', ' +
+    (vector.size.width - vector.strokeSize) +
+    ',' +
+    (vector.size.height - vector.strokeSize / 2)
   return (
     <svg
-      width={vector.size.width + vector.strokeSize}
-      height={vector.size.height + vector.strokeSize}
+      width={vector.size.width}
+      height={vector.size.height}
       xmlns='http://www.w3.org/2000/svg'
       stroke={vector.strokeColor}
       fill={vector.fillColor}

@@ -72,18 +72,26 @@ export type TVector = TSlideObject & {
 
 export type TImage = TSlideObject & {
   type: ObjectType.Image
-  link: string
+  data: string
+  name: string
 }
 
 export type TSlide = {
   id: number
   background: TSlideBackground
-  size: TSize
   objects: Array<TText | TVector | TImage>
   isSelected: boolean
 }
 
 export type TDocument = {
   name: string
+  size: TSize
   slides: TSlide[]
+}
+
+export type TEditor = {
+  activeSlideId: number
+  activeToolId: string
+  globalSlideId: number
+  globalObjectId: number
 }

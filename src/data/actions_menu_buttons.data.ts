@@ -1,53 +1,76 @@
+import arrow from '@/static/images/arrow.svg'
+import image from '@/static/images/image.svg'
+import log from '@/static/images/log.svg'
+import new_slide from '@/static/images/new_slide.svg'
+import redo from '@/static/images/redo.svg'
+import shape from '@/static/images/shape.svg'
+import text from '@/static/images/text.svg'
+import undo from '@/static/images/undo.svg'
 import { TActionsButton } from '@/types/action_buttons.type'
 
 export const baseActions: TActionsButton[] = [
   {
-    name: 'new slide',
-    iconUrl: '',
-    alt: 'new slide',
-    hover: () => {},
-    onClick: () => {},
+    id: 'add_slide_btn',
+    name: 'Добавить слайд',
+    iconUrl: new_slide,
+    contextMenu: null,
   },
   {
-    name: 'undo',
-    iconUrl: '',
-    alt: 'undo',
-    hover: () => {},
-    onClick: () => {},
+    id: 'undo_btn',
+    name: 'Отменить действие',
+    iconUrl: undo,
+    contextMenu: null,
   },
   {
-    name: 'redo',
-    iconUrl: '',
-    alt: 'redo',
-    hover: () => {},
-    onClick: () => {},
+    id: 'redo_btn',
+    name: 'Повторить действие',
+    iconUrl: redo,
+    contextMenu: null,
   },
   {
-    name: 'select',
-    iconUrl: '',
-    alt: 'select',
-    hover: () => {},
-    onClick: () => {},
+    id: 'select_btn',
+    name: 'Стандартный инструмент',
+    iconUrl: arrow,
+    contextMenu: null,
   },
   {
-    name: 'new text',
-    iconUrl: '',
-    alt: 'new text',
-    hover: () => {},
-    onClick: () => {},
+    id: 'new_text_btn',
+    name: 'Добавить текстовое поле',
+    iconUrl: text,
+    contextMenu: null,
   },
   {
-    name: 'new image',
-    iconUrl: '',
-    alt: 'new image',
-    hover: () => {},
-    onClick: () => {},
+    id: 'new_image_btn',
+    name: 'Добавить изображение',
+    iconUrl: image,
+    contextMenu: null,
   },
   {
-    name: 'new shape',
-    iconUrl: '',
-    alt: 'new shape',
-    hover: () => {},
-    onClick: () => {},
+    id: 'new_shape_btn',
+    name: 'Добавить фигуру',
+    iconUrl: shape,
+    contextMenu: [
+      {
+        id: 'new_ellipse_btn',
+        name: 'Эллипс',
+      },
+      {
+        id: 'new_rect_btn',
+        name: 'Прямоугольник',
+      },
+      {
+        id: 'new_triangle_btn',
+        name: 'Треугольник',
+      },
+    ],
+  },
+]
+
+export const devActions: TActionsButton[] = [
+  {
+    id: 'log_btn',
+    name: 'Print model',
+    iconUrl: log,
+    contextMenu: null,
   },
 ]

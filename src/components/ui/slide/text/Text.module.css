@@ -1,0 +1,5 @@
+.textObject {
+  user-select: none;
+  cursor: text;
+  outline: none;
+}

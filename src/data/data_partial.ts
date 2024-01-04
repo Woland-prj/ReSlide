@@ -4,7 +4,6 @@ import {
   TDocument,
   TImage,
   TSlide,
-  //TText,
 } from '../types/type'
 
 // export const text: TText = {
@@ -37,7 +36,8 @@ import {
 export const image: TImage = {
   id: 3,
   type: ObjectType.Image,
-  link: 'https://...',
+  data: 'https://...',
+  name: 'test',
   size: {
     width: 50,
     height: 50,
@@ -56,10 +56,6 @@ export const slide1: TSlide = {
     variation: SlideBgType.Color,
     value: '#FFFFFF',
   },
-  size: {
-    width: 960,
-    height: 540,
-  },
   objects: [image /*, text*/],
   isSelected: true,
 }
@@ -69,10 +65,6 @@ export const slide2: TSlide = {
   background: {
     variation: SlideBgType.Img,
     value: 'https://test.com/test_back.png',
-  },
-  size: {
-    width: 960,
-    height: 540,
   },
   objects: [],
   isSelected: false,
@@ -84,10 +76,6 @@ export const slide3: TSlide = {
     variation: SlideBgType.Img,
     value: 'https://test.com/test_back.png',
   },
-  size: {
-    width: 960,
-    height: 540,
-  },
   objects: [
     /*text, text*/
   ],
@@ -96,5 +84,9 @@ export const slide3: TSlide = {
 
 export const doc: TDocument = {
   name: 'Test presentation',
+  size: {
+    width: 960,
+    height: 540,
+  },
   slides: [slide1, slide2, slide3],
 }
