@@ -1,9 +1,11 @@
+import { resizeBlockData } from '@/data/resizes_elements.data'
 import { useDnd } from '@/hooks/useDnd'
 import { useObjectsStyles } from '@/hooks/useObjectsStyles'
 import { useSelection } from '@/hooks/useSelection'
 import { TImage, TText, TVector } from '@/types/type'
 import cn from 'clsx'
 import { FC, PropsWithChildren, useEffect, useRef } from 'react'
+import ResizeBlockComp from './ResizeBlock'
 import styles from './SelectionBox.module.css'
 
 type TSelectionBoxProps = {
@@ -39,6 +41,13 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
         editable && obj.isSelected ? styles.active_box : null,
       )}
     >
+      {editable && obj.isSelected && (
+        <ResizeBlockComp
+          dots={resizeBlockData}
+          objId={obj.id}
+          objRef={boxRef}
+        ></ResizeBlockComp>
+      )}
       {children}
     </div>
   )

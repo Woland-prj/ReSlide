@@ -169,12 +169,19 @@ const createDocActions = {
       },
     }
   },
-  changeObjectSizeAction: (objectID: number, size: TSize): TDocAction => {
+  changeObjectSizeAction: (
+    objectID: number,
+    w: number,
+    h: number,
+  ): TDocAction => {
     return {
       type: DocActions.CHANGE_OBJECT_SIZE,
       payload: {
         objectId: objectID,
-        size: size,
+        size: {
+          width: w,
+          height: h,
+        },
       },
     }
   },
