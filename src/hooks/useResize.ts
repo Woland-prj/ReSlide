@@ -54,23 +54,33 @@ export const useResize = (objId: number, handler: ResizeDotHandler) => {
             parentCoords,
             movedObj.size,
           )
+        changeObjectCoordsAction(
+          objId,
+          item.getBoundingClientRect().left - parentCoords.x,
+          item.getBoundingClientRect().top - parentCoords.y,
+        )
+        changeObjectSizeAction(
+          objId,
+          parseFloat(item.style.width),
+          parseFloat(item.style.height),
+        )
       }
 
       const onDrop = () => {
         item.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)
-        changeObjectCoordsAction(
-          objId,
-          item.getBoundingClientRect().left - parentCoords.x,
-          item.getBoundingClientRect().top - parentCoords.y,
-        )
-        console.log(parseFloat(item.style.width), parseFloat(item.style.height))
-        changeObjectSizeAction(
-          objId,
-          parseFloat(item.style.width),
-          parseFloat(item.style.height),
-        )
+        // changeObjectCoordsAction(
+        //   objId,
+        //   item.getBoundingClientRect().left - parentCoords.x,
+        //   item.getBoundingClientRect().top - parentCoords.y,
+        // )
+        // console.log(parseFloat(item.style.width), parseFloat(item.style.height))
+        // changeObjectSizeAction(
+        //   objId,
+        //   parseFloat(item.style.width),
+        //   parseFloat(item.style.height),
+        // )
       }
 
       window.addEventListener('mousemove', onDrag)
