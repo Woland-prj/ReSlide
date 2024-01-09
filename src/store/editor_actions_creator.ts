@@ -1,7 +1,10 @@
+import { AppMode } from '@/types/type'
+
 const enum EditorActions {
   SET_ACTIVE_SLIDE = 'SET_ACTIVE_SLIDE',
   SET_ACTIVE_TOOL = 'SET_ACTIVE_TOOL',
   GENERATE_ID = 'GENERATE_ID',
+  SET_APP_MODE = 'SET_APP_MODE',
 }
 
 type TSetActiveSlideAction = {
@@ -25,10 +28,18 @@ type TGenerateIdAction = {
   }
 }
 
+type TSetAppMode = {
+  type: EditorActions.SET_APP_MODE
+  payload: {
+    mode: AppMode
+  }
+}
+
 type TEditorAction =
   | TSetActiveSlideAction
   | TSetActiveToolAction
   | TGenerateIdAction
+  | TSetAppMode
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -55,7 +66,15 @@ const createEditorActions = {
       },
     }
   },
+  setAppModeAction: (appMode: AppMode) => {
+    return {
+      type: EditorActions.SET_APP_MODE,
+      payload: {
+        mode: appMode,
+      },
+    }
+  },
 }
 
-export type { TEditorAction }
 export { EditorActions, createEditorActions }
+export type { TEditorAction }

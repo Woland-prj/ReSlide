@@ -69,7 +69,7 @@ const docReducer = (
       }
     }
     case DocActions.LOAD_DOC_ACTION:
-      return action.payload.doc
+      return { ...action.payload.doc }
     case DocActions.CHANGE_OBJECT_COORDS: {
       const { slideIndex, objectIndex } = getIndexesByObjectId(
         action.payload.objectId,

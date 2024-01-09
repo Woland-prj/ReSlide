@@ -28,8 +28,13 @@ const editorReducer = (
           ...state,
           globalObjectId: state.globalObjectId + 1,
         }
+    case EditorActions.SET_APP_MODE:
+      return {
+        ...state,
+        appMode: action.payload.mode,
+      }
     default:
-      return state
+      return { ...state }
   }
 }
 
