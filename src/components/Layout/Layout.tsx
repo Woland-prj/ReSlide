@@ -59,6 +59,10 @@ const Layout: FC = () => {
         setIsSlideMenuOpen(true)
       }
     })
+    return () => {
+      ref_slide.current?.removeEventListener('contextmenu', () => {})
+      ref_slidebar.current?.removeEventListener('contextmenu', () => {})
+    }
   }, [])
 
   return (
@@ -76,7 +80,7 @@ const Layout: FC = () => {
           ></ContextMenu>
         )}
       </div>
-      <div // Элемент, по правому клику на который, активируется ПКМ-меню на
+      <div // Элемент, по правому клику на который, активируется ПКМ-меню на слайде
         className={styles.editor}
         ref={ref_slide}
       >

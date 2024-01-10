@@ -41,7 +41,7 @@ export type TFormattingVariation = {
     | 'underline'
     | 'line-through'
     | 'underline line-through'
-} // Раньше тут был boolean
+}
 
 export type TFormatting = {
   variation: TFormattingVariation
