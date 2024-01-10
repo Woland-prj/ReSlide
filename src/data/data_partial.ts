@@ -36,7 +36,8 @@ import {
 export const image: TImage = {
   id: 3,
   type: ObjectType.Image,
-  link: 'https://...',
+  data: 'https://...',
+  name: 'test',
   size: {
     width: 50,
     height: 50,

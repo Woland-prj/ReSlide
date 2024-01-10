@@ -1,4 +1,4 @@
-import { TCoords, TDocument, TSize } from '@/types/type'
+import { ShapeVariation, TCoords, TDocument, TSize } from '@/types/type'
 
 enum DocActions {
   CHANGE_DOC_NAME_ACTION = 'CHANGE_DOC_NAME_ACTION',
@@ -10,6 +10,8 @@ enum DocActions {
   ADD_TEXT_ACTION = 'ADD_TEXT_ACTION',
   CHANGE_TEXT_VALUE_ACTION = 'CHANGE_TEXT_VALUE_ACTION',
   SET_OBJECT_SELECTION = 'SET_OBJECT_SELECTION',
+  ADD_SHAPE_ACTION = 'ADD_SHAPE_ACTION',
+  ADD_IMAGE_ACTION = 'ADD_IMAGE_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -80,6 +82,26 @@ type TSetObjectSelection = {
   }
 }
 
+type TAddShapeAction = {
+  type: DocActions.ADD_SHAPE_ACTION
+  payload: {
+    objectId: number
+    slideId: number
+    variation: ShapeVariation
+  }
+}
+
+type TAddImageAction = {
+  type: DocActions.ADD_IMAGE_ACTION
+  payload: {
+    objectId: number
+    slideId: number
+    data: string
+    name: string
+    size: TSize
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -90,6 +112,8 @@ type TDocAction =
   | TChangeObjectSizeAction
   | TChangeTextValueAction
   | TSetObjectSelection
+  | TAddShapeAction
+  | TAddImageAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -145,12 +169,19 @@ const createDocActions = {
       },
     }
   },
-  changeObjectSizeAction: (objectID: number, size: TSize): TDocAction => {
+  changeObjectSizeAction: (
+    objectID: number,
+    w: number,
+    h: number,
+  ): TDocAction => {
     return {
       type: DocActions.CHANGE_OBJECT_SIZE,
       payload: {
         objectId: objectID,
-        size: size,
+        size: {
+          width: w,
+          height: h,
+        },
       },
     }
   },
@@ -169,6 +200,38 @@ const createDocActions = {
       payload: {
         objectId: objectId,
         selectState: selectState,
+      },
+    }
+  },
+  addShapeAction: (
+    objectID: number,
+    slideID: number,
+    variation: ShapeVariation,
+  ): TDocAction => {
+    return {
+      type: DocActions.ADD_SHAPE_ACTION,
+      payload: {
+        objectId: objectID,
+        slideId: slideID,
+        variation: variation,
+      },
+    }
+  },
+  addImageAction: (
+    objectID: number,
+    slideID: number,
+    base64data: string,
+    name: string,
+    size: TSize,
+  ): TDocAction => {
+    return {
+      type: DocActions.ADD_IMAGE_ACTION,
+      payload: {
+        objectId: objectID,
+        slideId: slideID,
+        name: name,
+        data: base64data,
+        size: size,
       },
     }
   },

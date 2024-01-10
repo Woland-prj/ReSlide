@@ -1,5 +1,6 @@
 import { useActions } from '@/hooks/useActions'
 import { TText } from '@/types/type'
+import cn from 'clsx'
 import { FC, useEffect, useRef } from 'react'
 import styles from './Text.module.css'
 
@@ -30,6 +31,7 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
   }, [text.isSelected])
 
   const saveValue = () => {
+    console.log('save')
     changeTextValueAction(
       text.id,
       textBlockRef.current?.innerText &&
@@ -41,10 +43,11 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
 
   return (
     <div
-      className={styles.textObject}
+      className={cn(styles.text_object, text.isSelected && styles.active_text)}
       ref={textBlockRef}
       suppressContentEditableWarning={true}
       contentEditable={text.isSelected ? 'true' : 'false'}
+      tabIndex={0}
       onBlur={saveValue}
     >
       {text.value}

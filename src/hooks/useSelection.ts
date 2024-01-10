@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { RefObject, useRef } from 'react'
 import { useActions } from './useActions'
 
 export type TSelectionHandlers = {
@@ -8,6 +8,10 @@ export type TSelectionHandlers = {
 
 export const useSelection = (objId: number) => {
   const { setObjectSelection } = useActions()
+  const handlersRef = useRef<TSelectionHandlers>({
+    selectHandler: () => {},
+    unselectHandler: () => {},
+  })
 
   const setSelection = (
     itemRef: RefObject<HTMLDivElement>,
@@ -18,20 +22,21 @@ export const useSelection = (objId: number) => {
     }
 
     const realizeSelection = () => {
-      console.log('active select')
+      //console.log('active select', handlersRef.current)
       setObjectSelection(objId, true)
+      const stopProp = (e: MouseEvent) => e.stopPropagation()
       const realizeUnselection = () => {
-        console.log('active unselect')
+        //console.log('active unselect', handlersRef.current)
         setObjectSelection(objId, false)
         itemRef.current?.parentElement?.removeEventListener(
           'mousedown',
           realizeUnselection,
         )
-        itemRef.current?.removeEventListener('mousedown', (e: MouseEvent) =>
-          e.stopPropagation(),
-        )
+        itemRef.current?.removeEventListener('mousedown', stopProp)
+        handlersRef.current.unselectHandler = () => {}
         setTimeout(() => {
           itemRef.current?.addEventListener('mousedown', realizeSelection)
+          handlersRef.current.selectHandler = realizeSelection
         }, 100)
       }
 
@@ -40,12 +45,12 @@ export const useSelection = (objId: number) => {
           'mousedown',
           realizeUnselection,
         )
-        itemRef.current?.addEventListener('mousedown', (e: MouseEvent) =>
-          e.stopPropagation(),
-        )
+        handlersRef.current.unselectHandler = realizeUnselection
+        itemRef.current?.addEventListener('mousedown', stopProp)
       }, 100)
 
       itemRef.current?.removeEventListener('mousedown', realizeSelection)
+      handlersRef.current.selectHandler = () => {}
       handlers.unselectHandler = realizeUnselection
     }
 
@@ -54,14 +59,16 @@ export const useSelection = (objId: number) => {
     return handlers
   }
 
-  const deleteSelection = (
-    itemRef: RefObject<HTMLDivElement>,
-    handlers: TSelectionHandlers,
-  ) => {
-    itemRef.current?.removeEventListener('mousedown', handlers.selectHandler)
+  const deleteSelection = (itemRef: RefObject<HTMLDivElement>) => {
+    //console.log('unmount', handlersRef.current)
     itemRef.current?.parentElement?.removeEventListener(
       'mousedown',
-      handlers.unselectHandler,
+      handlersRef.current.unselectHandler,
+    )
+    setObjectSelection(objId, false)
+    itemRef.current?.removeEventListener(
+      'mousedown',
+      handlersRef.current.selectHandler,
     )
   }
 

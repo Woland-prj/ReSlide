@@ -1,13 +1,18 @@
 import {
+  AppMode,
   ObjectType,
+  ShapeVariation,
   SlideBgType,
   TDocument,
   TEditor,
+  TImage,
   TSlide,
   TText,
+  TVector,
 } from '@/types/type'
 
 const docInitialName: string = 'Презентация без названия'
+const brandStr: string = ' - ReSlide'
 
 const docInitialState: TDocument = {
   name: docInitialName,
@@ -43,6 +48,7 @@ const initialEditor: TEditor = {
   activeToolId: 'select_btn',
   globalSlideId: 0,
   globalObjectId: 0,
+  appMode: AppMode.EDIT_MODE,
 }
 
 const initText: TText = {
@@ -71,23 +77,49 @@ const initText: TText = {
   },
 }
 
-export { docInitialName, docInitialState, initText, initialEditor, voidSlide }
+const initShape: TVector = {
+  id: 0,
+  size: {
+    width: 150,
+    height: 80,
+  },
+  coords: {
+    x: 0,
+    y: 0,
+  },
+  rotationAngle: 0,
+  isSelected: false,
+  type: ObjectType.Vector,
+  shape: ShapeVariation.Rectangle,
+  strokeColor: 'red',
+  strokeSize: 3,
+  fillColor: '#aaaaaa',
+}
 
-// {
-//   id: 1,
-//     type: ObjectType.Vector,
-//   shape: ShapeVariation.Rectangle,
-//   fillColor: 'purple',
-//   strokeColor: 'blue',
-//   strokeSize: 5,
-//   size: {
-//   width: 200,
-//     height: 300,
-// },
-//   coords: {
-//     x: 50,
-//       y: 50,
-//   },
-//   rotationAngle: 0,
-//     isSelected: false,
-// },
+const initImg: TImage = {
+  id: 0,
+  size: {
+    width: 300,
+    height: 190,
+  },
+  coords: {
+    x: 0,
+    y: 0,
+  },
+  rotationAngle: 0,
+  isSelected: false,
+  type: ObjectType.Image,
+  name: 'init name',
+  data: '',
+}
+
+export {
+  brandStr,
+  docInitialName,
+  docInitialState,
+  initImg,
+  initShape,
+  initText,
+  initialEditor,
+  voidSlide,
+}

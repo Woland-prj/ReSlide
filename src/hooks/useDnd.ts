@@ -1,6 +1,6 @@
 import { useActions } from '@/hooks/useActions'
 import { useDoc } from '@/hooks/useDoc'
-import { TCoords, TImage, TText, TVector } from '@/types/type'
+import { TCoords } from '@/types/type'
 import { RefObject } from 'react'
 
 type TDndHandlers = {
@@ -10,13 +10,7 @@ type TDndHandlers = {
 
 export const useDnd = (objId: number) => {
   const { changeObjectCoordsAction } = useActions()
-  const { slides, size } = useDoc()
-  let movedObj: TText | TImage | TVector | null = null
-  slides.forEach(slide => {
-    slide.objects.forEach(obj => {
-      if (obj.id === objId) movedObj = obj
-    })
-  })
+  const { size } = useDoc()
 
   const registerItemFn = (
     elementRef: RefObject<HTMLDivElement>,
@@ -38,25 +32,25 @@ export const useDnd = (objId: number) => {
       }
 
       const onDrag = (dragEvt: MouseEvent) => {
-        console.log('onmousemove')
+        const borderCoords: TCoords = {
+          x: size.width - parseFloat(item.style.width),
+          y: size.height - parseFloat(item.style.height),
+        }
         let newY: number =
           startCoords.y - mouseDownEvt.clientY + dragEvt.clientY
         if (newY < 0) newY = 0
-        if (newY > size.height - movedObj!.size.height)
-          newY = size.height - movedObj!.size.height
+        if (newY > borderCoords.y) newY = borderCoords.y
         let newX: number =
           startCoords.x - mouseDownEvt.clientX + dragEvt.clientX
         if (newX < 0) newX = 0
-        if (newX > size.width - movedObj!.size.width)
-          newX = size.width - movedObj!.size.width
-        item.style.position = 'absolute'
+        if (newX > borderCoords.x) newX = borderCoords.x
         item.style.zIndex = '1'
         item.style.top = `${newY}px`
         item.style.left = `${newX}px`
       }
 
       const onDrop = () => {
-        console.log('onmouseup')
+        // console.log('onmouseup')
         item.style.zIndex = ''
         window.removeEventListener('mousemove', onDrag)
         window.removeEventListener('mouseup', onDrop)

@@ -1,6 +1,12 @@
 import { DocActions, TDocAction } from '@/store/doc_actions_creator'
-import { ObjectType, TDocument, TSlide } from '@/types/type'
-import { docInitialState, initText, voidSlide } from './initial_states.data'
+import { ObjectType, TDocument, TSize, TSlide } from '@/types/type'
+import {
+  docInitialState,
+  initImg,
+  initShape,
+  initText,
+  voidSlide,
+} from './initial_states.data'
 
 type TIndexes = {
   slideIndex: number
@@ -18,6 +24,23 @@ const getIndexesByObjectId = (id: number, state: TDocument): TIndexes => {
     })
   })
   return { slideIndex, objectIndex }
+}
+
+const getScaledSize = (realSize: TSize, slideSize: TSize): TSize => {
+  if (realSize.width <= slideSize.width && realSize.height <= slideSize.height)
+    return realSize
+  let scaleK = slideSize.height / realSize.height
+  if (realSize.width * scaleK <= slideSize.width) {
+    return {
+      width: realSize.width * scaleK,
+      height: realSize.height * scaleK,
+    }
+  }
+  scaleK = slideSize.width / realSize.width
+  return {
+    width: realSize.width * scaleK,
+    height: realSize.height * scaleK,
+  }
 }
 
 const docReducer = (
@@ -46,7 +69,7 @@ const docReducer = (
       }
     }
     case DocActions.LOAD_DOC_ACTION:
-      return action.payload.doc
+      return { ...action.payload.doc }
     case DocActions.CHANGE_OBJECT_COORDS: {
       const { slideIndex, objectIndex } = getIndexesByObjectId(
         action.payload.objectId,
@@ -104,6 +127,42 @@ const docReducer = (
       newState.slides[slideIndex].objects[objectIndex].isSelected =
         action.payload.selectState
 
+      return newState
+    }
+    case DocActions.ADD_SHAPE_ACTION: {
+      let slideIndex: number = 0
+      state.slides.forEach((slide, index) => {
+        if (slide.id == action.payload.slideId) slideIndex = index
+      })
+      const newShape = {
+        ...initShape,
+        id: action.payload.objectId,
+        shape: action.payload.variation,
+      }
+      const newState = { ...state }
+      newState.slides[slideIndex].objects = [
+        ...newState.slides[slideIndex].objects,
+        newShape,
+      ]
+      return newState
+    }
+    case DocActions.ADD_IMAGE_ACTION: {
+      let slideIndex: number = 0
+      state.slides.forEach((slide, index) => {
+        if (slide.id == action.payload.slideId) slideIndex = index
+      })
+      const newImg = {
+        ...initImg,
+        id: action.payload.objectId,
+        name: action.payload.name,
+        data: action.payload.data,
+        size: getScaledSize(action.payload.size, state.size),
+      }
+      const newState = { ...state }
+      newState.slides[slideIndex].objects = [
+        ...newState.slides[slideIndex].objects,
+        newImg,
+      ]
       return newState
     }
     default:

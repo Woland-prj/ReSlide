@@ -1,19 +1,20 @@
+import { useActions } from '@/hooks/useActions'
 import { useDoc } from '@/hooks/useDoc'
+import { brandStr, docInitialName } from '@/store/initial_states.data'
 import { FC, useEffect, useRef, useState } from 'react'
 import styles from '../TopMenu.module.css'
-import { useActions } from '@/hooks/useActions'
-import { docInitialName } from '@/store/initial_states.data'
 
 const PresentationName: FC = () => {
   const { name } = useDoc()
-  const [tempName, setTempName] = useState<string>(docInitialName)
+  const [tempName, setTempName] = useState<string>(name)
   const [isTyped, setIsTyped] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const { changeDocNameAction } = useActions()
 
   useEffect(() => {
-    document.title = docInitialName + ' - ReSlide'
-  }, [])
+    document.title = name + brandStr
+    setTempName(name)
+  }, [name])
 
   useEffect(() => {
     inputRef.current?.focus()

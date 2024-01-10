@@ -1,0 +1,44 @@
+.context_menu_button {
+  display: flex;
+  border: none;
+  padding: 0.15rem 0.35rem;
+  background: none;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.context_menu_button:hover {
+  background-color: #e8e8e8;
+  border-radius: 3px;
+  color: #611cd2;
+}
+
+.context_menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  background-color: #fefefe;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.context_menu_castile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: rgb(0 0 0 / 15%);
+  animation: 0.1s open-castile ease;
+}
+.button_text {
+  margin: 5px
+}
+.button_image {
+  border-right-color: #000000;
+  border-right-width: 2px;
+}

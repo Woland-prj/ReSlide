@@ -1,0 +1,30 @@
+.resize {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.resize_visible {
+  background-color: #611cd2;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.resize_container_row {
+  width: calc(100% + 1.15rem);
+  height: calc(100% + 1.15rem);
+  top: -0.575rem;
+  left: -0.575rem;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.resize_container_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

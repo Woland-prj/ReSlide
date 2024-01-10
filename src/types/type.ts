@@ -72,7 +72,8 @@ export type TVector = TSlideObject & {
 
 export type TImage = TSlideObject & {
   type: ObjectType.Image
-  link: string
+  data: string
+  name: string
 }
 
 export type TSlide = {
@@ -88,9 +89,15 @@ export type TDocument = {
   slides: TSlide[]
 }
 
+export const enum AppMode {
+  EDIT_MODE = 'EDIT_MODE',
+  VIEW_MODE = 'VIEW_MODE',
+}
+
 export type TEditor = {
   activeSlideId: number
   activeToolId: string
   globalSlideId: number
   globalObjectId: number
+  appMode: AppMode
 }

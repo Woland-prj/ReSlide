@@ -5,6 +5,10 @@ body {
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
+button {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
 #root {
   padding: inherit;
   border: inherit;

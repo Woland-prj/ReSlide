@@ -1,5 +1,10 @@
-.textObject {
+.text_object {
   user-select: none;
-  cursor: text;
   outline: none;
+  position: absolute;
+}
+
+.active_text {
+  cursor: text;
+  z-index: 1;
 }

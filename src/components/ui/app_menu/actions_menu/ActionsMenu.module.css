@@ -20,6 +20,7 @@
   content: '';
   background: rgba(190 190 190 / 70%);
   display: block;
+  margin-right: 0.4rem;
 }
 
 .image_button {
@@ -40,3 +41,7 @@
 .image_button.active {
   background: rgb(97 28 210 / 50%);
 }
+
+/* .button_wrapper {
+  position: relative;
+} */
