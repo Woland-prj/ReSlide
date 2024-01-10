@@ -12,6 +12,7 @@ enum DocActions {
   SET_OBJECT_SELECTION = 'SET_OBJECT_SELECTION',
   ADD_SHAPE_ACTION = 'ADD_SHAPE_ACTION',
   ADD_IMAGE_ACTION = 'ADD_IMAGE_ACTION',
+  DELETE_OBJECT_ACTION = 'DELETE_OBJECT_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -102,6 +103,13 @@ type TAddImageAction = {
   }
 }
 
+type TDeleteObjectAction = {
+  type: DocActions.DELETE_OBJECT_ACTION
+  payload: {
+    objectId: number
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -114,6 +122,7 @@ type TDocAction =
   | TSetObjectSelection
   | TAddShapeAction
   | TAddImageAction
+  | TDeleteObjectAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -232,6 +241,14 @@ const createDocActions = {
         name: name,
         data: base64data,
         size: size,
+      },
+    }
+  },
+  deleteObjectAction: (objectID: number): TDocAction => {
+    return {
+      type: DocActions.DELETE_OBJECT_ACTION,
+      payload: {
+        objectId: objectID,
       },
     }
   },

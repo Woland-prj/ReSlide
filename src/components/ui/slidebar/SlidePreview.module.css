@@ -31,13 +31,9 @@
 }
 
 .slidePreview_active > div {
-<<<<<<< HEAD
-  box-shadow: 0 0 0 13px #611cd2;
-=======
   box-shadow: 0 0 0 11px #611cd2;
 }
 
-.slidePreview_active > div:hover {
+.slidePreview_active:hover > div {
   box-shadow: 0 0 0 11px #611cd2;
->>>>>>> 6c955447e197ae0c97966baa5fccb2a959c823ef
 }

@@ -1,21 +1,31 @@
 import Slide from '@/components/ui/slide/Slide'
 import { useActions } from '@/hooks/useActions'
 import { useDoc } from '@/hooks/useDoc'
+import { useEditor } from '@/hooks/useEditor'
 import { AppMode } from '@/types/type'
-import { CSSProperties, FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import styles from './SlideShow.module.css'
+
+const cursorTimeout: number = 4000
 
 const SlideShow: FC = () => {
   const { setAppModeAction } = useActions()
   const resizeRef = useRef<HTMLDivElement>(null)
   const { size, slides, name } = useDoc()
+  const { activeSlideId } = useEditor()
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-  const [cursorStyle, setCursorStyle] = useState<CSSProperties>({
-    cursor: 'default',
-  })
+  const timerRef = useRef<number | null>(null)
+  const getSLideIndexById = (): number => {
+    let strtIndex = 0
+    slides.forEach((slide, index) => {
+      if (slide.id === activeSlideId) strtIndex = index
+    })
+    return strtIndex
+  }
   useEffect(() => {
     document.title = name + ' - ReSlide slideshow'
     document.documentElement.requestFullscreen()
+    setActiveSlideIndex(getSLideIndexById())
     const setSlideScaleHandler = () => {
       resizeRef.current!.style.transform = `scale(${
         window.innerHeight / size.height
@@ -39,9 +49,18 @@ const SlideShow: FC = () => {
     }
     const moveHandler = () => {
       resizeRef.current!.style.cursor = 'default'
+      if (!timerRef.current) timerRef.current = Date.now()
+
       setTimeout(() => {
-        if (resizeRef.current) resizeRef.current.style.cursor = 'none'
-      }, 3000)
+        if (
+          resizeRef.current &&
+          timerRef.current &&
+          Date.now() - timerRef.current >= cursorTimeout
+        ) {
+          resizeRef.current.style.cursor = 'none'
+          timerRef.current = null
+        }
+      }, cursorTimeout)
     }
     setTimeout(() => {
       addEventListener('fullscreenchange', closeViewHandler)
@@ -59,7 +78,7 @@ const SlideShow: FC = () => {
   }, [])
   return (
     <div className={styles.slide_wrapper}>
-      <div ref={resizeRef} style={cursorStyle}>
+      <div ref={resizeRef}>
         <Slide editable={false} slide={slides[activeSlideIndex]} />
       </div>
     </div>
