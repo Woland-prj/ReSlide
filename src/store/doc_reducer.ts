@@ -69,7 +69,7 @@ const docReducer = (
       }
     }
     case DocActions.LOAD_DOC_ACTION:
-      return action.payload.doc
+      return { ...action.payload.doc }
     case DocActions.CHANGE_OBJECT_COORDS: {
       const { slideIndex, objectIndex } = getIndexesByObjectId(
         action.payload.objectId,
@@ -124,8 +124,10 @@ const docReducer = (
         state,
       )
       const newState = { ...state }
-      newState.slides[slideIndex].objects[objectIndex].isSelected =
-        action.payload.selectState
+      console.log(slideIndex)
+      if (slideIndex != -1 && objectIndex != -1)
+        newState.slides[slideIndex].objects[objectIndex].isSelected =
+          action.payload.selectState
 
       return newState
     }
@@ -163,6 +165,19 @@ const docReducer = (
         ...newState.slides[slideIndex].objects,
         newImg,
       ]
+      return newState
+    }
+    case DocActions.DELETE_OBJECT_ACTION: {
+      const { slideIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      newState.slides[slideIndex].objects = newState.slides[
+        slideIndex
+      ].objects.filter(object => {
+        if (object.id != action.payload.objectId) return object
+      })
       return newState
     }
     default:

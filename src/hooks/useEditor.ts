@@ -7,6 +7,7 @@ export const useEditor = () => {
   const activeSlideId = editor.activeSlideId
   const globalSlideId = editor.globalSlideId
   const globalObjectId = editor.globalObjectId
+  const appMode = editor.appMode
 
-  return { activeToolId, activeSlideId, globalObjectId, globalSlideId }
+  return { activeToolId, activeSlideId, globalObjectId, globalSlideId, appMode }
 }

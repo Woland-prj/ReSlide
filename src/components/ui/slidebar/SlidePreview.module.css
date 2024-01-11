@@ -9,7 +9,7 @@
 .slidePreview {
   transform-origin: top left;
   margin-bottom: 1rem;
-  max-width: inherit;
+  width: 10rem;
 }
 
 .slidePreview > div {
@@ -34,6 +34,6 @@
   box-shadow: 0 0 0 11px #611cd2;
 }
 
-.slidePreview_active > div:hover {
+.slidePreview_active:hover > div {
   box-shadow: 0 0 0 11px #611cd2;
 }

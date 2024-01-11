@@ -5,13 +5,14 @@ import {
 } from '@/data/context_menu_buttons.data'
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
+import { useGlobalHandlers } from '@/hooks/useGlobalHandlers'
 import { TButtonGroup } from '@/types/context_menu_buttons.type'
+import { TCoords } from '@/types/type'
 import Slide from '@slide/Slide'
 import ContextMenu from '@ui/context_menu/ContextMenu'
 import { SlidePreviewList } from '@ui/slidebar/SlidePreviewList'
 import { FC, useEffect, useRef, useState } from 'react'
 import styles from './Layout.module.css'
-import { TCoords } from '@/types/type'
 
 const Layout: FC = () => {
   const { activeSlideId } = useEditor()
@@ -28,6 +29,7 @@ const Layout: FC = () => {
     group => group.id in slideButtonGroupNames,
   )
   const [mouseCoords, setMouseCoords] = useState<TCoords>({ x: 0, y: 0 })
+  useGlobalHandlers()
 
   useEffect(() => {
     ref_slidebar.current?.addEventListener('contextmenu', event => {

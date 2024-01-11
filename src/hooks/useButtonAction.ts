@@ -4,7 +4,8 @@ import { useEditor } from '@/hooks/useEditor'
 import { imageToBase64 } from '@/services/image_encode.service'
 import { saveJsonObjToFile } from '@/services/save_doc.service'
 import { readJSONFile } from '@/services/upload_doc.service'
-import { ShapeVariation, TDocument } from '@/types/type'
+import { brandStr } from '@/store/initial_states.data'
+import { AppMode, ShapeVariation, TDocument } from '@/types/type'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
@@ -21,8 +22,9 @@ export const useButtonAction = (
     generateIdAction,
     addShapeAction,
     addImageAction,
+    setAppModeAction,
   } = useActions()
-  const { activeSlideId, globalSlideId, globalObjectId } = useEditor()
+  const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
   const openDocFn = () => {
     const input: HTMLInputElement = document.createElement('input')
@@ -31,6 +33,7 @@ export const useButtonAction = (
       const filePromise = readJSONFile(e)
       filePromise.then(loadedDoc => {
         console.log(loadedDoc)
+        document.title = loadedDoc.name + brandStr
         loadDocAction(loadedDoc)
       })
       filePromise.finally(() => {
@@ -90,7 +93,15 @@ export const useButtonAction = (
     let onClick = (e: Event) => alert(`Возникли проблемы с кнопкой ${btnId}`)
     switch (btnId) {
       case 'log_btn':
-        onClick = () => console.log('Document model:', name, size, slides)
+        onClick = () => console.log(name, size, slides)
+        break
+      case 'slide_show_btn':
+        onClick = () =>
+          setAppModeAction(
+            appMode === AppMode.EDIT_MODE
+              ? AppMode.VIEW_MODE
+              : AppMode.EDIT_MODE,
+          )
         break
       case 'create_btn':
         onClick = () => console.log('create button')
@@ -134,6 +145,6 @@ export const useButtonAction = (
     }
     buttonRef.current?.addEventListener('click', onClick)
     return () => buttonRef.current?.removeEventListener('click', onClick)
-  }, [activeSlideId, globalObjectId, globalSlideId])
+  }, [activeSlideId, globalObjectId, globalSlideId, name])
   return buttonRef
 }
