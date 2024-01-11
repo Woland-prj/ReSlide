@@ -1,5 +1,5 @@
-import { TSize, TVector } from '@/types/type'
-import { FC, useEffect, useRef } from 'react'
+import { TVector } from '@/types/type'
+import { FC, useRef } from 'react'
 
 type TCircleProps = {
   vector: TVector
@@ -8,27 +8,27 @@ type TCircleProps = {
 const Ellipse: FC<TCircleProps> = ({ vector }) => {
   const elRef = useRef<SVGEllipseElement>(null)
 
-  useEffect(() => {
-    const size: TSize = {
-      width: parseFloat(elRef.current!.parentElement!.style.width),
-      height: parseFloat(elRef.current!.parentElement!.style.height),
-    }
-    if (size.width && size.height) {
-      elRef.current!.setAttribute('cx', `${size.width / 2}`)
-      elRef.current!.setAttribute('cy', `${size.height / 2}`)
-      elRef.current!.setAttribute(
-        'rx',
-        `${size.width / 2 - vector.strokeSize / 2}`,
-      )
-      elRef.current!.setAttribute(
-        'ry',
-        `${size.height / 2 - vector.strokeSize / 2}`,
-      )
-    }
-  }, [
-    elRef.current?.parentElement?.style.width,
-    elRef.current?.parentElement?.style.height,
-  ])
+  // useEffect(() => {
+  //   const size: TSize = {
+  //     width: parseFloat(elRef.current!.parentElement!.style.width),
+  //     height: parseFloat(elRef.current!.parentElement!.style.height),
+  //   }
+  //   if (size.width && size.height) {
+  //     elRef.current!.setAttribute('cx', `${size.width / 2}`)
+  //     elRef.current!.setAttribute('cy', `${size.height / 2}`)
+  //     elRef.current!.setAttribute(
+  //       'rx',
+  //       `${size.width / 2 - vector.strokeSize / 2}`,
+  //     )
+  //     elRef.current!.setAttribute(
+  //       'ry',
+  //       `${size.height / 2 - vector.strokeSize / 2}`,
+  //     )
+  //   }
+  // }, [
+  //   elRef.current?.parentElement?.style.width,
+  //   elRef.current?.parentElement?.style.height,
+  // ])
 
   return (
     <ellipse

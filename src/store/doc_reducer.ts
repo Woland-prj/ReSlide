@@ -180,6 +180,19 @@ const docReducer = (
       })
       return newState
     }
+    case DocActions.DUPLICATE_SLIDE_ACTION: {
+      let slideIndex: number = 0
+      state.slides.forEach((slide, index) => {
+        if (slide.id == action.payload.slideId) slideIndex = index
+      })
+      const newState = { ...state }
+      const dupSlide = {
+        ...newState.slides[slideIndex],
+        id: action.payload.newId,
+      }
+      newState.slides = [...newState.slides, dupSlide]
+      return newState
+    }
     default:
       return { ...state }
   }

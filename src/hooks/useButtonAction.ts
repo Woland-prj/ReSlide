@@ -23,6 +23,7 @@ export const useButtonAction = (
     addShapeAction,
     addImageAction,
     setAppModeAction,
+    duplicateSlideAction,
   } = useActions()
   const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
@@ -141,6 +142,12 @@ export const useButtonAction = (
         break
       case 'new_image_btn':
         onClick = loadImageFn
+        break
+      case 'duplicate_slide_btn':
+        onClick = () => {
+          generateIdAction('slideId')
+          duplicateSlideAction(activeSlideId, globalSlideId)
+        }
         break
     }
     buttonRef.current?.addEventListener('click', onClick)
