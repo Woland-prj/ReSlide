@@ -7,23 +7,13 @@ import {
   TSlide,
   TText,
   TVector,
-  TCoords,
 } from '@/types/type'
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC, RefObject, useEffect, useRef, useState } from 'react'
+import { FC, RefObject, useRef } from 'react'
 import styles from './Slide.module.css'
 import SelectionBox from './selection_box/SelectionBox'
-import ContextMenu from '@ui/context_menu/ContextMenu'
-import { TButtonGroup } from '@/types/context_menu_buttons.type'
-import {
-  context_menu_button_groups,
-  slideButtonGroupNames,
-  textButtonGroupNames,
-  imageButtonGroupNames,
-  vectorButtonGroupNames,
-} from '@/data/context_menu_buttons.data'
 
 type TObjectProps = {
   object: TText | TVector | TImage
@@ -36,43 +26,16 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const objectButtonGroups: TButtonGroup[] = context_menu_button_groups.filter(
-  group => group.id in slideButtonGroupNames,
-)
-
-const makeButtonGroupWithObjectType = (
-  objectType: ObjectType,
-): TButtonGroup[] => {
-  if (objectType == ObjectType.Text) {
-    return context_menu_button_groups.filter(
-      group => group.id in textButtonGroupNames || slideButtonGroupNames,
-    )
-  } else if (objectType == ObjectType.Image) {
-    return context_menu_button_groups.filter(
-      group => group.id in imageButtonGroupNames || slideButtonGroupNames,
-    )
-  } else {
-    return context_menu_button_groups.filter(
-      group => group.id in imageButtonGroupNames || slideButtonGroupNames,
-    )
-  }
-}
-
 const Object: FC<TObjectProps> = ({ object, editable }) => {
   return (
     <SelectionBox editable={editable} obj={object}>
-      {(() => {
-        switch (object.type) {
-          case ObjectType.Text:
-            return <TextField text={object} />
-          case ObjectType.Image:
-            return <Image image={object} editable={editable} />
-          case ObjectType.Vector:
-            return <Vector vector={object} editable={editable} />
-          default:
-            return <div>Incorrect object</div>
-        }
-      })()}
+      {(object.type == ObjectType.Text && <TextField text={object} />) ||
+        (object.type == ObjectType.Image && (
+          <Image image={object} editable={editable} />
+        )) ||
+        (object.type == ObjectType.Vector && (
+          <Vector vector={object} editable={editable} />
+        )) || <div>Incorrect object</div>}
     </SelectionBox>
   )
 }
@@ -89,29 +52,9 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
     return styles
   }
 
-  const [isObjectMenuOpen, setIsObjectMenuOpen] = useState(false)
   const params = [doc.size.width, doc.size.height]
   const chStyles = useStyles(params, slide, changeStyles)
   const slRef = useRef<HTMLDivElement>(null)
-  const [mouseCoords, setMouseCoords] = useState<TCoords>({ x: 0, y: 0 })
-
-  useEffect(() => {
-    slRef.current?.addEventListener('contextmenu', event => {
-      event.preventDefault()
-      setMouseCoords({
-        x: event.clientX,
-        y: event.clientY,
-      })
-      if (isObjectMenuOpen) {
-        setIsObjectMenuOpen(false)
-      } else {
-        setIsObjectMenuOpen(true)
-      }
-    })
-    return () => {
-      slRef.current?.removeEventListener
-    }
-  })
 
   return (
     <div className={styles.slide} style={chStyles} ref={slRef}>
@@ -123,13 +66,6 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
             slideRef={slRef}
             editable={editable}
           />
-          {object.isSelected && isObjectMenuOpen && (
-            <ContextMenu
-              coords={mouseCoords}
-              buttonGroups={makeButtonGroupWithObjectType(object.type)}
-              setIsContextMenuOpen={setIsObjectMenuOpen}
-            ></ContextMenu>
-          )}
         </>
       ))}
     </div>

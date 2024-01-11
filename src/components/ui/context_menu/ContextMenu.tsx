@@ -25,24 +25,27 @@ const ContextMenu: FC<ContextMenuProps> = ({
 }) => {
   const ref_context_menu = useRef<HTMLDivElement>(null)
   const castileRef = useRef<HTMLDivElement>(null)
-  const [isMenuClosing, setIsMenuClosing] = useState<boolean>(false)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
   useEffect(() => {
     ref_context_menu.current!.style.left = coords.x.toString() + 'px'
     ref_context_menu.current!.style.top = coords.y.toString() + 'px'
     const toggleFn = () => {
+      console.log('toggleContext')
       const closingTimeout: number = 100
-      setIsMenuClosing(true)
+      setIsMenuOpen(false)
       setTimeout(() => setIsContextMenuOpen(prev => !prev), closingTimeout)
     }
     castileRef.current?.addEventListener('click', toggleFn)
     return () => castileRef.current?.removeEventListener('click', toggleFn)
   }, [])
+
   return (
     <>
       <div
         className={cn(
           styles.context_menu_castile,
-          isMenuClosing && styles.context_menu_castile_closing,
+          isMenuOpen && styles.context_menu_castile_closing,
         )}
         ref={castileRef}
       />

@@ -36,13 +36,8 @@ const Layout: FC = () => {
         x: event.clientX,
         y: event.clientY,
       })
-      if (isSlideBarMenuOpen) {
-        setIsSlideBarMenuOpen(false)
-        setIsSlideMenuOpen(false)
-      } else {
-        setIsSlideBarMenuOpen(true)
-        setIsSlideMenuOpen(false)
-      }
+      setIsSlideBarMenuOpen(!isSlideBarMenuOpen)
+      setIsSlideMenuOpen(false)
     })
 
     ref_slide.current?.addEventListener('contextmenu', event => {
@@ -51,13 +46,8 @@ const Layout: FC = () => {
         x: event.clientX,
         y: event.clientY,
       })
-      if (isSlideMenuOpen) {
-        setIsSlideBarMenuOpen(false)
-        setIsSlideMenuOpen(false)
-      } else {
-        setIsSlideBarMenuOpen(false)
-        setIsSlideMenuOpen(true)
-      }
+      setIsSlideMenuOpen(!isSlideMenuOpen)
+      setIsSlideBarMenuOpen(false)
     })
     return () => {
       ref_slide.current?.removeEventListener('contextmenu', () => {})
