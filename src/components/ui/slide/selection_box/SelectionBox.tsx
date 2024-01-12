@@ -31,7 +31,7 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
         deleteSelection(boxRef)
       }
     }
-  }, [])
+  }, [editable])
   return (
     <div
       ref={boxRef}

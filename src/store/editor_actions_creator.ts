@@ -5,6 +5,7 @@ const enum EditorActions {
   SET_ACTIVE_TOOL = 'SET_ACTIVE_TOOL',
   GENERATE_ID = 'GENERATE_ID',
   SET_APP_MODE = 'SET_APP_MODE',
+  SELECTED_OBJECT_ID = 'SELECTED_OBJECT_ID',
 }
 
 type TSetActiveSlideAction = {
