@@ -100,4 +100,5 @@ export type TEditor = {
   globalSlideId: number
   globalObjectId: number
   appMode: AppMode
+  activeObjectsIds: number[]
 }

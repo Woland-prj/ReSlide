@@ -33,6 +33,11 @@ const editorReducer = (
         ...state,
         appMode: action.payload.mode,
       }
+    case EditorActions.ADD_SELECTED_OBJECT_ID:
+      return {
+        ...state,
+        activeObjectsIds: [...state.activeObjectsIds, action.payload.id],
+      }
     default:
       return { ...state }
   }

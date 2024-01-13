@@ -6,6 +6,7 @@ const enum EditorActions {
   GENERATE_ID = 'GENERATE_ID',
   SET_APP_MODE = 'SET_APP_MODE',
   SELECTED_OBJECT_ID = 'SELECTED_OBJECT_ID',
+  ADD_SELECTED_OBJECT_ID = 'ADD_SELECTED_OBJECT_ID',
 }
 
 type TSetActiveSlideAction = {
@@ -36,11 +37,19 @@ type TSetAppMode = {
   }
 }
 
+type TAddActiveSlideId = {
+  type: EditorActions.ADD_SELECTED_OBJECT_ID
+  payload: {
+    id: number
+  }
+}
+
 type TEditorAction =
   | TSetActiveSlideAction
   | TSetActiveToolAction
   | TGenerateIdAction
   | TSetAppMode
+  | TAddActiveSlideId
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -59,7 +68,7 @@ const createEditorActions = {
       },
     }
   },
-  generateIdAction: (type: 'slideId' | 'objectId') => {
+  generateIdAction: (type: 'slideId' | 'objectId'): TEditorAction => {
     return {
       type: EditorActions.GENERATE_ID,
       payload: {
@@ -67,11 +76,19 @@ const createEditorActions = {
       },
     }
   },
-  setAppModeAction: (appMode: AppMode) => {
+  setAppModeAction: (appMode: AppMode): TEditorAction => {
     return {
       type: EditorActions.SET_APP_MODE,
       payload: {
         mode: appMode,
+      },
+    }
+  },
+  addSelectedObjectIdAction: (id: number): TEditorAction => {
+    return {
+      type: EditorActions.ADD_SELECTED_OBJECT_ID,
+      payload: {
+        id: id,
       },
     }
   },

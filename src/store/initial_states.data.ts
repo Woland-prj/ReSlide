@@ -49,6 +49,7 @@ const initialEditor: TEditor = {
   globalSlideId: 0,
   globalObjectId: 0,
   appMode: AppMode.EDIT_MODE,
+  activeObjectsIds: [],
 }
 
 const initText: TText = {
