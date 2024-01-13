@@ -34,9 +34,18 @@ const editorReducer = (
         appMode: action.payload.mode,
       }
     case EditorActions.ADD_SELECTED_OBJECT_ID:
+      console.log(action.payload.id)
       return {
         ...state,
-        activeObjectsIds: [...state.activeObjectsIds, action.payload.id],
+        selectedObjectsIds: [...state.selectedObjectsIds, action.payload.id],
+      }
+    case EditorActions.REMOVE_SELECTED_OBJECT_ID:
+      console.log(action.payload.id)
+      return {
+        ...state,
+        selectedObjectsIds: state.selectedObjectsIds.filter(id => {
+          if (id != action.payload.id) return id
+        }),
       }
     default:
       return { ...state }

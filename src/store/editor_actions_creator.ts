@@ -7,6 +7,7 @@ const enum EditorActions {
   SET_APP_MODE = 'SET_APP_MODE',
   SELECTED_OBJECT_ID = 'SELECTED_OBJECT_ID',
   ADD_SELECTED_OBJECT_ID = 'ADD_SELECTED_OBJECT_ID',
+  REMOVE_SELECTED_OBJECT_ID = 'REMOVE_SELECTED_OBJECT_ID',
 }
 
 type TSetActiveSlideAction = {
@@ -44,12 +45,20 @@ type TAddActiveSlideId = {
   }
 }
 
+type TRemoveActiveSlideId = {
+  type: EditorActions.REMOVE_SELECTED_OBJECT_ID
+  payload: {
+    id: number
+  }
+}
+
 type TEditorAction =
   | TSetActiveSlideAction
   | TSetActiveToolAction
   | TGenerateIdAction
   | TSetAppMode
   | TAddActiveSlideId
+  | TRemoveActiveSlideId
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -87,6 +96,14 @@ const createEditorActions = {
   addSelectedObjectIdAction: (id: number): TEditorAction => {
     return {
       type: EditorActions.ADD_SELECTED_OBJECT_ID,
+      payload: {
+        id: id,
+      },
+    }
+  },
+  removeSelectedObjectIdAction: (id: number): TEditorAction => {
+    return {
+      type: EditorActions.REMOVE_SELECTED_OBJECT_ID,
       payload: {
         id: id,
       },

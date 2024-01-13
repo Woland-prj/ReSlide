@@ -1,4 +1,5 @@
 import { useActions } from '@/hooks/useActions'
+import { useEditor } from '@/hooks/useEditor'
 import { TText } from '@/types/type'
 import cn from 'clsx'
 import { FC, useEffect, useRef } from 'react'
@@ -11,6 +12,7 @@ type TTextFieldProps = {
 const TextField: FC<TTextFieldProps> = ({ text }) => {
   const { changeTextValueAction } = useActions()
   const textBlockRef = useRef<HTMLDivElement>(null)
+  const { selectedObjectsIds } = useEditor()
 
   useEffect(() => {
     const editFn = (e: Event) => {
@@ -46,7 +48,9 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
       className={cn(styles.text_object, text.isSelected && styles.active_text)}
       ref={textBlockRef}
       suppressContentEditableWarning={true}
-      contentEditable={text.isSelected ? 'true' : 'false'}
+      contentEditable={
+        selectedObjectsIds.find(id => id === text.id) ? 'true' : 'false'
+      }
       tabIndex={0}
       onBlur={saveValue}
     >

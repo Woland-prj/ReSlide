@@ -20,7 +20,7 @@ const ResizeDot: FC<TResizeDotProps> = ({ dot, objId, objRef }) => {
   const dotRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    console.log(objRef.current)
+    // console.log(objRef.current)
     const resizeHandlers = registerItemFn(dotRef, objRef)
     return () => unregisterItemFn(dotRef, resizeHandlers)
   }, [])

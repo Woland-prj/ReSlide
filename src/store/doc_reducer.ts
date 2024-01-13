@@ -124,7 +124,6 @@ const docReducer = (
         state,
       )
       const newState = { ...state }
-      console.log(slideIndex)
       if (slideIndex != -1 && objectIndex != -1)
         newState.slides[slideIndex].objects[objectIndex].isSelected =
           action.payload.selectState

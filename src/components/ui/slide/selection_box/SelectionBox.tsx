@@ -1,5 +1,6 @@
 import { resizeBlockData } from '@/data/resizes_elements.data'
 import { useDnd } from '@/hooks/useDnd'
+import { useEditor } from '@/hooks/useEditor'
 import { useObjectsStyles } from '@/hooks/useObjectsStyles'
 import { useSelection } from '@/hooks/useSelection'
 import { TImage, TText, TVector } from '@/types/type'
@@ -22,6 +23,7 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
   const boxRef = useRef<HTMLDivElement>(null)
   const { setSelection, deleteSelection } = useSelection(obj.id)
   const { registerItemFn, unregisterItemFn } = useDnd(obj.id)
+  const { selectedObjectsIds } = useEditor()
   useEffect(() => {
     if (editable) {
       setSelection(boxRef)
@@ -42,13 +44,14 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
         editable && obj.isSelected ? styles.active_box : null,
       )}
     >
-      {editable && obj.isSelected && (
-        <ResizeBlockComp
-          dots={resizeBlockData}
-          objId={obj.id}
-          objRef={boxRef}
-        ></ResizeBlockComp>
-      )}
+      {editable &&
+        selectedObjectsIds.find(id => id === obj.id) != undefined && (
+          <ResizeBlockComp
+            dots={resizeBlockData}
+            objId={obj.id}
+            objRef={boxRef}
+          ></ResizeBlockComp>
+        )}
       {children}
     </div>
   )

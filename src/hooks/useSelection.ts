@@ -7,7 +7,11 @@ export type TSelectionHandlers = {
 }
 
 export const useSelection = (objId: number) => {
-  const { setObjectSelection } = useActions()
+  const {
+    setObjectSelection,
+    addSelectedObjectIdAction,
+    removeSelectedObjectIdAction,
+  } = useActions()
   const handlersRef = useRef<TSelectionHandlers>({
     selectHandler: () => {},
     unselectHandler: () => {},
@@ -24,10 +28,12 @@ export const useSelection = (objId: number) => {
     const realizeSelection = () => {
       //console.log('active select', handlersRef.current)
       setObjectSelection(objId, true)
+      addSelectedObjectIdAction(objId)
       const stopProp = (e: MouseEvent) => e.stopPropagation()
       const realizeUnselection = () => {
         //console.log('active unselect', handlersRef.current)
         setObjectSelection(objId, false)
+        removeSelectedObjectIdAction(objId)
         itemRef.current?.parentElement?.removeEventListener(
           'mousedown',
           realizeUnselection,
