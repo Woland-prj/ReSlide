@@ -30,10 +30,10 @@
   margin: 0.5rem 0 0 0.5rem;
 }
 
-.slidePreview_active > div {
+.slidePreview_active > div:hover {
   box-shadow: 0 0 0 11px #611cd2;
 }
 
-.slidePreview_active:hover > div {
+.slidePreview_active > div {
   box-shadow: 0 0 0 11px #611cd2;
 }

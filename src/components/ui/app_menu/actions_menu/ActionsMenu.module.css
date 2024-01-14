@@ -1,7 +1,7 @@
 .actions_menu {
   margin: 0 1rem 1rem;
   height: 1.5rem;
-  background: rgba(190, 190, 190, 0.3);
+  background: rgb(190 190 190 / 30%);
   border-radius: 1.5rem;
   padding: 0.7rem;
   display: flex;

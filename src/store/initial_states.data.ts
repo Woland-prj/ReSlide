@@ -50,6 +50,7 @@ const initialEditor: TEditor = {
   globalObjectId: 0,
   appMode: AppMode.EDIT_MODE,
   selectedObjectsIds: [],
+  isShiftPressed: false,
 }
 
 const initText: TText = {

@@ -8,6 +8,7 @@ const enum EditorActions {
   SELECTED_OBJECT_ID = 'SELECTED_OBJECT_ID',
   ADD_SELECTED_OBJECT_ID = 'ADD_SELECTED_OBJECT_ID',
   REMOVE_SELECTED_OBJECT_ID = 'REMOVE_SELECTED_OBJECT_ID',
+  SET_SHIFT_PRESSED = 'SET_SHIFT_PRESSED',
 }
 
 type TSetActiveSlideAction = {
@@ -31,24 +32,31 @@ type TGenerateIdAction = {
   }
 }
 
-type TSetAppMode = {
+type TSetAppModeAction = {
   type: EditorActions.SET_APP_MODE
   payload: {
     mode: AppMode
   }
 }
 
-type TAddActiveSlideId = {
+type TAddActiveSlideIdAction = {
   type: EditorActions.ADD_SELECTED_OBJECT_ID
   payload: {
     id: number
   }
 }
 
-type TRemoveActiveSlideId = {
+type TRemoveActiveSlideIdAction = {
   type: EditorActions.REMOVE_SELECTED_OBJECT_ID
   payload: {
     id: number
+  }
+}
+
+type TSetShiftPressedAction = {
+  type: EditorActions.SET_SHIFT_PRESSED
+  payload: {
+    isPressed: boolean
   }
 }
 
@@ -56,9 +64,10 @@ type TEditorAction =
   | TSetActiveSlideAction
   | TSetActiveToolAction
   | TGenerateIdAction
-  | TSetAppMode
-  | TAddActiveSlideId
-  | TRemoveActiveSlideId
+  | TSetAppModeAction
+  | TAddActiveSlideIdAction
+  | TRemoveActiveSlideIdAction
+  | TSetShiftPressedAction
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -106,6 +115,14 @@ const createEditorActions = {
       type: EditorActions.REMOVE_SELECTED_OBJECT_ID,
       payload: {
         id: id,
+      },
+    }
+  },
+  setShiftPressedAction: (isPressed: boolean): TEditorAction => {
+    return {
+      type: EditorActions.SET_SHIFT_PRESSED,
+      payload: {
+        isPressed: isPressed,
       },
     }
   },

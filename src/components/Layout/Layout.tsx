@@ -29,7 +29,8 @@ const Layout: FC = () => {
     group => group.id in slideButtonGroupNames,
   )
   const [mouseCoords, setMouseCoords] = useState<TCoords>({ x: 0, y: 0 })
-  useGlobalHandlers()
+  const layoutRef = useRef<HTMLDivElement>(null)
+  useGlobalHandlers(layoutRef)
 
   useEffect(() => {
     ref_slidebar.current?.addEventListener('contextmenu', event => {
@@ -64,7 +65,7 @@ const Layout: FC = () => {
   }, [])
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout} ref={layoutRef}>
       <div // Элемент, по правому клику на который, активируется ПКМ-меню на слайдбаре
         className={styles.preview}
         ref={ref_slidebar}

@@ -47,6 +47,11 @@ const editorReducer = (
           if (id != action.payload.id) return id
         }),
       }
+    case EditorActions.SET_SHIFT_PRESSED:
+      return {
+        ...state,
+        isShiftPressed: action.payload.isPressed,
+      }
     default:
       return { ...state }
   }

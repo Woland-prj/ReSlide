@@ -1,20 +1,44 @@
-import { useEffect } from 'react'
+import { RefObject, useEffect } from 'react'
 import { useActions } from './useActions'
 import { useDoc } from './useDoc'
 import { useEditor } from './useEditor'
 
-export const useGlobalHandlers = () => {
-  const { activeSlideId } = useEditor()
+interface KeyboardEvent {
+  key: string
+}
+
+export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
+  const { activeSlideId, selectedObjectsIds } = useEditor()
   const { slides } = useDoc()
-  const { deleteObjectAction } = useActions()
+  const {
+    deleteObjectAction,
+    removeSelectedObjectIdAction,
+    setShiftPressedAction,
+  } = useActions()
   useEffect(() => {
-    const delHandler = (e: KeyboardEvent) => {
+    const keyDownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Delete')
         slides[activeSlideId].objects.forEach(object => {
-          if (object.isSelected) deleteObjectAction(object.id)
+          if (selectedObjectsIds.find(id => id === object.id) != undefined)
+            deleteObjectAction(object.id)
         })
+      if (e.key === 'Shift') setShiftPressedAction(true)
     }
-    document.addEventListener('keydown', delHandler)
-    return () => document.addEventListener('keydown', delHandler)
-  }, [slides, activeSlideId])
+    const keyUpHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') setShiftPressedAction(false)
+    }
+    const inActiveAllStatesHandler = () => {
+      selectedObjectsIds.forEach(id => {
+        removeSelectedObjectIdAction(id)
+      })
+    }
+    document.addEventListener('keydown', keyDownHandler)
+    document.addEventListener('keyup', keyUpHandler)
+    layoutRef.current?.addEventListener('click', inActiveAllStatesHandler)
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler)
+      document.addEventListener('keyup', keyUpHandler)
+      layoutRef.current?.removeEventListener('click', inActiveAllStatesHandler)
+    }
+  }, [slides, activeSlideId, selectedObjectsIds])
 }

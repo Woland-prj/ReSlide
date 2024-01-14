@@ -1,11 +1,13 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useEditor } from './useEditor'
 
-export const useCheckId = (selectedIds: number[], objId: number) => {
+export const useCheckId = (objId: number) => {
   const [isObjSelected, setIsObjSelected] = useState<boolean>(false)
-  useLayoutEffect(() => {
-    selectedIds.find(selectedId => selectedId === objId)
+  const { selectedObjectsIds } = useEditor()
+  useEffect(() => {
+    selectedObjectsIds.find(selectedId => selectedId === objId) != undefined
       ? setIsObjSelected(true)
       : setIsObjSelected(false)
-  }, [selectedIds])
+  }, [selectedObjectsIds])
   return isObjSelected
 }

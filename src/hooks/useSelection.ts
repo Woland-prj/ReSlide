@@ -1,81 +1,42 @@
-import { RefObject, useRef } from 'react'
+import { RefObject } from 'react'
 import { useActions } from './useActions'
+import { useEditor } from './useEditor'
 
-export type TSelectionHandlers = {
-  selectHandler: () => void
-  unselectHandler: () => void
-}
+type TRealizeSelectionHandler = (e: MouseEvent) => void
 
 export const useSelection = (objId: number) => {
-  const {
-    setObjectSelection,
-    addSelectedObjectIdAction,
-    removeSelectedObjectIdAction,
-  } = useActions()
-  const handlersRef = useRef<TSelectionHandlers>({
-    selectHandler: () => {},
-    unselectHandler: () => {},
-  })
+  const { addSelectedObjectIdAction, removeSelectedObjectIdAction } =
+    useActions()
+  const { selectedObjectsIds, isShiftPressed } = useEditor()
+  // const isSelected = useCheckId(objId)
 
   const setSelection = (
     itemRef: RefObject<HTMLDivElement>,
-  ): TSelectionHandlers => {
-    const handlers: TSelectionHandlers = {
-      selectHandler: () => {},
-      unselectHandler: () => {},
-    }
-
-    const realizeSelection = () => {
-      //console.log('active select', handlersRef.current)
-      setObjectSelection(objId, true)
-      addSelectedObjectIdAction(objId)
-      const stopProp = (e: MouseEvent) => e.stopPropagation()
-      const realizeUnselection = () => {
-        //console.log('active unselect', handlersRef.current)
-        setObjectSelection(objId, false)
-        removeSelectedObjectIdAction(objId)
-        itemRef.current?.parentElement?.removeEventListener(
-          'mousedown',
-          realizeUnselection,
-        )
-        itemRef.current?.removeEventListener('mousedown', stopProp)
-        handlersRef.current.unselectHandler = () => {}
-        setTimeout(() => {
-          itemRef.current?.addEventListener('mousedown', realizeSelection)
-          handlersRef.current.selectHandler = realizeSelection
-        }, 100)
+  ): TRealizeSelectionHandler => {
+    const realizeSelection = (e: MouseEvent) => {
+      const isSelected =
+        selectedObjectsIds.find(id => id === objId) != undefined
+      e.stopPropagation()
+      if (!isShiftPressed) {
+        selectedObjectsIds.forEach(id => removeSelectedObjectIdAction(id))
+        addSelectedObjectIdAction(objId)
       }
-
-      setTimeout(() => {
-        itemRef.current?.parentElement?.addEventListener(
-          'mousedown',
-          realizeUnselection,
-        )
-        handlersRef.current.unselectHandler = realizeUnselection
-        itemRef.current?.addEventListener('mousedown', stopProp)
-      }, 100)
-
-      itemRef.current?.removeEventListener('mousedown', realizeSelection)
-      handlersRef.current.selectHandler = () => {}
-      handlers.unselectHandler = realizeUnselection
+      if (isShiftPressed) {
+        if (!isSelected) addSelectedObjectIdAction(objId)
+        if (isSelected) removeSelectedObjectIdAction(objId)
+      }
+      console.log(selectedObjectsIds, isSelected)
     }
 
-    itemRef.current?.addEventListener('mousedown', realizeSelection)
-    handlers.selectHandler = realizeSelection
-    return handlers
+    itemRef.current?.addEventListener('click', realizeSelection)
+    return realizeSelection
   }
 
-  const deleteSelection = (itemRef: RefObject<HTMLDivElement>) => {
-    //console.log('unmount', handlersRef.current)
-    itemRef.current?.parentElement?.removeEventListener(
-      'mousedown',
-      handlersRef.current.unselectHandler,
-    )
-    setObjectSelection(objId, false)
-    itemRef.current?.removeEventListener(
-      'mousedown',
-      handlersRef.current.selectHandler,
-    )
+  const deleteSelection = (
+    itemRef: RefObject<HTMLDivElement>,
+    handler: TRealizeSelectionHandler,
+  ) => {
+    itemRef.current?.removeEventListener('click', handler)
   }
 
   return { setSelection, deleteSelection }

@@ -101,4 +101,5 @@ export type TEditor = {
   globalObjectId: number
   appMode: AppMode
   selectedObjectsIds: number[]
+  isShiftPressed: boolean
 }
