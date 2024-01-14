@@ -3,10 +3,37 @@
   display: flex;
   flex-flow: column nowrap;
   max-width: inherit;
+  z-index: 2;
 }
 
 .slidePreview {
   transform-origin: top left;
   margin-bottom: 1rem;
   max-width: inherit;
+}
+
+.slidePreview > div {
+  box-shadow: 0 0 0 5px #aaaaaa;
+  border-radius: 3rem;
+}
+
+.slidePreview > div:hover {
+  box-shadow: 0 0 0 11px #aaaaaa;
+}
+
+.preview_wrapper {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.preview_wrapper span {
+  margin: 0.5rem 0 0 0.5rem;
+}
+
+.slidePreview_active > div {
+  box-shadow: 0 0 0 11px #611cd2;
+}
+
+.slidePreview_active > div:hover {
+  box-shadow: 0 0 0 11px #611cd2;
 }

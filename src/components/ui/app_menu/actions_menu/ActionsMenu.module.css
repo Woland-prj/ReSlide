@@ -1,2 +1,47 @@
-.BaseActions {
+.actions_menu {
+  margin: 0 1rem 1rem;
+  height: 1.5rem;
+  background: rgba(190, 190, 190, 0.3);
+  border-radius: 1.5rem;
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
 }
+
+.actions_block {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.actions_block::after {
+  width: 1px;
+  height: 1.5rem;
+  content: '';
+  background: rgba(190 190 190 / 70%);
+  display: block;
+  margin-right: 0.4rem;
+}
+
+.image_button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: all 0.25s ease;
+}
+
+.image_button:hover {
+  background: rgba(190 190 190 / 70%);
+}
+
+.image_button.active {
+  background: rgb(97 28 210 / 50%);
+}
+
+/* .button_wrapper {
+  position: relative;
+} */

@@ -1,7 +1,7 @@
 import { TMenuButton } from '@/types/menu_buttons.type'
 import { FC, useState } from 'react'
 import SubMenu from './SubMenu'
-import styles from './TextButton.module.css'
+import styles from '../TopMenu.module.css'
 
 type TextButtonProps = {
   button: TMenuButton
@@ -15,14 +15,17 @@ const TextButton: FC<TextButtonProps> = ({ button }) => {
   }
 
   return (
-    <>
-      <div className={styles.TextButton}>
-        <button onClick={toggleSubMenu} className='TextButton'>
-          {button.name}
-        </button>
-        {isMenuOpen && <SubMenu buttons={button.contextButtons} />}
-      </div>
-    </>
+    <div className={styles.TextButton}>
+      <button onClick={toggleSubMenu} className={styles.text_button}>
+        {button.name}
+      </button>
+      {isMenuOpen && (
+        <SubMenu
+          buttons={button.contextButtons}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+      )}
+    </div>
   )
 }
 

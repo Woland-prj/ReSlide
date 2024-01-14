@@ -1,3 +1,4 @@
+import { doc } from '@/data/data_max'
 import { useStyles } from '@/hooks/useStyles'
 import {
   ObjectType,
@@ -10,11 +11,14 @@ import {
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC } from 'react'
+import { FC, RefObject, useRef } from 'react'
 import styles from './Slide.module.css'
+import SelectionBox from './selection_box/SelectionBox'
 
 type TObjectProps = {
   object: TText | TVector | TImage
+  editable: boolean
+  slideRef: RefObject<HTMLDivElement>
 }
 
 type TSlideProps = {
@@ -22,51 +26,30 @@ type TSlideProps = {
   slide: TSlide
 }
 
-const Object: FC<TObjectProps> = ({ object }) => {
-  function changeStyles(object: TText | TVector | TImage): React.CSSProperties {
-    const styles = {
-      left: object.coords.x,
-      top: object.coords.y,
-      transform: `rotate(${object.rotationAngle}deg)`,
-    }
-    return styles
-  }
-
-  const params = [object.coords.x, object.coords.y, object.rotationAngle]
-  const chStyles = useStyles(params, object, changeStyles)
-
+const Object: FC<TObjectProps> = ({ object, editable }) => {
   return (
-    <div
-      style={chStyles}
-      className={styles.object}
-      //ref={(el: HTMLDivElement) => (refItem.item = el)}
-    >
+    <SelectionBox editable={editable} obj={object}>
       {(() => {
         switch (object.type) {
           case ObjectType.Text:
             return <TextField text={object} />
           case ObjectType.Image:
-            return <Image image={object} />
+            return <Image image={object} editable={editable} />
           case ObjectType.Vector:
-            return <Vector vector={object} />
+            return <Vector vector={object} editable={editable} />
           default:
             return <div>Incorrect object</div>
         }
       })()}
-    </div>
+    </SelectionBox>
   )
 }
 
 const Slide: FC<TSlideProps> = ({ slide, editable }) => {
-  if (editable) {
-    // TODO: сделать драгэнддроп
-    console.log('useDnd')
-  }
-
   function changeStyles(slide: TSlide): React.CSSProperties {
     const styles: React.CSSProperties = {
-      width: slide.size.width,
-      height: slide.size.height,
+      width: doc.size.width,
+      height: doc.size.height,
     }
     slide.background.variation == SlideBgType.Img
       ? (styles.backgroundImage = `url(${slide.background.value})`)
@@ -74,13 +57,19 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
     return styles
   }
 
-  const params = [slide.size.width, slide.size.height]
+  const params = [doc.size.width, doc.size.height]
   const chStyles = useStyles(params, slide, changeStyles)
+  const slRef = useRef<HTMLDivElement>(null)
 
   return (
-    <div className={styles.slide} style={chStyles}>
+    <div className={styles.slide} style={chStyles} ref={slRef}>
       {slide.objects.map(object => (
-        <Object key={object.id} object={object} />
+        <Object
+          key={object.id}
+          object={object}
+          slideRef={slRef}
+          editable={editable}
+        />
       ))}
     </div>
   )

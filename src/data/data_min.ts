@@ -11,6 +11,10 @@ import {
 
 export const doc: TDocument = {
   name: 'Test presentation',
+  size: {
+    width: 960,
+    height: 540,
+  },
   slides: [],
 }
 
@@ -20,10 +24,6 @@ export const slide: TSlide = {
   background: {
     variation: SlideBgType.Color,
     value: 'https://test.com/test_back.png',
-  },
-  size: {
-    width: 960,
-    height: 540,
   },
   objects: [],
 }
@@ -77,7 +77,8 @@ export const vector: TVector = {
 export const image: TImage = {
   id: 3,
   type: ObjectType.Image,
-  link: 'https://...',
+  data: 'https://...',
+  name: 'test',
   size: {
     width: 50,
     height: 50,

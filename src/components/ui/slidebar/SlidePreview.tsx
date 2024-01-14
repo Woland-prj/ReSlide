@@ -1,32 +1,50 @@
-import { doc } from '@/data/data_max'
-import { TSlide } from '@/types/type'
+import { FC, useEffect, useRef } from 'react'
+import styles from '@ui/slidebar/SlidePreview.module.css'
+import cn from 'clsx'
 import Slide from '@slide/Slide'
-import { FC } from 'react'
-import styles from './SlidePreview.module.css'
+import { useDoc } from '@/hooks/useDoc'
+import { TSlide } from '@/types/type'
+import { useActions } from '@/hooks/useActions'
+import { useEditor } from '@/hooks/useEditor'
 
-type SlidePreview = {
-  slides: TSlide[]
+type TSlidePreviewProps = {
+  slide: TSlide
+  index: number
 }
 
-export const SlidePreview: FC<SlidePreview> = ({ slides = doc.slides }) => {
-  const scale: number = 300 / slides[0].size.width
+const SlidePreview: FC<TSlidePreviewProps> = ({ slide, index }) => {
+  const previewRef = useRef<HTMLDivElement>(null)
+  const { size } = useDoc()
+  const { activeSlideId } = useEditor()
+  const { setActiveSlideAction } = useActions()
+  const scale: number = 200 / size.width
+  useEffect(() => {
+    const toggleFn = () => {
+      setActiveSlideAction(slide.id)
+    }
+    previewRef.current?.addEventListener('click', toggleFn)
+    return () => previewRef.current?.removeEventListener('click', toggleFn)
+  }, [])
+
   return (
-    <div className={styles.preview}>
-      {slides.map(slide => (
-        <div
-          key={slide.id}
-          className={styles.slidePreview}
-          style={{
-            scale: `${scale}`,
-            width: slide.size.width * scale,
-            height: slide.size.height * scale,
-          }}
-        >
-          <Slide slide={slide} editable={false}></Slide>
-        </div>
-      ))}
+    <div className={styles.preview_wrapper}>
+      <span>{index + 1}</span>
+      <div
+        className={cn(
+          styles.slidePreview,
+          slide.id === activeSlideId && styles.slidePreview_active,
+        )}
+        style={{
+          scale: `${scale}`,
+          height: size.height * scale,
+          width: size.width * scale,
+        }}
+        ref={previewRef}
+      >
+        <Slide slide={slide} editable={false}></Slide>
+      </div>
     </div>
   )
 }
 
-// style={{ transform: `scale(${300 / slide.size.width})` }}
+export default SlidePreview
