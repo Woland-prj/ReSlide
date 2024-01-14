@@ -28,7 +28,7 @@ export const useSelection = (objId: number) => {
       console.log(selectedObjectsIds, isSelected)
     }
 
-    itemRef.current?.addEventListener('click', realizeSelection)
+    itemRef.current?.addEventListener('mousedown', realizeSelection)
     return realizeSelection
   }
 
@@ -36,7 +36,7 @@ export const useSelection = (objId: number) => {
     itemRef: RefObject<HTMLDivElement>,
     handler: TRealizeSelectionHandler,
   ) => {
-    itemRef.current?.removeEventListener('click', handler)
+    itemRef.current?.removeEventListener('mousedown', handler)
   }
 
   return { setSelection, deleteSelection }

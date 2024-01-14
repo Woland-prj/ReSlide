@@ -27,6 +27,7 @@ export const useButtonAction = (
     duplicateSlideAction,
     deleteSlideAction,
     setActiveSlideAction,
+    setGlobalIdAction,
   } = useActions()
   const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
@@ -38,6 +39,14 @@ export const useButtonAction = (
       filePromise.then(loadedDoc => {
         console.log(loadedDoc)
         document.title = loadedDoc.name + brandStr
+        const slIds: number[] = []
+        loadedDoc.slides.forEach(slide => slIds.push(slide.id))
+        const objIds: number[] = []
+        loadedDoc.slides.forEach(slide =>
+          slide.objects.forEach(object => objIds.push(object.id)),
+        )
+        setGlobalIdAction(Math.max(...slIds) + 1, 'slideId')
+        setGlobalIdAction(Math.max(...objIds) + 1, 'objectId')
         loadDocAction(loadedDoc)
       })
       filePromise.finally(() => {

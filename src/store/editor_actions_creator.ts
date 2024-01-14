@@ -9,6 +9,7 @@ const enum EditorActions {
   ADD_SELECTED_OBJECT_ID = 'ADD_SELECTED_OBJECT_ID',
   REMOVE_SELECTED_OBJECT_ID = 'REMOVE_SELECTED_OBJECT_ID',
   SET_SHIFT_PRESSED = 'SET_SHIFT_PRESSED',
+  SET_GLOBAL_ID = 'SET_GLOBAL_ID',
 }
 
 type TSetActiveSlideAction = {
@@ -60,6 +61,14 @@ type TSetShiftPressedAction = {
   }
 }
 
+type TSetGlobalIdAction = {
+  type: EditorActions.SET_GLOBAL_ID
+  payload: {
+    id: number
+    type: 'slideId' | 'objectId'
+  }
+}
+
 type TEditorAction =
   | TSetActiveSlideAction
   | TSetActiveToolAction
@@ -68,6 +77,7 @@ type TEditorAction =
   | TAddActiveSlideIdAction
   | TRemoveActiveSlideIdAction
   | TSetShiftPressedAction
+  | TSetGlobalIdAction
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -123,6 +133,18 @@ const createEditorActions = {
       type: EditorActions.SET_SHIFT_PRESSED,
       payload: {
         isPressed: isPressed,
+      },
+    }
+  },
+  setGlobalIdAction: (
+    id: number,
+    type: 'slideId' | 'objectId',
+  ): TEditorAction => {
+    return {
+      type: EditorActions.SET_GLOBAL_ID,
+      payload: {
+        id: id,
+        type: type,
       },
     }
   },

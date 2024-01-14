@@ -27,10 +27,11 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
   const isSelected = useCheckId(obj.id)
   const { selectedObjectsIds, isShiftPressed } = useEditor()
   useEffect(() => {
-    console.log('recreate')
-    const selectFn = setSelection(boxRef)
-    return () => {
-      deleteSelection(boxRef, selectFn)
+    if (editable) {
+      const selectFn = setSelection(boxRef)
+      return () => {
+        deleteSelection(boxRef, selectFn)
+      }
     }
   }, [editable, selectedObjectsIds, isShiftPressed])
   useEffect(() => {

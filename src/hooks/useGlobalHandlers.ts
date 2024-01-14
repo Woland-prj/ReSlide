@@ -1,3 +1,5 @@
+import { getIndexById } from '@/services/getIndexById.service'
+import { TSlide } from '@/types/type'
 import { RefObject, useEffect } from 'react'
 import { useActions } from './useActions'
 import { useDoc } from './useDoc'
@@ -17,11 +19,14 @@ export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
   } = useActions()
   useEffect(() => {
     const keyDownHandler = (e: KeyboardEvent) => {
-      if (e.key === 'Delete')
-        slides[activeSlideId].objects.forEach(object => {
+      if (e.key === 'Delete') {
+        const activeIndex = getIndexById<TSlide>(slides, activeSlideId)
+        slides[activeIndex!].objects.forEach(object => {
+          console.log(object)
           if (selectedObjectsIds.find(id => id === object.id) != undefined)
             deleteObjectAction(object.id)
         })
+      }
       if (e.key === 'Shift') setShiftPressedAction(true)
     }
     const keyUpHandler = (e: KeyboardEvent) => {
@@ -34,11 +39,14 @@ export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
     }
     document.addEventListener('keydown', keyDownHandler)
     document.addEventListener('keyup', keyUpHandler)
-    layoutRef.current?.addEventListener('click', inActiveAllStatesHandler)
+    layoutRef.current?.addEventListener('mousedown', inActiveAllStatesHandler)
     return () => {
       document.removeEventListener('keydown', keyDownHandler)
       document.addEventListener('keyup', keyUpHandler)
-      layoutRef.current?.removeEventListener('click', inActiveAllStatesHandler)
+      layoutRef.current?.removeEventListener(
+        'mousedown',
+        inActiveAllStatesHandler,
+      )
     }
   }, [slides, activeSlideId, selectedObjectsIds])
 }

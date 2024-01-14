@@ -52,6 +52,17 @@ const editorReducer = (
         ...state,
         isShiftPressed: action.payload.isPressed,
       }
+    case EditorActions.SET_GLOBAL_ID:
+      if (action.payload.type == 'slideId')
+        return {
+          ...state,
+          globalSlideId: action.payload.id,
+        }
+      else
+        return {
+          ...state,
+          globalObjectId: action.payload.id,
+        }
     default:
       return { ...state }
   }
