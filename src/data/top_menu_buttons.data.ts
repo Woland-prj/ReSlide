@@ -85,6 +85,10 @@ export const menu_buttons: TMenuButton[] = [
         name: 'Дублировать слайд',
       },
       {
+        id: 'delete_slide_btn',
+        name: 'Удалить слайд',
+      },
+      {
         id: 'change_background_btn',
         name: 'Изменить фон',
       },

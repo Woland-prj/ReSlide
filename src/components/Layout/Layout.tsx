@@ -6,9 +6,11 @@ import {
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
 import { useGlobalHandlers } from '@/hooks/useGlobalHandlers'
+import { slidePlaceholderText } from '@/store/initial_states.data'
 import { TButtonGroup } from '@/types/context_menu_buttons.type'
 import { TCoords } from '@/types/type'
 import Slide from '@slide/Slide'
+import SlidePlaceholder from '@slide/SlidePlaceholder'
 import ContextMenu from '@ui/context_menu/ContextMenu'
 import { SlidePreviewList } from '@ui/slidebar/SlidePreviewList'
 import { FC, useEffect, useRef, useState } from 'react'
@@ -19,7 +21,7 @@ const Layout: FC = () => {
   const { slides } = useDoc()
   const ref_slide = useRef<HTMLDivElement>(null)
   const ref_slidebar = useRef<HTMLDivElement>(null)
-  const active_slide = slides.filter(slide => slide.id === activeSlideId)[0]
+  const active_slide = slides.find(slide => slide.id === activeSlideId)
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
   const [isSlideBarMenuOpen, setIsSlideBarMenuOpen] = useState(false)
   const slidebarGroups: TButtonGroup[] = context_menu_button_groups.filter(
@@ -83,7 +85,11 @@ const Layout: FC = () => {
         className={styles.editor}
         ref={ref_slide}
       >
-        <Slide slide={active_slide} editable={true} />
+        {active_slide != undefined ? (
+          <Slide slide={active_slide} editable={true} />
+        ) : (
+          <SlidePlaceholder text={slidePlaceholderText} />
+        )}
         {isSlideMenuOpen && (
           <ContextMenu
             coords={mouseCoords}

@@ -1,11 +1,12 @@
 import { useActions } from '@/hooks/useActions'
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
+import { getIndexById } from '@/services/getIndexById.service'
 import { imageToBase64 } from '@/services/image_encode.service'
 import { saveJsonObjToFile } from '@/services/save_doc.service'
 import { readJSONFile } from '@/services/upload_doc.service'
 import { brandStr } from '@/store/initial_states.data'
-import { AppMode, ShapeVariation, TDocument } from '@/types/type'
+import { AppMode, ShapeVariation, TDocument, TSlide } from '@/types/type'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
@@ -24,6 +25,8 @@ export const useButtonAction = (
     addImageAction,
     setAppModeAction,
     duplicateSlideAction,
+    deleteSlideAction,
+    setActiveSlideAction,
   } = useActions()
   const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
@@ -147,6 +150,16 @@ export const useButtonAction = (
         onClick = () => {
           generateIdAction('slideId')
           duplicateSlideAction(activeSlideId, globalSlideId)
+        }
+        break
+      case 'delete_slide_btn':
+        onClick = () => {
+          const activeSlideIndex = getIndexById<TSlide>(slides, activeSlideId)
+          deleteSlideAction(activeSlideId)
+          if (activeSlideIndex)
+            setActiveSlideAction(
+              activeSlideIndex != 0 ? slides[activeSlideIndex - 1].id : -1,
+            )
         }
         break
     }

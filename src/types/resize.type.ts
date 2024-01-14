@@ -19,6 +19,7 @@ export type ResizeDotHandler = (
   startCoords: TCoords,
   parentCoords: TCoords,
   startSize: TSize,
+  isShiftPressed: boolean,
 ) => void
 
 export type TResizeDot = {

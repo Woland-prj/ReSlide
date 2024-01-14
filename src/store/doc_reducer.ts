@@ -192,6 +192,13 @@ const docReducer = (
       newState.slides = [...newState.slides, dupSlide]
       return newState
     }
+    case DocActions.DELETE_SLIDE_ACTION: {
+      const newState = { ...state }
+      newState.slides = state.slides.filter(
+        slide => slide.id != action.payload.slideId,
+      )
+      return newState
+    }
     default:
       return { ...state }
   }

@@ -115,6 +115,9 @@ const initImg: TImage = {
   data: '',
 }
 
+const slidePlaceholderText: string =
+  'Ни одного слайда не выбрано. Чтобы начать работу нажмите "+" на панели действий'
+
 export {
   brandStr,
   docInitialName,
@@ -123,5 +126,6 @@ export {
   initShape,
   initText,
   initialEditor,
+  slidePlaceholderText,
   voidSlide,
 }

@@ -14,6 +14,7 @@ enum DocActions {
   ADD_IMAGE_ACTION = 'ADD_IMAGE_ACTION',
   DELETE_OBJECT_ACTION = 'DELETE_OBJECT_ACTION',
   DUPLICATE_SLIDE_ACTION = 'DUPLICATE_SLIDE_ACTION',
+  DELETE_SLIDE_ACTION = 'DELETE_SLIDE_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -119,6 +120,13 @@ type TDuplicateSlideAction = {
   }
 }
 
+type TDeleteSlideAction = {
+  type: DocActions.DELETE_SLIDE_ACTION
+  payload: {
+    slideId: number
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -133,6 +141,7 @@ type TDocAction =
   | TAddImageAction
   | TDeleteObjectAction
   | TDuplicateSlideAction
+  | TDeleteSlideAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -268,6 +277,14 @@ const createDocActions = {
       payload: {
         slideId: slideID,
         newId: newID,
+      },
+    }
+  },
+  deleteSlideAction: (slideID: number): TDocAction => {
+    return {
+      type: DocActions.DELETE_SLIDE_ACTION,
+      payload: {
+        slideId: slideID,
       },
     }
   },
