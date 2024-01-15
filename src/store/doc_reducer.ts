@@ -185,11 +185,22 @@ const docReducer = (
         if (slide.id == action.payload.slideId) slideIndex = index
       })
       const newState = { ...state }
-      const dupSlide = {
+      let prevId = action.payload.objId
+      const slide = {
         ...newState.slides[slideIndex],
+        objects: [...newState.slides[slideIndex].objects],
+      }
+      for (let i = 0; i < slide.objects.length; i++) {
+        prevId += 1
+        slide.objects[i].id = prevId
+      }
+      console.log(slide.objects)
+      const dupSlide = {
+        ...slide,
         id: action.payload.newId,
       }
       newState.slides = [...newState.slides, dupSlide]
+      console.log(newState.slides)
       return newState
     }
     case DocActions.DELETE_SLIDE_ACTION: {

@@ -117,6 +117,8 @@ type TDuplicateSlideAction = {
   payload: {
     slideId: number
     newId: number
+    objId: number
+    objCount: number
   }
 }
 
@@ -271,12 +273,19 @@ const createDocActions = {
       },
     }
   },
-  duplicateSlideAction: (slideID: number, newID: number): TDocAction => {
+  duplicateSlideAction: (
+    slideID: number,
+    newID: number,
+    objID: number,
+    objCount: number,
+  ): TDocAction => {
     return {
       type: DocActions.DUPLICATE_SLIDE_ACTION,
       payload: {
         slideId: slideID,
         newId: newID,
+        objId: objID,
+        objCount: objCount,
       },
     }
   },

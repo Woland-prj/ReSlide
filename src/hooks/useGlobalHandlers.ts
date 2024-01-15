@@ -23,11 +23,16 @@ export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
     const keyDownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Delete') {
         const activeIndex = getIndexById<TSlide>(slides, activeSlideId)
+        console.log(activeSlideId, activeIndex, slides.length > 1)
         if (isShiftPressed) {
           deleteSlideAction(activeSlideId)
-          setActiveSlideAction(
-            activeIndex && activeIndex > 0 ? slides[activeIndex - 1].id : -1,
-          )
+          let newActiveId: number = -1
+          if (activeIndex != null)
+            if (activeIndex > 0) newActiveId = slides[activeIndex - 1].id
+            else
+              newActiveId = slides.length > 1 ? slides[activeIndex + 1].id : -27
+          console.log(newActiveId)
+          setActiveSlideAction(newActiveId)
         }
         slides[activeIndex!].objects.forEach(object => {
           console.log(object)

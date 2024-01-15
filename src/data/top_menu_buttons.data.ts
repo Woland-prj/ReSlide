@@ -47,7 +47,7 @@ export const menu_buttons: TMenuButton[] = [
     name: 'Вид',
     contextButtons: [
       {
-        id: 'slideshow_btn',
+        id: 'slide_show_btn',
         name: 'Слайдшоу',
       },
       {

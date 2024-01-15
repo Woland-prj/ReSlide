@@ -13,6 +13,7 @@ import {
 
 const docInitialName: string = 'Презентация без названия'
 const brandStr: string = ' - ReSlide'
+const rewriteConfirmQuestion = 'Перезаписать текущую презентацию?'
 
 const docInitialState: TDocument = {
   name: docInitialName,
@@ -126,6 +127,7 @@ export {
   initShape,
   initText,
   initialEditor,
+  rewriteConfirmQuestion,
   slidePlaceholderText,
   voidSlide,
 }
