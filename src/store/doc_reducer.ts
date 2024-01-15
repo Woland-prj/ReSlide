@@ -180,6 +180,26 @@ const docReducer = (
       })
       return newState
     }
+    case DocActions.SET_FONT_FAMILY: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      if (
+        newState.slides[slideIndex].objects[objectIndex].type ===
+        ObjectType.Text
+      ) {
+        newState.slides[slideIndex].objects[objectIndex].value
+      }
+      return newState
+    }
+    case DocActions.SET_OBJECT_COLOR: {
+      return newState
+    }
+    case DocActions.TOGGLE_FORMATTING: {
+      return newState
+    }
     default:
       return { ...state }
   }

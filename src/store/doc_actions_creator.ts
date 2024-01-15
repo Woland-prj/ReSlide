@@ -1,4 +1,13 @@
-import { ShapeVariation, TCoords, TDocument, TSize } from '@/types/type'
+import {
+  FormatVariation,
+  ObjectPartVariation,
+  ObjectType,
+  ShapeVariation,
+  TCoords,
+  TDocument,
+  TSize,
+} from '@/types/type'
+import { ObjectType } from 'typescript'
 
 enum DocActions {
   CHANGE_DOC_NAME_ACTION = 'CHANGE_DOC_NAME_ACTION',
@@ -13,6 +22,9 @@ enum DocActions {
   ADD_SHAPE_ACTION = 'ADD_SHAPE_ACTION',
   ADD_IMAGE_ACTION = 'ADD_IMAGE_ACTION',
   DELETE_OBJECT_ACTION = 'DELETE_OBJECT_ACTION',
+  SET_OBJECT_COLOR = 'SET_OBJECT_COLOR',
+  TOGGLE_FORMATTING = 'TOGGLE_FORMATTING',
+  SET_FONT_FAMILY = 'SET_FONT_FAMILY',
 }
 
 type TChangeDocNameAction = {
@@ -110,6 +122,46 @@ type TDeleteObjectAction = {
   }
 }
 
+type TSetObjectColor = {
+  type: DocActions.SET_OBJECT_COLOR
+  payload: {
+    objectId: number
+    color: string
+    objectPart: ObjectPartVariation
+    type: ObjectType
+  }
+}
+
+type TToggleFormatting = {
+  type: DocActions.TOGGLE_FORMATTING
+  payload: {
+    objectId: number
+    slideID: number
+    variation: FormatVariation
+    type: ObjectType
+  }
+}
+
+type TSetFontFamily = {
+  type: DocActions.SET_FONT_FAMILY
+  payload: {
+    objectId: number
+    slideID: number
+    fontFamily: string
+    type: ObjectType
+  }
+}
+
+type TSetFontSize = {
+  type: DocActions.SET_FONT_FAMILY
+  payload: {
+    objectId: number
+    slideID: number
+    fontSize: number
+    type: ObjectType
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -123,6 +175,10 @@ type TDocAction =
   | TAddShapeAction
   | TAddImageAction
   | TDeleteObjectAction
+  | TSetObjectColor
+  | TToggleFormatting
+  | TSetFontFamily
+  | TSetFontSize
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -249,6 +305,70 @@ const createDocActions = {
       type: DocActions.DELETE_OBJECT_ACTION,
       payload: {
         objectId: objectID,
+      },
+    }
+  },
+  setObjectColorAction: (
+    objectID: number,
+    color: string,
+    objectPart: ObjectPartVariation,
+    type: ObjectType,
+  ): TDocAction => {
+    return {
+      type: DocActions.SET_OBJECT_COLOR,
+      payload: {
+        objectId: objectID,
+        color: color,
+        objectPart: objectPart,
+        type: type,
+      },
+    }
+  },
+  toggleFormattingAction: (
+    objectID: number,
+    slideID: number,
+    variation: FormatVariation,
+    type: ObjectType,
+  ): TDocAction => {
+    return {
+      type: DocActions.TOGGLE_FORMATTING,
+      payload: {
+        objectId: objectID,
+        slideID: slideID,
+        variation: variation,
+        type: type,
+      },
+    }
+  },
+  setFontFamilyAction: (
+    objectID: number,
+    slideID: number,
+    fontFamily: string,
+    type: ObjectType,
+  ): TDocAction => {
+    return {
+      type: DocActions.SET_FONT_FAMILY,
+      payload: {
+        objectId: objectID,
+        slideID: slideID,
+        fontFamily: fontFamily,
+        type: type,
+      },
+    }
+  },
+  setFontSizeAction: (
+    objectID: number,
+    slideID: number,
+    size: number,
+    type: ObjectType,
+  ): TDocAction => {
+    return {
+      type: DocActions.SET_FONT_FAMILY,
+      payload: {
+        objectId: objectID,
+        slideID: slideID,
+        fontSize: size,
+        type: type,
       },
     }
   },

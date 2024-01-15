@@ -5,10 +5,15 @@ import { imageToBase64 } from '@/services/image_encode.service'
 import { saveJsonObjToFile } from '@/services/save_doc.service'
 import { readJSONFile } from '@/services/upload_doc.service'
 import { brandStr } from '@/store/initial_states.data'
-import { AppMode, ShapeVariation, TDocument } from '@/types/type'
+import {
+  AppMode,
+  FormatVariation,
+  ShapeVariation,
+  TDocument,
+} from '@/types/type'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
-// По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
+// По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова ее же по клику
 export const useButtonAction = (
   btnId: string,
   menuCallback: Dispatch<SetStateAction<boolean>> | null = null,
@@ -23,6 +28,8 @@ export const useButtonAction = (
     addShapeAction,
     addImageAction,
     setAppModeAction,
+    setObjectColorAction,
+    toggleFormattingAction,
   } = useActions()
   const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
@@ -89,8 +96,15 @@ export const useButtonAction = (
     }
   }
 
+  const toggleFormatParameterByName = (formatName: FormatVariation) => {
+    console.log(globalSlideId)
+    generateIdAction('objectId')
+    console.log(globalSlideId)
+    toggleFormattingAction(globalObjectId, activeSlideId, formatName)
+  }
+
   useEffect(() => {
-    let onClick = (e: Event) => alert(`Возникли проблемы с кнопкой ${btnId}`)
+    let onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
     switch (btnId) {
       case 'log_btn':
         onClick = () => console.log(name, size, slides)
@@ -141,6 +155,29 @@ export const useButtonAction = (
         break
       case 'new_image_btn':
         onClick = loadImageFn
+        break
+      case 'italic_btn':
+        onClick = () => toggleFormatParameterByName(FormatVariation.Italic)
+        break
+      case 'bold_btn':
+        onClick = () => toggleFormatParameterByName(FormatVariation.Bold)
+        break
+      case 'underline_btn':
+        onClick = () => toggleFormatParameterByName(FormatVariation.Underline)
+        break
+      case 'strikethrough_btn':
+        onClick = () =>
+          toggleFormatParameterByName(FormatVariation.Strikethrough)
+        break
+      case 'text_color_btn':
+        onClick = () => changeTextColor()
+        break
+      case 'size_btn':
+        onClick = () => changeTextSize()
+        break
+
+      default:
+        onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
         break
     }
     buttonRef.current?.addEventListener('click', onClick)
