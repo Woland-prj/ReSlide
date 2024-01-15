@@ -10,17 +10,25 @@ interface KeyboardEvent {
 }
 
 export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
-  const { activeSlideId, selectedObjectsIds } = useEditor()
+  const { activeSlideId, selectedObjectsIds, isShiftPressed } = useEditor()
   const { slides } = useDoc()
   const {
     deleteObjectAction,
     removeSelectedObjectIdAction,
     setShiftPressedAction,
+    deleteSlideAction,
+    setActiveSlideAction,
   } = useActions()
   useEffect(() => {
     const keyDownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Delete') {
         const activeIndex = getIndexById<TSlide>(slides, activeSlideId)
+        if (isShiftPressed) {
+          deleteSlideAction(activeSlideId)
+          setActiveSlideAction(
+            activeIndex && activeIndex > 0 ? slides[activeIndex - 1].id : -1,
+          )
+        }
         slides[activeIndex!].objects.forEach(object => {
           console.log(object)
           if (selectedObjectsIds.find(id => id === object.id) != undefined)
@@ -48,5 +56,5 @@ export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
         inActiveAllStatesHandler,
       )
     }
-  }, [slides, activeSlideId, selectedObjectsIds])
+  }, [slides, activeSlideId, selectedObjectsIds, isShiftPressed])
 }
