@@ -129,7 +129,6 @@ type TSetObjectColor = {
     objectId: number
     color: string
     objectPart: ObjectPartVariation
-    type: ObjectType
   }
 }
 
@@ -138,7 +137,6 @@ type TSetFontColor = {
   payload: {
     objectId: number
     fontColor: string
-    type: ObjectType
   }
 }
 
@@ -146,9 +144,7 @@ type TToggleFormatting = {
   type: DocActions.TOGGLE_FORMATTING
   payload: {
     objectId: number
-    slideID: number
     variation: FormatVariation
-    type: ObjectType
   }
 }
 
@@ -156,9 +152,7 @@ type TSetFontFamily = {
   type: DocActions.SET_FONT_FAMILY
   payload: {
     objectId: number
-    slideID: number
     fontFamily: string
-    type: ObjectType
   }
 }
 
@@ -166,9 +160,7 @@ type TSetFontSize = {
   type: DocActions.SET_FONT_SIZE
   payload: {
     objectId: number
-    slideID: number
     fontSize: number
-    type: ObjectType
   }
 }
 
@@ -323,7 +315,6 @@ const createDocActions = {
     objectID: number,
     color: string,
     objectPart: ObjectPartVariation,
-    type: ObjectType,
   ): TDocAction => {
     return {
       type: DocActions.SET_OBJECT_COLOR,
@@ -331,72 +322,48 @@ const createDocActions = {
         objectId: objectID,
         color: color,
         objectPart: objectPart,
-        type: type,
       },
     }
   },
   toggleFormattingAction: (
     objectID: number,
-    slideID: number,
     variation: FormatVariation,
-    type: ObjectType,
   ): TDocAction => {
     return {
       type: DocActions.TOGGLE_FORMATTING,
       payload: {
         objectId: objectID,
-        slideID: slideID,
         variation: variation,
-        type: type,
       },
     }
   },
-  setFontFamilyAction: (
-    objectID: number,
-    slideID: number,
-    fontFamily: string,
-    type: ObjectType,
-  ): TDocAction => {
+  setFontFamilyAction: (objectID: number, fontFamily: string): TDocAction => {
     return {
       type: DocActions.SET_FONT_FAMILY,
       payload: {
         objectId: objectID,
-        slideID: slideID,
         fontFamily: fontFamily,
-        type: type,
       },
     }
   },
-  setFontSizeAction: (
-    objectID: number,
-    slideID: number,
-    size: number,
-    type: ObjectType,
-  ): TDocAction => {
+  setFontSizeAction: (objectID: number, size: number): TDocAction => {
     return {
       type: DocActions.SET_FONT_SIZE,
       payload: {
         objectId: objectID,
-        slideID: slideID,
         fontSize: size,
-        type: type,
       },
     }
   },
-  // setFontColorAction: (
-  //   objectID: number,
-  //   color: string,
-  //   type: ObjectType,
-  // ): TDocAction => {
-  //   return {
-  //     type: DocActions.SET_FONT_COLOR,
-  //     payload: {
-  //       objectId: objectID,
-  //       fontColor: color,
-  //       type: type,
-  //     },
-  //   }
-  // },
+  setFontColorAction: (objectID: number, color: string): TDocAction => {
+    return {
+      type: DocActions.SET_FONT_COLOR,
+      payload: {
+        objectId: objectID,
+        fontColor: color,
+      },
+    }
+  },
 }
 
 export { DocActions, createDocActions }

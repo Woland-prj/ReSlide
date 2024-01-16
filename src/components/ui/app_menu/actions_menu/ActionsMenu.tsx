@@ -8,7 +8,6 @@ import { FC } from 'react'
 import ActionsBlock from './ActionsBlock'
 import styles from './ActionsMenu.module.css'
 import { ObjectType } from '@/types/type'
-import { EnumDeclaration } from 'typescript'
 
 const ActionsMenu: FC = () => {
   const getSelectedObjectType = (): ObjectType => {

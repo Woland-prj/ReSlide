@@ -238,7 +238,7 @@ const docReducer = (
       const newState = { ...state }
       const object = newState.slides[slideIndex].objects[objectIndex]
       if (object.type == ObjectType.Text) {
-        object.formatting.fontColor = action.payload.fontColor
+        object.formatting.color = action.payload.fontColor
       }
       return newState
     }

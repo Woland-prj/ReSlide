@@ -8,6 +8,8 @@ import { brandStr } from '@/store/initial_states.data'
 import {
   AppMode,
   FormatVariation,
+  ObjectPartVariation,
+  ObjectType,
   ShapeVariation,
   TDocument,
 } from '@/types/type'
@@ -29,7 +31,10 @@ export const useButtonAction = (
     addImageAction,
     setAppModeAction,
     setObjectColorAction,
+    setFontFamilyAction,
+    setFontSizeAction,
     toggleFormattingAction,
+    setFontColorAction,
   } = useActions()
   const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
@@ -100,7 +105,37 @@ export const useButtonAction = (
     console.log(globalSlideId)
     generateIdAction('objectId')
     console.log(globalSlideId)
-    toggleFormattingAction(globalObjectId, activeSlideId, formatName)
+    toggleFormattingAction(globalObjectId, formatName)
+  }
+
+  const changeTextSize = (size: number) => {
+    console.log(globalSlideId)
+    generateIdAction('objectId')
+    console.log(globalSlideId)
+    setFontSizeAction(globalObjectId, size)
+  }
+
+  const changeTextFontFamily = (fontFamily: string) => {
+    console.log(globalSlideId)
+    generateIdAction('objectId')
+    console.log(globalSlideId)
+    setFontFamilyAction(globalObjectId, fontFamily)
+  }
+  const changeTextColor = (fontColor: string) => {
+    console.log(globalSlideId)
+    generateIdAction('objectId')
+    console.log(globalSlideId)
+    setFontColorAction(globalObjectId, fontColor)
+  }
+
+  const changeObjectColor = (
+    color: string,
+    objectPart: ObjectPartVariation,
+  ) => {
+    console.log(globalSlideId)
+    generateIdAction('objectId')
+    console.log(globalSlideId)
+    setObjectColorAction(globalObjectId, color, objectPart)
   }
 
   useEffect(() => {
@@ -175,7 +210,9 @@ export const useButtonAction = (
       case 'size_btn':
         onClick = () => changeTextSize()
         break
-
+      case 'vector_stroke_color_btn':
+        onClick = () => changeObjectColor(color)
+      break
       default:
         onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
         break

@@ -47,7 +47,7 @@ export type TFormatting = {
   variation: TFormattingVariation
   fontFamily: string
   fontSize: number
-  fontColor: string
+  color: string
 }
 
 export const enum ShapeVariation {
