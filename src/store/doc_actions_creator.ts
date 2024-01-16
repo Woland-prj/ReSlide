@@ -24,6 +24,8 @@ enum DocActions {
   SET_OBJECT_COLOR = 'SET_OBJECT_COLOR',
   TOGGLE_FORMATTING = 'TOGGLE_FORMATTING',
   SET_FONT_FAMILY = 'SET_FONT_FAMILY',
+  SET_FONT_SIZE = 'SET_FONT_SIZE',
+  SET_FONT_COLOR = 'SET_FONT_COLOR',
 }
 
 type TChangeDocNameAction = {
@@ -131,6 +133,15 @@ type TSetObjectColor = {
   }
 }
 
+type TSetFontColor = {
+  type: DocActions.SET_FONT_COLOR
+  payload: {
+    objectId: number
+    fontColor: string
+    type: ObjectType
+  }
+}
+
 type TToggleFormatting = {
   type: DocActions.TOGGLE_FORMATTING
   payload: {
@@ -152,7 +163,7 @@ type TSetFontFamily = {
 }
 
 type TSetFontSize = {
-  type: DocActions.SET_FONT_FAMILY
+  type: DocActions.SET_FONT_SIZE
   payload: {
     objectId: number
     slideID: number
@@ -178,6 +189,7 @@ type TDocAction =
   | TToggleFormatting
   | TSetFontFamily
   | TSetFontSize
+  | TSetFontColor
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -362,7 +374,7 @@ const createDocActions = {
     type: ObjectType,
   ): TDocAction => {
     return {
-      type: DocActions.SET_FONT_FAMILY,
+      type: DocActions.SET_FONT_SIZE,
       payload: {
         objectId: objectID,
         slideID: slideID,
@@ -371,6 +383,20 @@ const createDocActions = {
       },
     }
   },
+  // setFontColorAction: (
+  //   objectID: number,
+  //   color: string,
+  //   type: ObjectType,
+  // ): TDocAction => {
+  //   return {
+  //     type: DocActions.SET_FONT_COLOR,
+  //     payload: {
+  //       objectId: objectID,
+  //       fontColor: color,
+  //       type: type,
+  //     },
+  //   }
+  // },
 }
 
 export { DocActions, createDocActions }

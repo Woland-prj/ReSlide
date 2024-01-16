@@ -1,5 +1,12 @@
 import { DocActions, TDocAction } from '@/store/doc_actions_creator'
-import { ObjectType, TDocument, TSize, TSlide } from '@/types/type'
+import {
+  FormatVariation,
+  ObjectPartVariation,
+  ObjectType,
+  TDocument,
+  TSize,
+  TSlide,
+} from '@/types/type'
 import {
   docInitialState,
   initImg,
@@ -186,16 +193,110 @@ const docReducer = (
         state,
       )
       const newState = { ...state }
-      const obj = newState.slides[slideIndex].objects[objectIndex]
-      if (obj.type === ObjectType.Text) {
-        obj.value
+      const object = newState.slides[slideIndex].objects[objectIndex]
+      if (object.type === ObjectType.Text) {
+        object.formatting.fontFamily = action.payload.fontFamily
       }
       return newState
     }
+    case DocActions.SET_FONT_SIZE: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      const object = newState.slides[slideIndex].objects[objectIndex]
+      if (object.type == ObjectType.Text)
+        if (action.payload.fontSize > 0)
+          object.formatting.fontSize = Math.ceil(action.payload.fontSize)
+        else object.formatting.fontSize = 1
+      return newState
+    }
     case DocActions.SET_OBJECT_COLOR: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      const object = newState.slides[slideIndex].objects[objectIndex]
+      if (object.type == ObjectType.Vector) {
+        switch (action.payload.objectPart) {
+          case ObjectPartVariation.Background:
+            object.fillColor = action.payload.color
+            break
+          case ObjectPartVariation.Stroke:
+            object.strokeColor = action.payload.color
+        }
+      }
+      return newState
+    }
+    case DocActions.SET_FONT_COLOR: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      const object = newState.slides[slideIndex].objects[objectIndex]
+      if (object.type == ObjectType.Text) {
+        object.formatting.fontColor = action.payload.fontColor
+      }
       return newState
     }
     case DocActions.TOGGLE_FORMATTING: {
+      const { slideIndex, objectIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      const object = newState.slides[slideIndex].objects[objectIndex]
+      if (object.type == ObjectType.Text) {
+        switch (action.payload.variation) {
+          case FormatVariation.Bold:
+            if (object.formatting.variation.bold == 'normal')
+              object.formatting.variation.bold = 'bold'
+            else object.formatting.variation.bold = 'normal'
+            break
+          case FormatVariation.Italic:
+            if (object.formatting.variation.italic == 'normal')
+              object.formatting.variation.italic = 'italic'
+            else object.formatting.variation.italic = 'normal'
+            break
+          case FormatVariation.Strikethrough:
+            switch (object.formatting.variation.decorationLine) {
+              case 'none':
+                object.formatting.variation.decorationLine = 'line-through'
+                break
+              case 'underline':
+                object.formatting.variation.decorationLine =
+                  'underline line-through'
+                break
+              case 'line-through':
+                object.formatting.variation.decorationLine = 'none'
+                break
+              case 'underline line-through':
+                object.formatting.variation.decorationLine = 'underline'
+                break
+            }
+            break
+          case FormatVariation.Underline:
+            switch (object.formatting.variation.decorationLine) {
+              case 'none':
+                object.formatting.variation.decorationLine = 'underline'
+                break
+              case 'underline':
+                object.formatting.variation.decorationLine = 'none'
+                break
+              case 'line-through':
+                object.formatting.variation.decorationLine =
+                  'underline line-through'
+                break
+              case 'underline line-through':
+                object.formatting.variation.decorationLine = 'line-through'
+                break
+            }
+            break
+        }
+      }
       return newState
     }
     default:
