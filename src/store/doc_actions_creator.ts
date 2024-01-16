@@ -7,7 +7,6 @@ import {
   TDocument,
   TSize,
 } from '@/types/type'
-import { ObjectType } from 'typescript'
 
 enum DocActions {
   CHANGE_DOC_NAME_ACTION = 'CHANGE_DOC_NAME_ACTION',

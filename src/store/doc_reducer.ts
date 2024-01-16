@@ -186,9 +186,9 @@ const docReducer = (
         state,
       )
       const newState = { ...state }
-      const object = newState.slides[slideIndex].objects[objectIndex]
-      if (object.type === ObjectType.Text) {
-        object.value
+      const obj = newState.slides[slideIndex].objects[objectIndex]
+      if (obj.type === ObjectType.Text) {
+        obj.value
       }
       return newState
     }
