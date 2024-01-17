@@ -32,8 +32,7 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({ type, id }) => {
   return (
     <div>
       <input
-        type='color'
-        name='message'
+        type='text'
         ref={colorInputRef}
         value={colorValue}
         onBlur={saveColor}
