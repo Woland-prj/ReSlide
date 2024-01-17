@@ -7,21 +7,29 @@ import {
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
 import { ObjectType } from '@/types/type'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import ActionsBlock from './ActionsBlock'
 import styles from './ActionsMenu.module.css'
 
 const ActionsMenu: FC = () => {
-  const { selectedObjectsIds, activeSlideId } = useEditor()
-  const { slides } = useDoc()
-
+  const { activeSlideId, selectedObjectsIds } = useEditor()
+  const doc = useDoc()
+  const [selObjType, setSelObjType] = useState<ObjectType | undefined>(
+    undefined,
+  )
+  useEffect(() => {
+    const object = doc.slides[activeSlideId].objects[selectedObjectsIds[0]]
+    if (selectedObjectsIds.length == 1) {
+      setSelObjType(object.type)
+    }
+  }, [doc.slides[activeSlideId].objects[selectedObjectsIds[0]]])
   return (
     <div className={styles.actions_menu}>
       <ActionsBlock actions={baseActions} />
-      {(getSelectedObjectType() == ObjectType.Text && (
+      {(selObjType == ObjectType.Text && (
         <ActionsBlock actions={textActions} />
       )) ||
-        (getSelectedObjectType() == ObjectType.Vector && (
+        (selObjType == ObjectType.Vector && (
           <ActionsBlock actions={vectorActions} />
         ))}
       <ActionsBlock actions={devActions} />

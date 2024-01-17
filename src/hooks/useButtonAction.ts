@@ -24,7 +24,6 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 export const useButtonAction = (
   btnId: string,
   menuCallback: Dispatch<SetStateAction<boolean>> | null = null,
-  specialSubMenuCallback: Dispatch<SetStateAction<string>> | null = null,
 ) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const { name, size, slides } = useDoc()
