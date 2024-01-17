@@ -51,7 +51,7 @@ export const TextInputButton: FC<TextInputButtonProps> = ({
         placeholder={placeholder}
         value={textValue}
         onBlur={saveText}
-        onChange={() => setTextValue}
+        onChange={e => setTextValue(e.target.value)}
       />
     </div>
   )

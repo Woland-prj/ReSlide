@@ -30,7 +30,7 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({ id }) => {
     if (re.test(colorValue)) {
       slides[activeSlideId].objects.forEach(obj => {
         if (
-          selectedObjectsIds.find(selId => selId === obj.id) != undefined &&
+          selectedObjectsIds.find(selId => selId === obj.id) != null &&
           obj.type === ObjectType.Vector
         ) {
           let type: ObjectPartVariation = ObjectPartVariation.Background

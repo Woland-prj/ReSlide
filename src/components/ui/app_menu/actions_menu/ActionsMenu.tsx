@@ -14,13 +14,11 @@ import { useDoc } from '@/hooks/useDoc'
 const ActionsMenu: FC = () => {
   const { activeSlideId, selectedObjectsIds } = useEditor()
   const doc = useDoc()
-  const [selObjType, setSelObjType] = useState<ObjectType | undefined>(
-    undefined,
-  )
+  const [selObjType, setSelObjType] = useState<ObjectType | null>(null)
   useEffect(() => {
     const object = doc.slides[activeSlideId].objects[selectedObjectsIds[0]]
     if (selectedObjectsIds.length == 1) setSelObjType(object.type)
-    else if (selectedObjectsIds.length == 0) setSelObjType(undefined)
+    else if (selectedObjectsIds.length == 0) setSelObjType(null)
   }, [selectedObjectsIds])
   return (
     <div className={styles.actions_menu}>
