@@ -4,16 +4,17 @@ import {
   textActions,
   vectorActions,
 } from '@/data/actions_menu_buttons.data'
+import { useDoc } from '@/hooks/useDoc'
+import { useEditor } from '@/hooks/useEditor'
 import { ObjectType } from '@/types/type'
 import { FC } from 'react'
 import ActionsBlock from './ActionsBlock'
 import styles from './ActionsMenu.module.css'
 
 const ActionsMenu: FC = () => {
-  const getSelectedObjectType = (): ObjectType => {
-    // Функция-заглушка на время отсутствующей работающей версии
-    return ObjectType.Vector
-  }
+  const { selectedObjectsIds, activeSlideId } = useEditor()
+  const { slides } = useDoc()
+
   return (
     <div className={styles.actions_menu}>
       <ActionsBlock actions={baseActions} />
@@ -29,3 +30,11 @@ const ActionsMenu: FC = () => {
 }
 
 export default ActionsMenu
+
+//   const getSelectedObjectType = (): ObjectType | null=> {
+//   let isSame: boolean = false
+//   selectedObjectsIds.forEach(id => {
+//     if (slides[])
+//   })
+//   return
+// }
