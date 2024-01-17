@@ -17,6 +17,15 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({ id }) => {
   const { selectedObjectsIds, activeSlideId } = useEditor()
   const { slides } = useDoc()
 
+  // useEffect(() => {
+  //   const enterHandler = (e: KeyboardEvent) => {
+  //     if (e.code === 'Enter' && colorInputRef.current != null)
+  //       colorInputRef.current.onblur()
+  //   }
+  //   document.addEventListener('keydown', enterHandler)
+  //   return () => document.removeEventListener('keydown', enterHandler)
+  // }, [selectedObjectsIds])
+
   const saveColor = () => {
     if (re.test(colorValue)) {
       slides[activeSlideId].objects.forEach(obj => {
