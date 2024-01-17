@@ -41,7 +41,7 @@ export type TFormattingVariation = {
     | 'underline'
     | 'line-through'
     | 'underline line-through'
-} // Раньше тут был boolean
+}
 
 export type TFormatting = {
   variation: TFormattingVariation
@@ -50,16 +50,28 @@ export type TFormatting = {
   color: string
 }
 
-export type TText = TSlideObject & {
-  type: ObjectType.Text
-  value: string
-  formatting: TFormatting
-}
-
 export const enum ShapeVariation {
   Rectangle = 'rectangle',
   Triangle = 'triangle',
   Ellipse = 'ellipse',
+}
+
+export const enum FormatVariation {
+  Italic = 'italic',
+  Bold = 'bold',
+  Underline = 'underline',
+  Strikethrough = 'strikethrough',
+}
+
+export const enum ObjectPartVariation {
+  Background = 'background',
+  Stroke = 'stroke',
+}
+
+export type TText = TSlideObject & {
+  type: ObjectType.Text
+  value: string
+  formatting: TFormatting
 }
 
 export type TVector = TSlideObject & {
@@ -79,7 +91,7 @@ export type TImage = TSlideObject & {
 export type TSlide = {
   id: number
   background: TSlideBackground
-  objects: Array<TText | TVector | TImage>
+  objects: Array<TImage | TText | TVector>
   isSelected: boolean
 }
 

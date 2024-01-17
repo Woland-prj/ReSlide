@@ -15,7 +15,7 @@
 }
 
 .context_menu {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -25,7 +25,7 @@
 }
 
 .context_menu_castile {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 1;

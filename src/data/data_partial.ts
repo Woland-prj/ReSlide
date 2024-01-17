@@ -6,7 +6,7 @@ import {
   TSlide,
 } from '../types/type'
 
-// export const text: TText = {
+// export const text1: TText = {
 //   id: 1,
 //   type: ObjectType.Text,
 //   size: {
@@ -22,9 +22,9 @@ import {
 //   value: 'Text',
 //   formatting: {
 //     variation: {
-//       italic: true,
-//       bold: true,
-//       underline: true,
+//       italic: 'normal',
+//       bold: 'bold',
+//       underline: 'none',
 //     },
 //     fontSize: 23,
 //     fontFamily: 'FontName',
@@ -56,7 +56,9 @@ export const slide1: TSlide = {
     variation: SlideBgType.Color,
     value: '#FFFFFF',
   },
-  objects: [image /*, text*/],
+  objects: [
+    /*text1*/
+  ],
   isSelected: true,
 }
 
@@ -83,7 +85,7 @@ export const slide3: TSlide = {
 }
 
 export const doc: TDocument = {
-  name: 'Test presentation',
+  name: 'ReSlide presentation',
   size: {
     width: 960,
     height: 540,

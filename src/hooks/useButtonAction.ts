@@ -10,10 +10,17 @@ import {
   docInitialState,
   rewriteConfirmQuestion,
 } from '@/store/initial_states.data'
-import { AppMode, ShapeVariation, TDocument, TSlide } from '@/types/type'
+import {
+  AppMode,
+  FormatVariation,
+  ObjectPartVariation,
+  ShapeVariation,
+  TDocument,
+  TSlide,
+} from '@/types/type'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
-// По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова по клику
+// По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова ее же по клику
 export const useButtonAction = (
   btnId: string,
   menuCallback: Dispatch<SetStateAction<boolean>> | null = null,
@@ -28,6 +35,11 @@ export const useButtonAction = (
     addShapeAction,
     addImageAction,
     setAppModeAction,
+    setObjectColorAction,
+    setFontFamilyAction,
+    setFontSizeAction,
+    toggleFormattingAction,
+    setFontColorAction,
     duplicateSlideAction,
     deleteSlideAction,
     setActiveSlideAction,
@@ -101,15 +113,40 @@ export const useButtonAction = (
 
   const generateFnByShape = (shape: ShapeVariation) => {
     return () => {
-      console.log(globalSlideId)
       generateIdAction('objectId')
-      console.log(globalSlideId)
       addShapeAction(globalObjectId, activeSlideId, shape)
     }
   }
 
+  const toggleFormatParameterByName = (formatName: FormatVariation) => {
+    generateIdAction('objectId')
+    toggleFormattingAction(globalObjectId, formatName)
+  }
+
+  const changeTextSize = (size: number) => {
+    generateIdAction('objectId')
+    setFontSizeAction(globalObjectId, size)
+  }
+
+  const changeTextFontFamily = (fontFamily: string) => {
+    generateIdAction('objectId')
+    setFontFamilyAction(globalObjectId, fontFamily)
+  }
+  const changeTextColor = (fontColor: string) => {
+    generateIdAction('objectId')
+    setFontColorAction(globalObjectId, fontColor)
+  }
+
+  const changeObjectColor = (
+    color: string,
+    objectPart: ObjectPartVariation,
+  ) => {
+    generateIdAction('objectId')
+    setObjectColorAction(globalObjectId, color, objectPart)
+  }
+
   useEffect(() => {
-    let onClick = (e: Event) => alert(`Возникли проблемы с кнопкой ${btnId}`)
+    let onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
     switch (btnId) {
       case 'log_btn':
         onClick = () => console.log(name, size, slides)
@@ -168,6 +205,38 @@ export const useButtonAction = (
       case 'new_image_btn':
         onClick = loadImageFn
         break
+      case 'italic_btn':
+        onClick = () => toggleFormatParameterByName(FormatVariation.Italic)
+        break
+      case 'bold_btn':
+        onClick = () => toggleFormatParameterByName(FormatVariation.Bold)
+        break
+      case 'underline_btn':
+        onClick = () => toggleFormatParameterByName(FormatVariation.Underline)
+        break
+      case 'strikethrough_btn':
+        onClick = () =>
+          toggleFormatParameterByName(FormatVariation.Strikethrough)
+        break
+      // case 'text_color_btn':
+      //   onClick = () => {
+      //     changeTextColor(fontColor)}
+      // break
+      // case 'text_color_btn':
+      //   onClick = () => changeTextColor(fontColor)
+      //   break
+      // case 'size_btn':
+      //   onClick = () => changeTextSize(size)
+      //   break
+      // case 'font_family_btn':
+      //   onClick = () => changeTextFontFamily(fontFamily)
+      //   break
+      // case 'vector_stroke_color_btn':
+      //   onClick = () => changeObjectColor(color, ObjectPartVariation.Stroke)
+      //   break
+      // case 'vector_background_color_btn':
+      //   onClick = () => changeObjectColor(color, ObjectPartVariation.Background)
+      //   break
       case 'duplicate_slide_btn':
         onClick = () => {
           generateIdAction('slideId')
@@ -197,6 +266,8 @@ export const useButtonAction = (
           document.documentElement.requestFullscreen()
         }
         break
+      default:
+        onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
     }
     buttonRef.current?.addEventListener('click', onClick)
     return () => buttonRef.current?.removeEventListener('click', onClick)

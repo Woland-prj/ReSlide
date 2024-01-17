@@ -31,26 +31,20 @@ export const useObjectsStyles = (
     }
     case ObjectType.Vector: {
       const params: unknown[] = [...baseParams]
-      const styleFn = useCallback(
-        (object: TVector): React.CSSProperties => {
-          return {
-            ...baseStyles,
-          }
-        },
-        [...params],
-      )
+      const styleFn = useCallback((): React.CSSProperties => {
+        return {
+          ...baseStyles,
+        }
+      }, [...params])
       return useStyles<TVector>(params, object, styleFn)
     }
     case ObjectType.Image: {
       const params: unknown[] = [...baseParams]
-      const styleFn = useCallback(
-        (object: TImage): React.CSSProperties => {
-          return {
-            ...baseStyles,
-          }
-        },
-        [...params],
-      )
+      const styleFn = useCallback((): React.CSSProperties => {
+        return {
+          ...baseStyles,
+        }
+      }, [...params])
       return useStyles<TImage>(params, object, styleFn)
     }
   }

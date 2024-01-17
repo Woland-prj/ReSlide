@@ -46,9 +46,11 @@ export const useGlobalHandlers = (layoutRef: RefObject<HTMLDivElement>) => {
       if (e.key === 'Shift') setShiftPressedAction(false)
     }
     const inActiveAllStatesHandler = () => {
-      selectedObjectsIds.forEach(id => {
-        removeSelectedObjectIdAction(id)
-      })
+      setTimeout(() => {
+        selectedObjectsIds.forEach(id => {
+          removeSelectedObjectIdAction(id)
+        })
+      }, 100)
     }
     document.addEventListener('keydown', keyDownHandler)
     document.addEventListener('keyup', keyUpHandler)

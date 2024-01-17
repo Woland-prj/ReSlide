@@ -29,18 +29,13 @@ type TSlideProps = {
 const Object: FC<TObjectProps> = ({ object, editable }) => {
   return (
     <SelectionBox editable={editable} obj={object}>
-      {(() => {
-        switch (object.type) {
-          case ObjectType.Text:
-            return <TextField text={object} />
-          case ObjectType.Image:
-            return <Image image={object} editable={editable} />
-          case ObjectType.Vector:
-            return <Vector vector={object} editable={editable} />
-          default:
-            return <div>Incorrect object</div>
-        }
-      })()}
+      {(object.type == ObjectType.Text && <TextField text={object} />) ||
+        (object.type == ObjectType.Image && (
+          <Image image={object} editable={editable} />
+        )) ||
+        (object.type == ObjectType.Vector && (
+          <Vector vector={object} editable={editable} />
+        )) || <div>Incorrect object</div>}
     </SelectionBox>
   )
 }
@@ -67,19 +62,17 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
   return (
     <div className={styles.slide} style={chStyles} ref={slRef}>
       {slide.objects.map(object => (
-        <Object
-          key={object.id}
-          object={object}
-          slideRef={slRef}
-          editable={editable}
-        />
+        <>
+          <Object
+            key={object.id}
+            object={object}
+            slideRef={slRef}
+            editable={editable}
+          />
+        </>
       ))}
     </div>
   )
 }
 
 export default Slide
-
-// TODO: editable - Nikita
-// actions_menu 1) картинки, 2) размапить
-// CSS Layout
