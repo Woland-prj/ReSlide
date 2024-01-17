@@ -10,12 +10,10 @@ import underline from '@/static/images/formatting_underline.svg'
 import image from '@/static/images/image.svg'
 import log from '@/static/images/log.svg'
 import new_slide from '@/static/images/new_slide.svg'
-import redo from '@/static/images/redo.svg'
 import shape from '@/static/images/shape.svg'
 import slideshow from '@/static/images/slideshow.svg'
 import vector_stroke_color from '@/static/images/stroke_color.svg'
 import text from '@/static/images/text.svg'
-import undo from '@/static/images/undo.svg'
 import { ButtonType, TActionsButton } from '@/types/action_buttons.type'
 
 export const baseActions: TActionsButton[] = [
@@ -30,20 +28,6 @@ export const baseActions: TActionsButton[] = [
     id: 'duplicate_slide_btn',
     name: 'Дублировать слайд',
     iconUrl: duplicate,
-    contextMenu: null,
-    type: ButtonType.IMAGE_BUTTON,
-  },
-  {
-    id: 'undo_btn',
-    name: 'Отменить действие',
-    iconUrl: undo,
-    contextMenu: null,
-    type: ButtonType.IMAGE_BUTTON,
-  },
-  {
-    id: 'redo_btn',
-    name: 'Повторить действие',
-    iconUrl: redo,
     contextMenu: null,
     type: ButtonType.IMAGE_BUTTON,
   },
