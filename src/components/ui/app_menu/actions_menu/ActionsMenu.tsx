@@ -4,12 +4,12 @@ import {
   textActions,
   vectorActions,
 } from '@/data/actions_menu_buttons.data'
+import { useDoc } from '@/hooks/useDoc'
+import { useEditor } from '@/hooks/useEditor'
 import { ObjectType } from '@/types/type'
 import { FC, useEffect, useState } from 'react'
 import ActionsBlock from './ActionsBlock'
 import styles from './ActionsMenu.module.css'
-import { useEditor } from '@/hooks/useEditor'
-import { useDoc } from '@/hooks/useDoc'
 
 const ActionsMenu: FC = () => {
   const { activeSlideId, selectedObjectsIds } = useEditor()
@@ -35,3 +35,11 @@ const ActionsMenu: FC = () => {
 }
 
 export default ActionsMenu
+
+//   const getSelectedObjectType = (): ObjectType | null=> {
+//   let isSame: boolean = false
+//   selectedObjectsIds.forEach(id => {
+//     if (slides[])
+//   })
+//   return
+// }
