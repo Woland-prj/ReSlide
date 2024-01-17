@@ -73,7 +73,3 @@ const Slide: FC<TSlideProps> = ({ slide, editable }) => {
 }
 
 export default Slide
-
-// TODO: editable - Nikita
-// actions_menu 1) картинки, 2) размапить
-// CSS Layout

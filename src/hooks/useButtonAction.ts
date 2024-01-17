@@ -9,7 +9,6 @@ import {
   AppMode,
   FormatVariation,
   ObjectPartVariation,
-  ObjectType,
   ShapeVariation,
   TDocument,
 } from '@/types/type'
@@ -205,14 +204,20 @@ export const useButtonAction = (
           toggleFormatParameterByName(FormatVariation.Strikethrough)
         break
       case 'text_color_btn':
-        onClick = () => changeTextColor()
+        onClick = () => changeTextColor(fontColor)
         break
       case 'size_btn':
-        onClick = () => changeTextSize()
+        onClick = () => changeTextSize(size)
+        break
+      case 'font_family_btn':
+        onClick = () => changeTextFontFamily(fontFamily)
         break
       case 'vector_stroke_color_btn':
-        onClick = () => changeObjectColor(color)
-      break
+        onClick = () => changeObjectColor(color, ObjectPartVariation.Stroke)
+        break
+      case 'vector_background_color_btn':
+        onClick = () => changeObjectColor(color, ObjectPartVariation.Background)
+        break
       default:
         onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
         break

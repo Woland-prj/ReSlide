@@ -20,9 +20,6 @@ const ActionsMenu: FC = () => {
       {(getSelectedObjectType() == ObjectType.Text && (
         <ActionsBlock actions={textActions} />
       )) ||
-        // (getSelectedObjectType() == ObjectType.Image && (
-        //   <ActionsBlock actions={imageActions} />
-        // )) ||
         (getSelectedObjectType() == ObjectType.Vector && (
           <ActionsBlock actions={vectorActions} />
         ))}
