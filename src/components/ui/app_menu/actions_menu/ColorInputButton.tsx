@@ -1,5 +1,4 @@
-import { useButtonAction } from '@/hooks/useButtonAction.1'
-import { FC, useRef } from 'react'
+import { FC } from 'react'
 
 type ColorInputButtonProps = {
   submitValue: string
@@ -10,13 +9,13 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({
   submitValue,
   id,
 }) => {
-  let buttonRef = useRef<HTMLInputElement>(null)
-  buttonRef = useButtonAction(id)
+  // let buttonRef = useRef<HTMLInputElement>(null)
+  // buttonRef = useButtonAction(id)
   return (
     <div>
       <form name='publish'>
         <input type='color' name='message' />
-        <input type='submit' value={submitValue} ref={buttonRef} />
+        <input type='submit' value={submitValue} />
       </form>
     </div>
   )
