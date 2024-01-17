@@ -5,22 +5,31 @@ import {
   vectorActions,
 } from '@/data/actions_menu_buttons.data'
 import { ObjectType } from '@/types/type'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import ActionsBlock from './ActionsBlock'
 import styles from './ActionsMenu.module.css'
+import { useEditor } from '@/hooks/useEditor'
+import { useDoc } from '@/hooks/useDoc'
 
 const ActionsMenu: FC = () => {
-  const getSelectedObjectType = (): ObjectType => {
-    // Функция-заглушка на время отсутствующей работающей версии
-    return ObjectType.Vector
-  }
+  const { activeSlideId, selectedObjectsIds } = useEditor()
+  const doc = useDoc()
+  const [selObjType, setSelObjType] = useState<ObjectType | undefined>(
+    undefined,
+  )
+  useEffect(() => {
+    const object = doc.slides[activeSlideId].objects[selectedObjectsIds[0]]
+    if (selectedObjectsIds.length == 1) {
+      setSelObjType(object.type)
+    }
+  }, [doc.slides[activeSlideId].objects[selectedObjectsIds[0]]])
   return (
     <div className={styles.actions_menu}>
       <ActionsBlock actions={baseActions} />
-      {(getSelectedObjectType() == ObjectType.Text && (
+      {(selObjType == ObjectType.Text && (
         <ActionsBlock actions={textActions} />
       )) ||
-        (getSelectedObjectType() == ObjectType.Vector && (
+        (selObjType == ObjectType.Vector && (
           <ActionsBlock actions={vectorActions} />
         ))}
       <ActionsBlock actions={devActions} />

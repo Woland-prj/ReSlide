@@ -3,6 +3,7 @@ import { FC } from 'react'
 import styles from './ActionsMenu.module.css'
 import { ColorInputButton } from './ColorInputButton'
 import ImageButton from './ImageButton'
+import { TextInputButton } from './TextInputButton'
 
 type TActionsBlockProps = {
   actions: TActionsButton[]
@@ -19,6 +20,12 @@ const SelectNodeComp: FC<TSelectProps> = ({ action }) => {
     )) ||
     (action.type === ButtonType.COLOR_INPUT_BUTTON && (
       <ColorInputButton id={action.id} />
+    )) ||
+    (action.type == ButtonType.SIZE_INPUT_BUTTON && (
+      <TextInputButton
+        type='number'
+        placeholder='Введите размер шрифта'
+      ></TextInputButton>
     )) || <div>lol</div>
   )
 }
