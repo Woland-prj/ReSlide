@@ -24,6 +24,7 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 export const useButtonAction = (
   btnId: string,
   menuCallback: Dispatch<SetStateAction<boolean>> | null = null,
+  specialSubMenuCallback: Dispatch<SetStateAction<string>> | null = null,
 ) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const { name, size, slides } = useDoc()
@@ -113,37 +114,27 @@ export const useButtonAction = (
 
   const generateFnByShape = (shape: ShapeVariation) => {
     return () => {
-      console.log(globalSlideId)
       generateIdAction('objectId')
-      console.log(globalSlideId)
       addShapeAction(globalObjectId, activeSlideId, shape)
     }
   }
 
   const toggleFormatParameterByName = (formatName: FormatVariation) => {
-    console.log(globalSlideId)
     generateIdAction('objectId')
-    console.log(globalSlideId)
     toggleFormattingAction(globalObjectId, formatName)
   }
 
   const changeTextSize = (size: number) => {
-    console.log(globalSlideId)
     generateIdAction('objectId')
-    console.log(globalSlideId)
     setFontSizeAction(globalObjectId, size)
   }
 
   const changeTextFontFamily = (fontFamily: string) => {
-    console.log(globalSlideId)
     generateIdAction('objectId')
-    console.log(globalSlideId)
     setFontFamilyAction(globalObjectId, fontFamily)
   }
   const changeTextColor = (fontColor: string) => {
-    console.log(globalSlideId)
     generateIdAction('objectId')
-    console.log(globalSlideId)
     setFontColorAction(globalObjectId, fontColor)
   }
 
@@ -151,9 +142,7 @@ export const useButtonAction = (
     color: string,
     objectPart: ObjectPartVariation,
   ) => {
-    console.log(globalSlideId)
     generateIdAction('objectId')
-    console.log(globalSlideId)
     setObjectColorAction(globalObjectId, color, objectPart)
   }
 
@@ -230,6 +219,10 @@ export const useButtonAction = (
         onClick = () =>
           toggleFormatParameterByName(FormatVariation.Strikethrough)
         break
+      case 'text_color_btn':
+        onClick = () => {
+          changeTextColor(fontColor)}
+      break
       // case 'text_color_btn':
       //   onClick = () => changeTextColor(fontColor)
       //   break
