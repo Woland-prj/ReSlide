@@ -5,13 +5,12 @@ import { ObjectPartVariation, ObjectType } from '@/types/type'
 import { FC, useRef, useState } from 'react'
 
 type ColorInputButtonProps = {
-  type: ObjectPartVariation
   id: string
 }
 
 const re = new RegExp(/^#[0-9a-fA-F]/)
 
-export const ColorInputButton: FC<ColorInputButtonProps> = ({ type, id }) => {
+export const ColorInputButton: FC<ColorInputButtonProps> = ({ id }) => {
   const colorInputRef = useRef<HTMLInputElement>(null)
   const [colorValue, setColorValue] = useState<string>('#000000')
   const { setObjectColorAction } = useActions()
@@ -24,16 +23,19 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({ type, id }) => {
         if (
           selectedObjectsIds.find(selId => selId === obj.id) != undefined &&
           obj.type === ObjectType.Vector
-        )
+        ) {
+          let type: ObjectPartVariation = ObjectPartVariation.Background
+          if (id === 'a') type = ObjectPartVariation.Background
+          if (id === 'a') type = ObjectPartVariation.Stroke
           setObjectColorAction(obj.id, colorValue, type)
+        }
       })
     }
   }
   return (
     <div>
       <input
-        type='color'
-        name='message'
+        type='text'
         ref={colorInputRef}
         value={colorValue}
         onBlur={saveColor}

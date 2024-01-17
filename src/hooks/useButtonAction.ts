@@ -219,6 +219,10 @@ export const useButtonAction = (
           toggleFormatParameterByName(FormatVariation.Strikethrough)
         break
       // case 'text_color_btn':
+      //   onClick = () => {
+      //     changeTextColor(fontColor)}
+      // break
+      // case 'text_color_btn':
       //   onClick = () => changeTextColor(fontColor)
       //   break
       // case 'size_btn':

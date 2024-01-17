@@ -5,7 +5,7 @@ import cn from 'clsx'
 import { FC, useState } from 'react'
 import SubMenu from '../top_menu/SubMenu'
 import styles from './ActionsMenu.module.css'
-import { TextInputButton } from './TextInputButton'
+// import { TextInputButton } from './TextInputButton'
 
 type ImageButtonProps = {
   button: TActionsButton
