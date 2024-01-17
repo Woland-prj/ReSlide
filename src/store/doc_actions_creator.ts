@@ -1,7 +1,6 @@
 import {
   FormatVariation,
   ObjectPartVariation,
-  ObjectType,
   ShapeVariation,
   TCoords,
   TDocument,
