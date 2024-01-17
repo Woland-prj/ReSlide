@@ -12,10 +12,19 @@ const re = new RegExp(/^#[0-9a-fA-F]/)
 
 export const ColorInputButton: FC<ColorInputButtonProps> = ({ id }) => {
   const colorInputRef = useRef<HTMLInputElement>(null)
-  const [colorValue, setColorValue] = useState<string>('#000000')
+  const [colorValue, setColorValue] = useState<string>('#252525')
   const { setObjectColorAction } = useActions()
   const { selectedObjectsIds, activeSlideId } = useEditor()
   const { slides } = useDoc()
+
+  // useEffect(() => {
+  //   const enterHandler = (e: KeyboardEvent) => {
+  //     if (e.code === 'Enter' && colorInputRef.current != null)
+  //       colorInputRef.current.onblur()
+  //   }
+  //   document.addEventListener('keydown', enterHandler)
+  //   return () => document.removeEventListener('keydown', enterHandler)
+  // }, [selectedObjectsIds])
 
   const saveColor = () => {
     if (re.test(colorValue)) {
@@ -25,8 +34,10 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({ id }) => {
           obj.type === ObjectType.Vector
         ) {
           let type: ObjectPartVariation = ObjectPartVariation.Background
-          if (id === 'a') type = ObjectPartVariation.Background
-          if (id === 'a') type = ObjectPartVariation.Stroke
+          if (id === 'vector_background_color_btn')
+            type = ObjectPartVariation.Background
+          if (id === 'vector_stroke_color_btn')
+            type = ObjectPartVariation.Stroke
           setObjectColorAction(obj.id, colorValue, type)
         }
       })
@@ -39,7 +50,7 @@ export const ColorInputButton: FC<ColorInputButtonProps> = ({ id }) => {
         ref={colorInputRef}
         value={colorValue}
         onBlur={saveColor}
-        onChange={() => setColorValue}
+        onChange={e => setColorValue(e.target.value)}
       />
     </div>
   )
