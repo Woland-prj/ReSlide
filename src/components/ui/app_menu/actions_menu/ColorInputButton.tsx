@@ -1,4 +1,4 @@
-import { useButtonAction } from '@/hooks/useButtonAction'
+import { useButtonAction } from '@/hooks/useButtonAction.1'
 import { FC, useRef } from 'react'
 
 type ColorInputButtonProps = {

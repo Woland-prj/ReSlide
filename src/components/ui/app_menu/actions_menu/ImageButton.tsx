@@ -1,4 +1,4 @@
-import { useButtonAction } from '@/hooks/useButtonAction'
+import { useButtonAction } from '@/hooks/useButtonAction.1'
 import { useEditor } from '@/hooks/useEditor'
 import { TActionsButton } from '@/types/action_buttons.type'
 import cn from 'clsx'

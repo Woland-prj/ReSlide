@@ -1,4 +1,4 @@
-import { useButtonAction } from '@/hooks/useButtonAction'
+import { useButtonAction } from '@/hooks/useButtonAction.1'
 import { FC } from 'react'
 import styles from './SlideShowButton.module.css'
 

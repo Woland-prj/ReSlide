@@ -21,6 +21,7 @@ import {
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
 // По имени назначает функцию, соответствующую имени кнопки, кнопке для вызова ее же по клику
+
 export const useButtonAction = (
   btnId: string,
   menuCallback: Dispatch<SetStateAction<boolean>> | null = null,
@@ -230,28 +231,28 @@ export const useButtonAction = (
         onClick = () =>
           toggleFormatParameterByName(FormatVariation.Strikethrough)
         break
-      // case 'text_color_btn':
-      //   onClick = () => changeTextColor(fontColor)
-      //   break
-      // case 'size_btn':
-      //   onClick = () => changeTextSize(size)
-      //   break
-      // case 'font_family_btn':
-      //   onClick = () => changeTextFontFamily(fontFamily)
-      //   break
-      // case 'vector_stroke_color_btn':
-      //   onClick = () => changeObjectColor(color, ObjectPartVariation.Stroke)
-      //   break
-      // case 'vector_background_color_btn':
-      //   onClick = () => changeObjectColor(color, ObjectPartVariation.Background)
-      //   break
+      case 'text_color_btn':
+        onClick = () => changeTextColor(fontColor)
+        break
+      case 'size_btn':
+        onClick = () => changeTextSize(size)
+        break
+      case 'font_family_btn':
+        onClick = () => changeTextFontFamily(fontFamily)
+        break
+      case 'vector_stroke_color_btn':
+        onClick = () => changeObjectColor(color, ObjectPartVariation.Stroke)
+        break
+      case 'vector_background_color_btn':
+        onClick = () => changeObjectColor(color, ObjectPartVariation.Background)
+        break
       case 'duplicate_slide_btn':
         onClick = () => {
           generateIdAction('slideId')
           slides[activeSlideId].objects.forEach(() =>
             generateIdAction('objectId'),
           )
-          duplicateSlideAction(
+          deleteSlideAction(
             activeSlideId,
             globalSlideId + 1,
             globalObjectId,

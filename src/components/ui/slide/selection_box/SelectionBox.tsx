@@ -1,5 +1,7 @@
 import { resizeBlockData } from '@/data/resizes_elements.data'
+import { useCheckId } from '@/hooks/useCheckId'
 import { useDnd } from '@/hooks/useDnd'
+import { useEditor } from '@/hooks/useEditor'
 import { useObjectsStyles } from '@/hooks/useObjectsStyles'
 import { useSelection } from '@/hooks/useSelection'
 import { TImage, TText, TVector } from '@/types/type'
@@ -22,16 +24,24 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
   const boxRef = useRef<HTMLDivElement>(null)
   const { setSelection, deleteSelection } = useSelection(obj.id)
   const { registerItemFn, unregisterItemFn } = useDnd(obj.id)
+  const isSelected = useCheckId(obj.id)
+  const { selectedObjectsIds, isShiftPressed } = useEditor()
   useEffect(() => {
     if (editable) {
-      setSelection(boxRef)
+      const selectFn = setSelection(boxRef)
+      return () => {
+        deleteSelection(boxRef, selectFn)
+      }
+    }
+  }, [editable, selectedObjectsIds, isShiftPressed])
+  useEffect(() => {
+    if (editable) {
       const dndFn = registerItemFn(boxRef)
       return () => {
         unregisterItemFn(boxRef, dndFn)
-        deleteSelection(boxRef)
       }
     }
-  }, [])
+  }, [editable])
   return (
     <div
       ref={boxRef}
@@ -39,10 +49,10 @@ const SelectionBox: FC<PropsWithChildren<TSelectionBoxProps>> = ({
       className={cn(
         styles.box,
         editable && styles.editable_box,
-        editable && obj.isSelected ? styles.active_box : null,
+        editable && isSelected ? styles.active_box : null,
       )}
     >
-      {editable && obj.isSelected && (
+      {editable && isSelected && (
         <ResizeBlockComp
           dots={resizeBlockData}
           objId={obj.id}

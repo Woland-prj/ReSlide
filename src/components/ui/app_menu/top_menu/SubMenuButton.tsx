@@ -1,4 +1,4 @@
-import { useButtonAction } from '@/hooks/useButtonAction'
+import { useButtonAction } from '@/hooks/useButtonAction.1'
 import { TContextButton } from '@/types/menu_buttons.type'
 import { FC } from 'react'
 import styles from './SubMenu.module.css'

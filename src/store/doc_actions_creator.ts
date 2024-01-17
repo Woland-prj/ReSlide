@@ -1,7 +1,6 @@
 import {
   FormatVariation,
   ObjectPartVariation,
-  ObjectType,
   ShapeVariation,
   TCoords,
   TDocument,
@@ -26,6 +25,8 @@ enum DocActions {
   SET_FONT_FAMILY = 'SET_FONT_FAMILY',
   SET_FONT_SIZE = 'SET_FONT_SIZE',
   SET_FONT_COLOR = 'SET_FONT_COLOR',
+  DUPLICATE_SLIDE_ACTION = 'DUPLICATE_SLIDE_ACTION',
+  DELETE_SLIDE_ACTION = 'DELETE_SLIDE_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -164,6 +165,23 @@ type TSetFontSize = {
   }
 }
 
+type TDuplicateSlideAction = {
+  type: DocActions.DUPLICATE_SLIDE_ACTION
+  payload: {
+    slideId: number
+    newId: number
+    objId: number
+    objCount: number
+  }
+}
+
+type TDeleteSlideAction = {
+  type: DocActions.DELETE_SLIDE_ACTION
+  payload: {
+    slideId: number
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -182,6 +200,8 @@ type TDocAction =
   | TSetFontFamily
   | TSetFontSize
   | TSetFontColor
+  | TDuplicateSlideAction
+  | TDeleteSlideAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -361,6 +381,30 @@ const createDocActions = {
       payload: {
         objectId: objectID,
         fontColor: color,
+      },
+    }
+  },
+  duplicateSlideAction: (
+    slideID: number,
+    newID: number,
+    objID: number,
+    objCount: number,
+  ): TDocAction => {
+    return {
+      type: DocActions.DUPLICATE_SLIDE_ACTION,
+      payload: {
+        slideId: slideID,
+        newId: newID,
+        objId: objID,
+        objCount: objCount,
+      },
+    }
+  },
+  deleteSlideAction: (slideID: number): TDocAction => {
+    return {
+      type: DocActions.DELETE_SLIDE_ACTION,
+      payload: {
+        slideId: slideID,
       },
     }
   },

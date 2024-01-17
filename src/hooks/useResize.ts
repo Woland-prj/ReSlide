@@ -3,6 +3,7 @@ import { TCoords, TImage, TText, TVector } from '@/types/type'
 import { RefObject } from 'react'
 import { useActions } from './useActions'
 import { useDoc } from './useDoc'
+import { useEditor } from './useEditor'
 
 type TResizeHandlers = {
   onDragStart: (e: MouseEvent) => void
@@ -12,6 +13,7 @@ type TResizeHandlers = {
 export const useResize = (objId: number, handler: ResizeDotHandler) => {
   const { changeObjectCoordsAction, changeObjectSizeAction } = useActions()
   const { slides } = useDoc()
+  const { isShiftPressed } = useEditor()
 
   const registerItemFn = (
     dotRef: RefObject<HTMLDivElement>,
@@ -53,6 +55,7 @@ export const useResize = (objId: number, handler: ResizeDotHandler) => {
             startCoords,
             parentCoords,
             movedObj.size,
+            isShiftPressed,
           )
         changeObjectCoordsAction(
           objId,

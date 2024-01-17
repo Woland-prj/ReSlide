@@ -1,5 +1,5 @@
 import { ShapeVariation, TVector } from '@/types/type'
-import { FC, useEffect, useRef } from 'react'
+import { FC, useRef } from 'react'
 import Ellipse from './Ellipse'
 import Rectangle from './Rectangle'
 import Triangle from './Triangle'
@@ -12,10 +12,10 @@ type TVectorProps = {
 const Vector: FC<TVectorProps> = ({ vector }) => {
   const svgRef = useRef<SVGSVGElement>(null)
 
-  useEffect(() => {
-    svgRef.current!.style.width = svgRef.current!.parentElement!.style.width
-    svgRef.current!.style.height = svgRef.current!.parentElement!.style.height
-  })
+  // useEffect(() => {
+  //   svgRef.current!.style.width = svgRef.current!.parentElement!.style.width
+  //   svgRef.current!.style.height = svgRef.current!.parentElement!.style.height
+  // })
 
   return (
     <svg
