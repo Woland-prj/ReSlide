@@ -1,6 +1,9 @@
 import { FC, useState } from 'react'
 import styles from './ActionsMenu.module.css'
 import { useEditor } from '@/hooks/useEditor'
+import { useDoc } from '@/hooks/useDoc'
+import { ObjectType } from '@/types/type'
+import { useActions } from '@/hooks/useActions'
 
 type TextInputButtonProps = {
   type: string
@@ -15,17 +18,28 @@ export const TextInputButton: FC<TextInputButtonProps> = ({
     if (type == 'text') return 'Times New Roman'
     else return '14'
   }
-  const {setFontSize} = useAction()
-  const {activeSlideId} = useEditor()
+  const { activeSlideId, selectedObjectsIds } = useEditor()
+  const { setFontFamilyAction, setFontSizeAction } = useActions()
   const [textValue, setTextValue] = useState(standardValue(type))
+  const { slides } = useDoc()
+
   const saveText = () => {
-    if (type == 'number' && parseInt(textValue) != undefined) {
+    if (type == 'number' && parseInt(textValue)) {
       slides[activeSlideId].objects.forEach(obj => {
         if (
-          selectedObjectsIds.find(selId => selId === obj.id) != undefined &&
-          obj.type === ObjectType.Vector
+          selectedObjectsIds.find(selectedId => selectedId == obj.id) !=
+            undefined &&
+          obj.type == ObjectType.Vector
         )
-          setObjectColorAction(obj.id, textValue, type)
+          setFontSizeAction(obj.id, parseInt(textValue))
+      })
+    } else if (type == 'text') {
+      slides[activeSlideId].objects.forEach(obj => {
+        if (
+          selectedObjectsIds.find(selId => selId == obj.id) != undefined &&
+          obj.type == ObjectType.Vector
+        )
+          setFontFamilyAction(obj.id, textValue)
       })
     }
   }
@@ -36,6 +50,7 @@ export const TextInputButton: FC<TextInputButtonProps> = ({
         type={type}
         placeholder={placeholder}
         value={textValue}
+        onBlur={saveText}
         onChange={() => setTextValue}
       />
     </div>

@@ -24,7 +24,6 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 export const useButtonAction = (
   btnId: string,
   menuCallback: Dispatch<SetStateAction<boolean>> | null = null,
-  specialSubMenuCallback: Dispatch<SetStateAction<string>> | null = null,
 ) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const { name, size, slides } = useDoc()
@@ -219,10 +218,6 @@ export const useButtonAction = (
         onClick = () =>
           toggleFormatParameterByName(FormatVariation.Strikethrough)
         break
-      case 'text_color_btn':
-        onClick = () => {
-          changeTextColor(fontColor)}
-      break
       // case 'text_color_btn':
       //   onClick = () => changeTextColor(fontColor)
       //   break

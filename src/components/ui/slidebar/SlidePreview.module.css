@@ -4,8 +4,7 @@
   flex-flow: column nowrap;
   min-width: inherit;
   z-index: 2;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden scroll;
 }
 
 ::-webkit-scrollbar {
