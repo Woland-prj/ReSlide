@@ -1,22 +1,44 @@
-import { FC } from 'react'
+import { useActions } from '@/hooks/useActions'
+import { useDoc } from '@/hooks/useDoc'
+import { useEditor } from '@/hooks/useEditor'
+import { ObjectPartVariation, ObjectType } from '@/types/type'
+import { FC, useRef, useState } from 'react'
 
 type ColorInputButtonProps = {
-  submitValue: string
+  type: ObjectPartVariation
   id: string
 }
 
-export const ColorInputButton: FC<ColorInputButtonProps> = ({
-  submitValue,
-  id,
-}) => {
-  // let buttonRef = useRef<HTMLInputElement>(null)
-  // buttonRef = useButtonAction(id)
+const re = new RegExp(/^#[0-9a-fA-F]/)
+
+export const ColorInputButton: FC<ColorInputButtonProps> = ({ type, id }) => {
+  const colorInputRef = useRef<HTMLInputElement>(null)
+  const [colorValue, setColorValue] = useState<string>('#000000')
+  const { setObjectColorAction } = useActions()
+  const { selectedObjectsIds, activeSlideId } = useEditor()
+  const { slides } = useDoc()
+
+  const saveColor = () => {
+    if (re.test(colorValue)) {
+      slides[activeSlideId].objects.forEach(obj => {
+        if (
+          selectedObjectsIds.find(selId => selId === obj.id) != undefined &&
+          obj.type === ObjectType.Vector
+        )
+          setObjectColorAction(obj.id, colorValue, type)
+      })
+    }
+  }
   return (
     <div>
-      <form name='publish'>
-        <input type='color' name='message' />
-        <input type='submit' value={submitValue} />
-      </form>
+      <input
+        type='color'
+        name='message'
+        ref={colorInputRef}
+        value={colorValue}
+        onBlur={saveColor}
+        onChange={() => setColorValue}
+      />
     </div>
   )
 }
