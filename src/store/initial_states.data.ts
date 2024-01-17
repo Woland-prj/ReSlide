@@ -1,4 +1,5 @@
 import {
+  AppMode,
   ObjectType,
   ShapeVariation,
   SlideBgType,
@@ -11,6 +12,8 @@ import {
 } from '@/types/type'
 
 const docInitialName: string = 'Презентация без названия'
+const brandStr: string = ' - ReSlide'
+const rewriteConfirmQuestion = 'Перезаписать текущую презентацию?'
 
 const docInitialState: TDocument = {
   name: docInitialName,
@@ -46,6 +49,9 @@ const initialEditor: TEditor = {
   activeToolId: 'select_btn',
   globalSlideId: 0,
   globalObjectId: 0,
+  appMode: AppMode.EDIT_MODE,
+  selectedObjectsIds: [],
+  isShiftPressed: false,
 }
 
 const initText: TText = {
@@ -110,31 +116,18 @@ const initImg: TImage = {
   data: '',
 }
 
+const slidePlaceholderText: string =
+  'Ни одного слайда не выбрано. Чтобы начать работу нажмите "+" на панели действий'
+
 export {
+  brandStr,
   docInitialName,
   docInitialState,
   initImg,
   initShape,
   initText,
   initialEditor,
+  rewriteConfirmQuestion,
+  slidePlaceholderText,
   voidSlide,
 }
-
-// {
-//   id: 1,
-//     type: ObjectType.Vector,
-//   shape: ShapeVariation.Rectangle,
-//   fillColor: 'purple',
-//   strokeColor: 'blue',
-//   strokeSize: 5,
-//   size: {
-//   width: 200,
-//     height: 300,
-// },
-//   coords: {
-//     x: 50,
-//       y: 50,
-//   },
-//   rotationAngle: 0,
-//     isSelected: false,
-// },

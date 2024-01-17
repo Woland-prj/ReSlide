@@ -18,18 +18,7 @@ const Triangle: FC<TCircleProps> = ({ vector }) => {
     (vector.size.width - vector.strokeSize) +
     ',' +
     (vector.size.height - vector.strokeSize / 2)
-  return (
-    <svg
-      width={vector.size.width}
-      height={vector.size.height}
-      xmlns='http://www.w3.org/2000/svg'
-      stroke={vector.strokeColor}
-      fill={vector.fillColor}
-      strokeWidth={vector.strokeSize}
-    >
-      <polygon points={points} />
-    </svg>
-  )
+  return <polygon points={points} />
 }
 
 export default Triangle

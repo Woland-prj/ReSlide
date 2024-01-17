@@ -69,7 +69,7 @@ const docReducer = (
       }
     }
     case DocActions.LOAD_DOC_ACTION:
-      return action.payload.doc
+      return { ...action.payload.doc }
     case DocActions.CHANGE_OBJECT_COORDS: {
       const { slideIndex, objectIndex } = getIndexesByObjectId(
         action.payload.objectId,
@@ -124,8 +124,9 @@ const docReducer = (
         state,
       )
       const newState = { ...state }
-      newState.slides[slideIndex].objects[objectIndex].isSelected =
-        action.payload.selectState
+      if (slideIndex != -1 && objectIndex != -1)
+        newState.slides[slideIndex].objects[objectIndex].isSelected =
+          action.payload.selectState
 
       return newState
     }
@@ -163,6 +164,50 @@ const docReducer = (
         ...newState.slides[slideIndex].objects,
         newImg,
       ]
+      return newState
+    }
+    case DocActions.DELETE_OBJECT_ACTION: {
+      const { slideIndex } = getIndexesByObjectId(
+        action.payload.objectId,
+        state,
+      )
+      const newState = { ...state }
+      newState.slides[slideIndex].objects = newState.slides[
+        slideIndex
+      ].objects.filter(object => {
+        if (object.id != action.payload.objectId) return object
+      })
+      return newState
+    }
+    case DocActions.DUPLICATE_SLIDE_ACTION: {
+      let slideIndex: number = 0
+      state.slides.forEach((slide, index) => {
+        if (slide.id == action.payload.slideId) slideIndex = index
+      })
+      const newState = { ...state }
+      let prevId = action.payload.objId
+      const slide = {
+        ...newState.slides[slideIndex],
+        objects: [...newState.slides[slideIndex].objects],
+      }
+      for (let i = 0; i < slide.objects.length; i++) {
+        prevId += 1
+        slide.objects[i].id = prevId
+      }
+      console.log(slide.objects)
+      const dupSlide = {
+        ...slide,
+        id: action.payload.newId,
+      }
+      newState.slides = [...newState.slides, dupSlide]
+      console.log(newState.slides)
+      return newState
+    }
+    case DocActions.DELETE_SLIDE_ACTION: {
+      const newState = { ...state }
+      newState.slides = state.slides.filter(
+        slide => slide.id != action.payload.slideId,
+      )
       return newState
     }
     default:

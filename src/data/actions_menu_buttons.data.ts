@@ -1,9 +1,11 @@
 import arrow from '@/static/images/arrow.svg'
+import duplicate from '@/static/images/duplicate.svg'
 import image from '@/static/images/image.svg'
 import log from '@/static/images/log.svg'
 import new_slide from '@/static/images/new_slide.svg'
 import redo from '@/static/images/redo.svg'
 import shape from '@/static/images/shape.svg'
+import slideshow from '@/static/images/slideshow.svg'
 import text from '@/static/images/text.svg'
 import undo from '@/static/images/undo.svg'
 import { TActionsButton } from '@/types/action_buttons.type'
@@ -13,6 +15,12 @@ export const baseActions: TActionsButton[] = [
     id: 'add_slide_btn',
     name: 'Добавить слайд',
     iconUrl: new_slide,
+    contextMenu: null,
+  },
+  {
+    id: 'duplicate_slide_btn',
+    name: 'Дублировать слайд',
+    iconUrl: duplicate,
     contextMenu: null,
   },
   {
@@ -71,6 +79,12 @@ export const devActions: TActionsButton[] = [
     id: 'log_btn',
     name: 'Print model',
     iconUrl: log,
+    contextMenu: null,
+  },
+  {
+    id: 'slide_show_btn',
+    name: 'Dev slideshow',
+    iconUrl: slideshow,
     contextMenu: null,
   },
 ]

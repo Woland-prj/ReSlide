@@ -1,27 +1,21 @@
 import { TVector } from '@/types/type'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 
 type TCircleProps = {
   vector: TVector
 }
 
 const Ellipse: FC<TCircleProps> = ({ vector }) => {
+  const elRef = useRef<SVGEllipseElement>(null)
   return (
-    <svg
-      width={vector.size.width}
-      height={vector.size.height}
-      xmlns='http://www.w3.org/2000/svg'
-      stroke={vector.strokeColor}
-      fill={vector.fillColor}
-    >
-      <ellipse
-        cx={vector.size.width / 2}
-        cy={vector.size.height / 2}
-        rx={vector.size.width / 2 - vector.strokeSize / 2}
-        ry={vector.size.height / 2 - vector.strokeSize / 2}
-        strokeWidth={vector.strokeSize}
-      />
-    </svg>
+    <ellipse
+      cx={vector.size.width / 2}
+      cy={vector.size.height / 2}
+      rx={vector.size.width / 2 - vector.strokeSize / 2}
+      ry={vector.size.height / 2 - vector.strokeSize / 2}
+      strokeWidth={vector.strokeSize}
+      ref={elRef}
+    />
   )
 }
 

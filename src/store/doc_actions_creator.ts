@@ -12,6 +12,9 @@ enum DocActions {
   SET_OBJECT_SELECTION = 'SET_OBJECT_SELECTION',
   ADD_SHAPE_ACTION = 'ADD_SHAPE_ACTION',
   ADD_IMAGE_ACTION = 'ADD_IMAGE_ACTION',
+  DELETE_OBJECT_ACTION = 'DELETE_OBJECT_ACTION',
+  DUPLICATE_SLIDE_ACTION = 'DUPLICATE_SLIDE_ACTION',
+  DELETE_SLIDE_ACTION = 'DELETE_SLIDE_ACTION',
 }
 
 type TChangeDocNameAction = {
@@ -102,6 +105,30 @@ type TAddImageAction = {
   }
 }
 
+type TDeleteObjectAction = {
+  type: DocActions.DELETE_OBJECT_ACTION
+  payload: {
+    objectId: number
+  }
+}
+
+type TDuplicateSlideAction = {
+  type: DocActions.DUPLICATE_SLIDE_ACTION
+  payload: {
+    slideId: number
+    newId: number
+    objId: number
+    objCount: number
+  }
+}
+
+type TDeleteSlideAction = {
+  type: DocActions.DELETE_SLIDE_ACTION
+  payload: {
+    slideId: number
+  }
+}
+
 type TDocAction =
   | TChangeDocNameAction
   | TChangeDocSizeAction
@@ -114,6 +141,9 @@ type TDocAction =
   | TSetObjectSelection
   | TAddShapeAction
   | TAddImageAction
+  | TDeleteObjectAction
+  | TDuplicateSlideAction
+  | TDeleteSlideAction
 
 const createDocActions = {
   changeDocNameAction: (name: string): TDocAction => {
@@ -169,12 +199,19 @@ const createDocActions = {
       },
     }
   },
-  changeObjectSizeAction: (objectID: number, size: TSize): TDocAction => {
+  changeObjectSizeAction: (
+    objectID: number,
+    w: number,
+    h: number,
+  ): TDocAction => {
     return {
       type: DocActions.CHANGE_OBJECT_SIZE,
       payload: {
         objectId: objectID,
-        size: size,
+        size: {
+          width: w,
+          height: h,
+        },
       },
     }
   },
@@ -225,6 +262,38 @@ const createDocActions = {
         name: name,
         data: base64data,
         size: size,
+      },
+    }
+  },
+  deleteObjectAction: (objectID: number): TDocAction => {
+    return {
+      type: DocActions.DELETE_OBJECT_ACTION,
+      payload: {
+        objectId: objectID,
+      },
+    }
+  },
+  duplicateSlideAction: (
+    slideID: number,
+    newID: number,
+    objID: number,
+    objCount: number,
+  ): TDocAction => {
+    return {
+      type: DocActions.DUPLICATE_SLIDE_ACTION,
+      payload: {
+        slideId: slideID,
+        newId: newID,
+        objId: objID,
+        objCount: objCount,
+      },
+    }
+  },
+  deleteSlideAction: (slideID: number): TDocAction => {
+    return {
+      type: DocActions.DELETE_SLIDE_ACTION,
+      payload: {
+        slideId: slideID,
       },
     }
   },

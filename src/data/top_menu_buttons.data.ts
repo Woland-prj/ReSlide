@@ -47,7 +47,7 @@ export const menu_buttons: TMenuButton[] = [
     name: 'Вид',
     contextButtons: [
       {
-        id: 'slideshow_btn',
+        id: 'slide_show_btn',
         name: 'Слайдшоу',
       },
       {
@@ -83,6 +83,10 @@ export const menu_buttons: TMenuButton[] = [
       {
         id: 'duplicate_slide_btn',
         name: 'Дублировать слайд',
+      },
+      {
+        id: 'delete_slide_btn',
+        name: 'Удалить слайд',
       },
       {
         id: 'change_background_btn',

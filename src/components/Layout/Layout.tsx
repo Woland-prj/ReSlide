@@ -5,9 +5,12 @@ import {
 } from '@/data/context_menu_buttons.data'
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
+import { useGlobalHandlers } from '@/hooks/useGlobalHandlers'
+import { slidePlaceholderText } from '@/store/initial_states.data'
 import { TButtonGroup } from '@/types/context_menu_buttons.type'
 import { TCoords } from '@/types/type'
 import Slide from '@slide/Slide'
+import SlidePlaceholder from '@slide/SlidePlaceholder'
 import ContextMenu from '@ui/context_menu/ContextMenu'
 import { SlidePreviewList } from '@ui/slidebar/SlidePreviewList'
 import { FC, useEffect, useRef, useState } from 'react'
@@ -18,7 +21,7 @@ const Layout: FC = () => {
   const { slides } = useDoc()
   const ref_slide = useRef<HTMLDivElement>(null)
   const ref_slidebar = useRef<HTMLDivElement>(null)
-  const active_slide = slides.filter(slide => slide.id === activeSlideId)[0]
+  const active_slide = slides.find(slide => slide.id === activeSlideId)
   const [isSlideMenuOpen, setIsSlideMenuOpen] = useState(false)
   const [isSlideBarMenuOpen, setIsSlideBarMenuOpen] = useState(false)
   const slidebarGroups: TButtonGroup[] = context_menu_button_groups.filter(
@@ -28,6 +31,8 @@ const Layout: FC = () => {
     group => group.id in slideButtonGroupNames,
   )
   const [mouseCoords, setMouseCoords] = useState<TCoords>({ x: 0, y: 0 })
+  const layoutRef = useRef<HTMLDivElement>(null)
+  useGlobalHandlers(layoutRef)
 
   useEffect(() => {
     ref_slidebar.current?.addEventListener('contextmenu', event => {
@@ -62,7 +67,7 @@ const Layout: FC = () => {
   }, [])
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout} ref={layoutRef}>
       <div // Элемент, по правому клику на который, активируется ПКМ-меню на слайдбаре
         className={styles.preview}
         ref={ref_slidebar}
@@ -80,7 +85,11 @@ const Layout: FC = () => {
         className={styles.editor}
         ref={ref_slide}
       >
-        <Slide slide={active_slide} editable={true} />
+        {active_slide != undefined ? (
+          <Slide slide={active_slide} editable={true} />
+        ) : (
+          <SlidePlaceholder text={slidePlaceholderText} />
+        )}
         {isSlideMenuOpen && (
           <ContextMenu
             coords={mouseCoords}
