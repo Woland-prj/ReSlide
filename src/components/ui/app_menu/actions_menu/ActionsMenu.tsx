@@ -19,10 +19,9 @@ const ActionsMenu: FC = () => {
   )
   useEffect(() => {
     const object = doc.slides[activeSlideId].objects[selectedObjectsIds[0]]
-    if (selectedObjectsIds.length == 1) {
-      setSelObjType(object.type)
-    }
-  }, [doc.slides[activeSlideId].objects[selectedObjectsIds[0]]])
+    if (selectedObjectsIds.length == 1) setSelObjType(object.type)
+    else if (selectedObjectsIds.length == 0) setSelObjType(undefined)
+  }, [selectedObjectsIds])
   return (
     <div className={styles.actions_menu}>
       <ActionsBlock actions={baseActions} />
