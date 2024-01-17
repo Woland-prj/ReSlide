@@ -5,6 +5,11 @@ const enum EditorActions {
   SET_ACTIVE_TOOL = 'SET_ACTIVE_TOOL',
   GENERATE_ID = 'GENERATE_ID',
   SET_APP_MODE = 'SET_APP_MODE',
+  SELECTED_OBJECT_ID = 'SELECTED_OBJECT_ID',
+  ADD_SELECTED_OBJECT_ID = 'ADD_SELECTED_OBJECT_ID',
+  REMOVE_SELECTED_OBJECT_ID = 'REMOVE_SELECTED_OBJECT_ID',
+  SET_SHIFT_PRESSED = 'SET_SHIFT_PRESSED',
+  SET_GLOBAL_ID = 'SET_GLOBAL_ID',
 }
 
 type TSetActiveSlideAction = {
@@ -28,10 +33,39 @@ type TGenerateIdAction = {
   }
 }
 
-type TSetAppMode = {
+type TSetAppModeAction = {
   type: EditorActions.SET_APP_MODE
   payload: {
     mode: AppMode
+  }
+}
+
+type TAddActiveSlideIdAction = {
+  type: EditorActions.ADD_SELECTED_OBJECT_ID
+  payload: {
+    id: number
+  }
+}
+
+type TRemoveActiveSlideIdAction = {
+  type: EditorActions.REMOVE_SELECTED_OBJECT_ID
+  payload: {
+    id: number
+  }
+}
+
+type TSetShiftPressedAction = {
+  type: EditorActions.SET_SHIFT_PRESSED
+  payload: {
+    isPressed: boolean
+  }
+}
+
+type TSetGlobalIdAction = {
+  type: EditorActions.SET_GLOBAL_ID
+  payload: {
+    id: number
+    type: 'slideId' | 'objectId'
   }
 }
 
@@ -39,7 +73,11 @@ type TEditorAction =
   | TSetActiveSlideAction
   | TSetActiveToolAction
   | TGenerateIdAction
-  | TSetAppMode
+  | TSetAppModeAction
+  | TAddActiveSlideIdAction
+  | TRemoveActiveSlideIdAction
+  | TSetShiftPressedAction
+  | TSetGlobalIdAction
 
 const createEditorActions = {
   setActiveSlideAction: (id: number): TEditorAction => {
@@ -58,7 +96,7 @@ const createEditorActions = {
       },
     }
   },
-  generateIdAction: (type: 'slideId' | 'objectId') => {
+  generateIdAction: (type: 'slideId' | 'objectId'): TEditorAction => {
     return {
       type: EditorActions.GENERATE_ID,
       payload: {
@@ -66,11 +104,47 @@ const createEditorActions = {
       },
     }
   },
-  setAppModeAction: (appMode: AppMode) => {
+  setAppModeAction: (appMode: AppMode): TEditorAction => {
     return {
       type: EditorActions.SET_APP_MODE,
       payload: {
         mode: appMode,
+      },
+    }
+  },
+  addSelectedObjectIdAction: (id: number): TEditorAction => {
+    return {
+      type: EditorActions.ADD_SELECTED_OBJECT_ID,
+      payload: {
+        id: id,
+      },
+    }
+  },
+  removeSelectedObjectIdAction: (id: number): TEditorAction => {
+    return {
+      type: EditorActions.REMOVE_SELECTED_OBJECT_ID,
+      payload: {
+        id: id,
+      },
+    }
+  },
+  setShiftPressedAction: (isPressed: boolean): TEditorAction => {
+    return {
+      type: EditorActions.SET_SHIFT_PRESSED,
+      payload: {
+        isPressed: isPressed,
+      },
+    }
+  },
+  setGlobalIdAction: (
+    id: number,
+    type: 'slideId' | 'objectId',
+  ): TEditorAction => {
+    return {
+      type: EditorActions.SET_GLOBAL_ID,
+      payload: {
+        id: id,
+        type: type,
       },
     }
   },

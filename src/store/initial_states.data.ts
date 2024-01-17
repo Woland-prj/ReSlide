@@ -13,6 +13,7 @@ import {
 
 const docInitialName: string = 'Презентация без названия'
 const brandStr: string = ' - ReSlide'
+const rewriteConfirmQuestion = 'Перезаписать текущую презентацию?'
 
 const docInitialState: TDocument = {
   name: docInitialName,
@@ -49,6 +50,8 @@ const initialEditor: TEditor = {
   globalSlideId: 0,
   globalObjectId: 0,
   appMode: AppMode.EDIT_MODE,
+  selectedObjectsIds: [],
+  isShiftPressed: false,
 }
 
 const initText: TText = {
@@ -113,6 +116,9 @@ const initImg: TImage = {
   data: '',
 }
 
+const slidePlaceholderText: string =
+  'Ни одного слайда не выбрано. Чтобы начать работу нажмите "+" на панели действий'
+
 export {
   brandStr,
   docInitialName,
@@ -121,5 +127,7 @@ export {
   initShape,
   initText,
   initialEditor,
+  rewriteConfirmQuestion,
+  slidePlaceholderText,
   voidSlide,
 }

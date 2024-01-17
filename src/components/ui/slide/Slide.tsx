@@ -11,7 +11,7 @@ import {
 import Image from '@slide/image/Image'
 import Vector from '@slide/shapes/Vector'
 import TextField from '@slide/text/TextField'
-import { FC, RefObject, useRef } from 'react'
+import { FC, RefObject, useCallback, useRef } from 'react'
 import styles from './Slide.module.css'
 import SelectionBox from './selection_box/SelectionBox'
 
@@ -41,18 +41,21 @@ const Object: FC<TObjectProps> = ({ object, editable }) => {
 }
 
 const Slide: FC<TSlideProps> = ({ slide, editable }) => {
-  function changeStyles(slide: TSlide): React.CSSProperties {
-    const styles: React.CSSProperties = {
-      width: doc.size.width,
-      height: doc.size.height,
-    }
-    slide.background.variation == SlideBgType.Img
-      ? (styles.backgroundImage = `url(${slide.background.value})`)
-      : (styles.backgroundColor = slide.background.value)
-    return styles
-  }
+  const params = [doc.size.width, doc.size.height, slide.background.variation]
+  const changeStyles = useCallback(
+    (slide: TSlide): React.CSSProperties => {
+      const styles: React.CSSProperties = {
+        width: doc.size.width,
+        height: doc.size.height,
+      }
+      slide.background.variation == SlideBgType.Img
+        ? (styles.backgroundImage = `url(${slide.background.value})`)
+        : (styles.backgroundColor = slide.background.value)
+      return styles
+    },
+    [...params],
+  )
 
-  const params = [doc.size.width, doc.size.height]
   const chStyles = useStyles(params, slide, changeStyles)
   const slRef = useRef<HTMLDivElement>(null)
 

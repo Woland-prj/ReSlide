@@ -1,4 +1,5 @@
 import { useActions } from '@/hooks/useActions'
+import { useCheckId } from '@/hooks/useCheckId'
 import { TText } from '@/types/type'
 import cn from 'clsx'
 import { FC, useEffect, useRef } from 'react'
@@ -11,10 +12,11 @@ type TTextFieldProps = {
 const TextField: FC<TTextFieldProps> = ({ text }) => {
   const { changeTextValueAction } = useActions()
   const textBlockRef = useRef<HTMLDivElement>(null)
+  const isSelected = useCheckId(text.id)
 
   useEffect(() => {
     const editFn = (e: Event) => {
-      if (text.isSelected) {
+      if (isSelected) {
         e.stopPropagation()
         const moveHandler = (e: Event) => e.stopPropagation()
         const upHandler = (e: Event) => {
@@ -28,7 +30,7 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
     }
     textBlockRef.current?.addEventListener('mousedown', editFn)
     return () => textBlockRef.current?.removeEventListener('mousedown', editFn)
-  }, [text.isSelected])
+  }, [isSelected])
 
   const saveValue = () => {
     console.log('save')
@@ -43,10 +45,10 @@ const TextField: FC<TTextFieldProps> = ({ text }) => {
 
   return (
     <div
-      className={cn(styles.text_object, text.isSelected && styles.active_text)}
+      className={cn(styles.text_object, isSelected && styles.active_text)}
       ref={textBlockRef}
       suppressContentEditableWarning={true}
-      contentEditable={text.isSelected ? 'true' : 'false'}
+      contentEditable={isSelected ? 'true' : 'false'}
       tabIndex={0}
       onBlur={saveValue}
     >

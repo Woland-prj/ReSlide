@@ -112,4 +112,6 @@ export type TEditor = {
   globalSlideId: number
   globalObjectId: number
   appMode: AppMode
+  selectedObjectsIds: number[]
+  isShiftPressed: boolean
 }

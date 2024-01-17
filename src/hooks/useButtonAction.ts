@@ -1,16 +1,22 @@
 import { useActions } from '@/hooks/useActions'
 import { useDoc } from '@/hooks/useDoc'
 import { useEditor } from '@/hooks/useEditor'
+import { getIndexById } from '@/services/getIndexById.service'
 import { imageToBase64 } from '@/services/image_encode.service'
 import { saveJsonObjToFile } from '@/services/save_doc.service'
 import { readJSONFile } from '@/services/upload_doc.service'
-import { brandStr } from '@/store/initial_states.data'
+import {
+  brandStr,
+  docInitialState,
+  rewriteConfirmQuestion,
+} from '@/store/initial_states.data'
 import {
   AppMode,
   FormatVariation,
   ObjectPartVariation,
   ShapeVariation,
   TDocument,
+  TSlide,
 } from '@/types/type'
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 
@@ -35,26 +41,40 @@ export const useButtonAction = (
     setFontSizeAction,
     toggleFormattingAction,
     setFontColorAction,
+    duplicateSlideAction,
+    deleteSlideAction,
+    setActiveSlideAction,
+    setGlobalIdAction,
   } = useActions()
   const { activeSlideId, globalSlideId, globalObjectId, appMode } = useEditor()
 
   const openDocFn = () => {
-    const input: HTMLInputElement = document.createElement('input')
-    input.type = 'file'
-    const loadFn = (e: Event) => {
-      const filePromise = readJSONFile(e)
-      filePromise.then(loadedDoc => {
-        console.log(loadedDoc)
-        document.title = loadedDoc.name + brandStr
-        loadDocAction(loadedDoc)
-      })
-      filePromise.finally(() => {
-        input.removeEventListener('change', loadFn)
-        input.remove()
-      })
+    if (confirm(rewriteConfirmQuestion)) {
+      const input: HTMLInputElement = document.createElement('input')
+      input.type = 'file'
+      const loadFn = (e: Event) => {
+        const filePromise = readJSONFile(e)
+        filePromise.then(loadedDoc => {
+          console.log(loadedDoc)
+          document.title = loadedDoc.name + brandStr
+          const slIds: number[] = []
+          loadedDoc.slides.forEach(slide => slIds.push(slide.id))
+          const objIds: number[] = []
+          loadedDoc.slides.forEach(slide =>
+            slide.objects.forEach(object => objIds.push(object.id)),
+          )
+          setGlobalIdAction(Math.max(...slIds) + 1, 'slideId')
+          setGlobalIdAction(Math.max(...objIds) + 1, 'objectId')
+          loadDocAction(loadedDoc)
+        })
+        filePromise.finally(() => {
+          input.removeEventListener('change', loadFn)
+          input.remove()
+        })
+      }
+      input.addEventListener('change', loadFn)
+      input.click()
     }
-    input.addEventListener('change', loadFn)
-    input.click()
   }
 
   const loadImageFn = () => {
@@ -141,7 +161,14 @@ export const useButtonAction = (
           )
         break
       case 'create_btn':
-        onClick = () => console.log('create button')
+        onClick = () => {
+          if (confirm(rewriteConfirmQuestion)) {
+            setGlobalIdAction(0, 'objectId')
+            setGlobalIdAction(0, 'slideId')
+            setActiveSlideAction(0)
+            loadDocAction(docInitialState)
+          }
+        }
         break
       case 'open_btn':
         onClick = openDocFn
@@ -195,22 +222,53 @@ export const useButtonAction = (
       case 'text_color_btn':
         onClick = () => {
           changeTextColor(fontColor)}
+      break
+      // case 'text_color_btn':
+      //   onClick = () => changeTextColor(fontColor)
+      //   break
+      // case 'size_btn':
+      //   onClick = () => changeTextSize(size)
+      //   break
+      // case 'font_family_btn':
+      //   onClick = () => changeTextFontFamily(fontFamily)
+      //   break
+      // case 'vector_stroke_color_btn':
+      //   onClick = () => changeObjectColor(color, ObjectPartVariation.Stroke)
+      //   break
+      // case 'vector_background_color_btn':
+      //   onClick = () => changeObjectColor(color, ObjectPartVariation.Background)
+      //   break
+      case 'duplicate_slide_btn':
+        onClick = () => {
+          generateIdAction('slideId')
+          slides[activeSlideId].objects.forEach(() =>
+            generateIdAction('objectId'),
+          )
+          duplicateSlideAction(
+            activeSlideId,
+            globalSlideId + 1,
+            globalObjectId,
+            slides[activeSlideId].objects.length,
+          )
+        }
         break
-      case 'size_btn':
-        onClick = () => changeTextSize(size)
+      case 'delete_slide_btn':
+        onClick = () => {
+          const activeSlideIndex = getIndexById<TSlide>(slides, activeSlideId)
+          deleteSlideAction(activeSlideId)
+          if (activeSlideIndex)
+            setActiveSlideAction(
+              activeSlideIndex != 0 ? slides[activeSlideIndex - 1].id : -1,
+            )
+        }
         break
-      case 'font_family_btn':
-        onClick = () => changeTextFontFamily(fontFamily)
-        break
-      case 'vector_stroke_color_btn':
-        onClick = () => changeObjectColor(color, ObjectPartVariation.Stroke)
-        break
-      case 'vector_background_color_btn':
-        onClick = () => changeObjectColor(color, ObjectPartVariation.Background)
+      case 'fullscreen_btn':
+        onClick = () => {
+          document.documentElement.requestFullscreen()
+        }
         break
       default:
         onClick = () => alert(`Возникли проблемы с кнопкой ${btnId}`)
-        break
     }
     buttonRef.current?.addEventListener('click', onClick)
     return () => buttonRef.current?.removeEventListener('click', onClick)

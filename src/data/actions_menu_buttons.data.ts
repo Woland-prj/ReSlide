@@ -1,4 +1,5 @@
 import arrow from '@/static/images/arrow.svg'
+import duplicate from '@/static/images/duplicate.svg'
 import image from '@/static/images/image.svg'
 import log from '@/static/images/log.svg'
 import new_slide from '@/static/images/new_slide.svg'
@@ -22,6 +23,12 @@ export const baseActions: TActionsButton[] = [
     id: 'add_slide_btn',
     name: 'Добавить слайд',
     iconUrl: new_slide,
+    contextMenu: null,
+  },
+  {
+    id: 'duplicate_slide_btn',
+    name: 'Дублировать слайд',
+    iconUrl: duplicate,
     contextMenu: null,
   },
   {

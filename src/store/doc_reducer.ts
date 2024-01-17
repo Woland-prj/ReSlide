@@ -131,7 +131,6 @@ const docReducer = (
         state,
       )
       const newState = { ...state }
-      console.log(slideIndex)
       if (slideIndex != -1 && objectIndex != -1)
         newState.slides[slideIndex].objects[objectIndex].isSelected =
           action.payload.selectState
@@ -297,6 +296,37 @@ const docReducer = (
             break
         }
       }
+      return newState
+    }
+    case DocActions.DUPLICATE_SLIDE_ACTION: {
+      let slideIndex: number = 0
+      state.slides.forEach((slide, index) => {
+        if (slide.id == action.payload.slideId) slideIndex = index
+      })
+      const newState = { ...state }
+      let prevId = action.payload.objId
+      const slide = {
+        ...newState.slides[slideIndex],
+        objects: [...newState.slides[slideIndex].objects],
+      }
+      for (let i = 0; i < slide.objects.length; i++) {
+        prevId += 1
+        slide.objects[i].id = prevId
+      }
+      console.log(slide.objects)
+      const dupSlide = {
+        ...slide,
+        id: action.payload.newId,
+      }
+      newState.slides = [...newState.slides, dupSlide]
+      console.log(newState.slides)
+      return newState
+    }
+    case DocActions.DELETE_SLIDE_ACTION: {
+      const newState = { ...state }
+      newState.slides = state.slides.filter(
+        slide => slide.id != action.payload.slideId,
+      )
       return newState
     }
     default:

@@ -33,6 +33,36 @@ const editorReducer = (
         ...state,
         appMode: action.payload.mode,
       }
+    case EditorActions.ADD_SELECTED_OBJECT_ID:
+      console.log(action.payload.id)
+      return {
+        ...state,
+        selectedObjectsIds: [...state.selectedObjectsIds, action.payload.id],
+      }
+    case EditorActions.REMOVE_SELECTED_OBJECT_ID:
+      console.log(action.payload.id)
+      return {
+        ...state,
+        selectedObjectsIds: state.selectedObjectsIds.filter(id => {
+          if (id != action.payload.id) return id
+        }),
+      }
+    case EditorActions.SET_SHIFT_PRESSED:
+      return {
+        ...state,
+        isShiftPressed: action.payload.isPressed,
+      }
+    case EditorActions.SET_GLOBAL_ID:
+      if (action.payload.type == 'slideId')
+        return {
+          ...state,
+          globalSlideId: action.payload.id,
+        }
+      else
+        return {
+          ...state,
+          globalObjectId: action.payload.id,
+        }
     default:
       return { ...state }
   }
